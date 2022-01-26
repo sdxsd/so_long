@@ -12,7 +12,7 @@ ifeq ($(shell uname -s),Linux)
 	LINKEN := -lmlx -lXext -lX11
 else
 	OSFLAG := darwin
-	LINKEN := -lmlx_Darwin -lmlx -L/usr/X11/include/../lib -lXext -lX11 -lm -framework OpenGL -framework AppKit
+	LINKEN := -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit
 endif
 
 all: $(NAME)
