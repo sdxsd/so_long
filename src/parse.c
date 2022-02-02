@@ -38,6 +38,7 @@ static t_the_matrix* 	chmap_val(char *path, t_the_matrix* matrix)
 	iterator = 0;
 	fd = open(path, O_RDONLY);
 	matrix -> wired_entry = matrix -> simulation_data;
+	matrix -> y = 0;
 	while (TRUE)
 	{
 		line = get_next_line(fd);
@@ -65,8 +66,6 @@ static t_the_matrix* 	chmap_val(char *path, t_the_matrix* matrix)
 			return (NULL);
 	}
 	matrix -> simulation_data = NULL;
-	ft_putnbr(matrix -> y);
-	ft_putnbr(matrix -> x);
 	return (matrix);
 }
 
