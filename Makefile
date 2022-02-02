@@ -1,8 +1,9 @@
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 NAME = so_long
 CFILES = \
-			src/main.c
+			src/main.c \
+			src/parse.c
 OFILES = $(CFILES:.c=.o)
 OSFLAG = ""
 LINKEN = ""
@@ -20,7 +21,9 @@ all: $(NAME)
 %.o: %.c
 	$(CC) $(CFLAGS) -I/usr/include -Imlx_$(OSFLAG) -O3 -c $< -o $@
 
-
 $(NAME): $(OBJ)
 	@echo "Building for: $(OSFLAG)"
-	$(CC) $(OBJ) $(CFILES) -Lmlx_$(OSFLAG) $(LINKEN) -o $(NAME)
+	make -C libft/
+	$(CC) -Wall -Wextra -Werror $(CFILES) -Lmlx_$(OSFLAG) $(LINKEN) libft/libft.a -g -o $(NAME)
+
+#$(CC) $(OBJ) libft/libft.a $(CFILES) -Lmlx_$(OSFLAG) $(LINKEN) -o $(NAME)

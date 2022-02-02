@@ -1,5 +1,5 @@
 /*
-SO_LONG (Implementation of Codam project so_long)
+THIS HEADER IS PART OF SO_LONG (Implementation of Codam project so_long)
 Copyright (C) 2021  Will Maguire
 
 This program is free software: you can redistribute it and/or modify
@@ -19,23 +19,21 @@ The definition of Free Software is as follows:
 		- The freedom to run the program, for any purpose.
 		- The freedom to study how the program works, and adapt it to your needs.
 		- The freedom to redistribute copies so you can help your neighbor.
-		- The freedom to improve the program, and release
+		-The freedom to improve the program, and release
 		your improvements to the public, so that the whole community benefits.
 
 A program is free software if users have all of these freedoms.
 */
 
-#include <mlx.h>
-#include "../include/so_long.h"
-#include "../include/parse.h"
+#ifndef PARSE_H
+# define PARSE_H
+# define DICT "01CEP\n"
+# include "../libft/libft.h"
+# include "so_long.h"
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
 
-int	main(int argc, char *argv[])
-{
-	t_the_matrix *sim_env;
-	sim_env = matrix_init(argc, argv);
-	if (!sim_env)
-	{
-		ft_putstr("Invalid map...\n");
-		return (1);
-	}
-}
+t_the_matrix*	matrix_init(int argc, char *argv[]);
+
+#endif // PARSE_H

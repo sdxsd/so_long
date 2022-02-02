@@ -1,5 +1,5 @@
 /*
-SO_LONG (Implementation of Codam project so_long)
+THIS FILE IS PART OF SO_LONG (Implementation of Codam project so_long)
 Copyright (C) 2021  Will Maguire
 
 This program is free software: you can redistribute it and/or modify
@@ -25,17 +25,60 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
-#include <mlx.h>
-#include "../include/so_long.h"
 #include "../include/parse.h"
+#include "../include/so_long.h"
 
-int	main(int argc, char *argv[])
+static t_the_matrix* 	chmap_val(char *path, t_the_matrix* matrix)
 {
-	t_the_matrix *sim_env;
-	sim_env = matrix_init(argc, argv);
-	if (!sim_env)
+	const char	*dict = "01CEP\n";
+	char		*line;
+	int			iterator;
+	int			fd;
+
+	iterator = 0;
+	fd = open(path, O_RDONLY);
+	matrix -> wired_entry = matrix -> simulation_data;
+	while (TRUE)
 	{
-		ft_putstr("Invalid map...\n");
-		return (1);
+		line = get_next_line(fd);
+		if (line)
+		{
+			matrix -> x = ft_strlen(line);
+			while (iterator < matrix -> x)
+			{
+				if (!ft_charchk(line[iterator], (char *)dict))
+				{
+					free(line);
+					return (NULL);
+				}
+				iterator++;
+			}
+			iterator = 0;
+			matrix -> simulation_data = &line;
+			ft_putstr(*matrix -> simulation_data);
+			matrix -> simulation_data++;
+		}
+		else
+			return (NULL);
 	}
+	matrix -> simulation_data = NULL;
+	return (matrix);
+}
+
+
+t_the_matrix*	matrix_init(int argc, char *argv[])
+{
+	t_the_matrix *matrix;
+
+	if (argc < 2 || argv[1] == NULL)
+		return (NULL);
+	matrix = malloc(sizeof(t_the_matrix));
+	if (!matrix)
+		return (NULL);
+	if (!chmap_val(argv[1], matrix))
+	{
+		free(matrix);
+		return (NULL);
+	}
+	return (matrix);
 }
