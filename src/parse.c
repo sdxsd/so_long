@@ -57,11 +57,16 @@ static t_the_matrix* 	chmap_val(char *path, t_the_matrix* matrix)
 			matrix -> simulation_data = &line;
 			ft_putstr(*matrix -> simulation_data);
 			matrix -> simulation_data++;
+			matrix -> y++;
 		}
+		else if (matrix -> simulation_data -1 != NULL)
+			break;
 		else
 			return (NULL);
 	}
 	matrix -> simulation_data = NULL;
+	ft_putnbr(matrix -> y);
+	ft_putnbr(matrix -> x);
 	return (matrix);
 }
 

@@ -26,4 +26,10 @@ $(NAME): $(OBJ)
 	make -C libft/
 	$(CC) -Wall -Wextra -Werror $(CFILES) -Lmlx_$(OSFLAG) $(LINKEN) libft/libft.a -g -o $(NAME)
 
-#$(CC) $(OBJ) libft/libft.a $(CFILES) -Lmlx_$(OSFLAG) $(LINKEN) -o $(NAME)
+test: re
+	./so_long maps/map01.ber
+
+re: clean all
+
+clean:
+	rm so_long
