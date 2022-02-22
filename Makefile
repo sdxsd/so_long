@@ -28,9 +28,15 @@ $(NAME): $(OBJ)
 	$(CC) -Wall -Wextra -Werror $(CFILES) -Lmlx_$(OSFLAG) $(LINKEN) libft/libft.a -g -o $(NAME)
 
 test: re
+	./so_long maps/map01.ber
+
+valtest: re
 	valgrind --tool=memcheck ./so_long maps/map01.ber
 
 re: clean all
 
 clean:
-	rm so_long
+	rm -f so_long
+	rm -f *vgcore*
+	rm -f so_long.dSYM
+	make -C libft/ clean

@@ -43,6 +43,7 @@ static int	valline(char *line, int y)
 			iterator++;
 		}
 	}
+	return (1);
 }
 
 static int	chline(char *line, int x, int y)
