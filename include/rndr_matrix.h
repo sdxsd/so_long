@@ -25,23 +25,21 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
-#include <mlx.h>
-#include <stdio.h>
-#include "../include/so_long.h"
-#include "../include/parse.h"
-#include "../include/rndr_matrix.h"
+// I am become Demiurge of this false world.
 
-int	main(int argc, char *argv[])
-{
-	t_the_matrix	*sim_env;
+#ifndef RNDR_MATRIX_H
+# define RNDR_MATRIX_H
+# include <mlx.h>
+# include "so_long.h"
 
-	sim_env = matrix_init(argc, argv);
-	if (!sim_env)
-	{
-		ft_putstr("Invalid map...\n");
-		return (1);
-	}
-	ft_printf("X: %d\nY: %d\n", sim_env -> x, sim_env -> y);
-	ft_printf("BLKNUM: %d\n", sim_env -> x * sim_env -> y);
-	rndr_matrix(sim_env);
-}
+typedef struct s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
+int	rndr_matrix(t_the_matrix *matrix);
+
+#endif // RNDR_MATRIX_H

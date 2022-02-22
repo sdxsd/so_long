@@ -25,23 +25,39 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
-#include <mlx.h>
-#include <stdio.h>
-#include "../include/so_long.h"
-#include "../include/parse.h"
 #include "../include/rndr_matrix.h"
 
-int	main(int argc, char *argv[])
+int	rndr_matrix(t_the_matrix *matrix)
 {
-	t_the_matrix	*sim_env;
+	void	*mlx;
+	void	*win;
+	int		img_x;
+	int		img_y;
+	//int		iterator;
+	//int		iterator_2;
+	t_data	render_data;
 
-	sim_env = matrix_init(argc, argv);
-	if (!sim_env)
-	{
-		ft_putstr("Invalid map...\n");
-		return (1);
-	}
-	ft_printf("X: %d\nY: %d\n", sim_env -> x, sim_env -> y);
-	ft_printf("BLKNUM: %d\n", sim_env -> x * sim_env -> y);
-	rndr_matrix(sim_env);
+	//iterator = 0;
+	//iterator_2 = 0;
+	img_x = BLKSIZ;
+	img_y = BLKSIZ;
+	mlx = mlx_init();
+	render_data.img = mlx_xpm_file_to_image(mlx, "./images/wall.xpm", &img_x, &img_y);
+	win = mlx_new_window(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ, "so_long");
+	matrix -> simulation_data -= matrix -> y;
+	ft_printf("%s\n", *matrix -> simulation_data - 2);
+	mlx_put_image_to_window(mlx, win, render_data.img, 0, 0);
+	//while (matrix -> simulation_data != NULL && iterator_2 < matrix -> y)
+	//{
+	//	while (iterator < matrix -> x)
+	//	{
+	//		if (*matrix -> simulation_data[iterator] == '#')
+	//			mlx_put_image_to_window(mlx, win, render_data.img, 0, 0);
+	//iterator++;
+	//	}
+	//	iterator_2++;
+	//	matrix -> simulation_data++;
+	//}
+	mlx_loop(mlx);
+	return (0);
 }

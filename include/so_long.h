@@ -1,5 +1,6 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# define BLKSIZ 32
 # include "../libft/libft.h"
 
 typedef struct the_matrix {

@@ -28,44 +28,56 @@ A program is free software if users have all of these freedoms.
 #include "../include/parse.h"
 #include "../include/so_long.h"
 
-static t_the_matrix* 	chmap_val(char *path, t_the_matrix* matrix)
+static int	chline(char *line, int x)
 {
 	const char	*dict = "01CEP\n";
-	char		*line;
-	int			iterator;
-	int			fd;
+	int	iterator;
 
 	iterator = 0;
+	if ((int)ft_strlen(line) != x)
+	{
+		free(line);
+		return (0);
+	}
+	while (iterator < x)
+	{
+		if (!ft_charchk(line[iterator], (char *)dict))
+		{
+			free(line);
+			return (0);
+		}
+		iterator++;
+	}
+	return (1);
+}
+
+static t_the_matrix* 	chmap_val(char *path, t_the_matrix* matrix)
+{
+	int		temp_x;
+	char	*line;
+	int		fd;
+
+	temp_x = -1;
 	fd = open(path, O_RDONLY);
-	matrix -> wired_entry = matrix -> simulation_data;
-	matrix -> y = 0;
 	while (TRUE)
 	{
 		line = get_next_line(fd);
 		if (line)
 		{
-			matrix -> x = ft_strlen(line);
-			while (iterator < matrix -> x)
-			{
-				if (!ft_charchk(line[iterator], (char *)dict))
-				{
-					free(line);
-					return (NULL);
-				}
-				iterator++;
-			}
-			iterator = 0;
-			matrix -> simulation_data = &line;
-			ft_putstr(*matrix -> simulation_data);
-			matrix -> simulation_data++;
-			matrix -> y++;
+			if (temp_x == -1)
+				temp_x = ft_strlen(line);
+			if (!chline(line, temp_x))
+				return (NULL);
+			else
+				matrix -> y++;
+			free(line);
 		}
-		else if (matrix -> simulation_data -1 != NULL)
-			break;
+		else if (matrix -> y != 0)
+			break ;
 		else
 			return (NULL);
 	}
-	matrix -> simulation_data = NULL;
+	matrix -> x = temp_x;
 	return (matrix);
 }
 
