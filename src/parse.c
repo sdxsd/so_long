@@ -28,7 +28,24 @@ A program is free software if users have all of these freedoms.
 #include "../include/parse.h"
 #include "../include/so_long.h"
 
-static int	chline(char *line, int x)
+static int	valline(char *line, int y)
+{
+	const char	*firlst = "1\n";
+	int			iterator;
+
+	iterator = 0;
+	if (y == 0)
+	{
+		while (line[iterator] != '\0')
+		{
+			if (!ft_charchk(line[iterator], (char *)firlst))
+				return (0);
+			iterator++;
+		}
+	}
+}
+
+static int	chline(char *line, int x, int y)
 {
 	const char	*dict = "01CEP\n";
 	int	iterator;
@@ -44,6 +61,11 @@ static int	chline(char *line, int x)
 		if (!ft_charchk(line[iterator], (char *)dict))
 		{
 			free(line);
+			return (0);
+		}
+		if (!valline(line, y))
+		{
+			free (line);
 			return (0);
 		}
 		iterator++;
@@ -66,7 +88,7 @@ static t_the_matrix* 	chmap_val(char *path, t_the_matrix* matrix)
 		{
 			if (temp_x == -1)
 				temp_x = ft_strlen(line);
-			if (!chline(line, temp_x))
+			if (!chline(line, temp_x, matrix -> y))
 				return (NULL);
 			else
 				matrix -> y++;
