@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   CODAM C FILE                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: wmaguire <wmaguire@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 1970/01/01 00:00:00 by wmaguire      #+#    #+#                 */
+/*   Updated: 1970/01/01 00:00:00 by wmaguire     ########   codam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 THIS HEADER IS PART OF SO_LONG (Implementation of Codam project so_long)
 Copyright (C) 2021  Will Maguire
@@ -34,6 +46,6 @@ A program is free software if users have all of these freedoms.
 # include <fcntl.h>
 # include <stdlib.h>
 
-t_the_matrix*	matrix_init(int argc, char *argv[]);
+t_the_matrix	*matrix_init(int argc, char *argv[]);
 
 #endif // PARSE_H

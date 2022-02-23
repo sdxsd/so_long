@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   CODAM C FILE                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: wmaguire <wmaguire@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 1970/01/01 00:00:00 by wmaguire      #+#    #+#                 */
+/*   Updated: 1970/01/01 00:00:00 by wmaguire     ########   codam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 THIS FILE IS PART OF SO_LONG (Implementation of Codam project so_long)
 Copyright (C) 2021  Will Maguire

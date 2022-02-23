@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   CODAM C FILE                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: wmaguire <wmaguire@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 1970/01/01 00:00:00 by wmaguire      #+#    #+#                 */
+/*   Updated: 1970/01/01 00:00:00 by wmaguire     ########   codam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 SO_LONG (Implementation of Codam project so_long)
 Copyright (C) 2021  Will Maguire
@@ -33,13 +45,8 @@ int	rndr_matrix(t_the_matrix *matrix)
 	void	*win;
 	int		img_x;
 	int		img_y;
-	//int		iterator;
-	//int		iterator_2;
 	t_data	render_data;
 
-	//iterator = 0;
-	//iterator_2 = 0;
-	img_x = BLKSIZ;
 	img_y = BLKSIZ;
 	mlx = mlx_init();
 	render_data.img = mlx_xpm_file_to_image(mlx, "./images/wall.xpm", &img_x, &img_y);
@@ -47,17 +54,6 @@ int	rndr_matrix(t_the_matrix *matrix)
 	matrix -> simulation_data -= matrix -> y;
 	ft_printf("%s\n", *matrix -> simulation_data - 2);
 	mlx_put_image_to_window(mlx, win, render_data.img, 0, 0);
-	//while (matrix -> simulation_data != NULL && iterator_2 < matrix -> y)
-	//{
-	//	while (iterator < matrix -> x)
-	//	{
-	//		if (*matrix -> simulation_data[iterator] == '#')
-	//			mlx_put_image_to_window(mlx, win, render_data.img, 0, 0);
-	//iterator++;
-	//	}
-	//	iterator_2++;
-	//	matrix -> simulation_data++;
-	//}
 	mlx_loop(mlx);
 	return (0);
 }
