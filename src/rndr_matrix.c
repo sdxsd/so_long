@@ -39,27 +39,69 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/rndr_matrix.h"
 
-t_texdata	*load_textures()
+static t_texdata	*load_textures()
 {
 	t_texdata	*tex_struct;
 
 	tex_struct = malloc(sizeof(tex_struct));
+	if (!tex_struct)
+		return (NULL);
 	tex_struct -> wall = mlx_load_png("./images/wall.png");
 	tex_struct -> coll = mlx_load_png("./images/coll.png");
+	tex_struct -> exit = mlx_load_png("./images/exit.png");
 	tex_struct -> plyr = mlx_load_png("./images/plyr.png");
-	tex_struct -> exit = mlx_load_png("./images/plyr.png");
+	if (!tex_struct -> wall || !tex_struct -> coll)
+		return (NULL);
+	if (!tex_struct -> exit || !tex_struct -> plyr)
+		return (NULL);
+	return (tex_struct);
+}
+
+static t_mlx_image	*map_blk(void *mlx, char blk)
+{
+	static t_texdata	*tex_struct;
+
+	if (!tex_struct)
+		tex_struct = load_textures();
+	if (blk == 'C')
+		return (mlx_texture_to_image(mlx, tex_struct -> coll));
+	if (blk == 'P')
+		return (mlx_texture_to_image(mlx, tex_struct -> plyr));
+	if (blk == '1')
+		return (mlx_texture_to_image(mlx, tex_struct -> wall));
+	if (blk == 'E')
+		return (mlx_texture_to_image(mlx, tex_struct -> exit));
+	else
+		return (NULL);
+}
+
+static int	rndr_line(void *mlx, char *mline, int lsize)
+{
+	int			iterator;
+	int			pos;
+	t_mlx_image	*img;
+
+	iterator = 0;
+	pos = 0;
+	while (iterator < lsize)
+	{
+		img = map_blk(mlx, mline[iterator]);
+		mlx_image_to_window(mlx, img, pos, 0);
+		pos += 32;
+	}
+	return (TRUE);
 }
 
 int	rndr_matrix(t_the_matrix *matrix)
 {
 	void		*mlx;
 	t_mlx_image	*img;
-	t_mlx_tex	*tex;
 
 	mlx = mlx_init(matrix -> x * BLKSIZ, matrix -> y * BLKSIZ, "so_long", TRUE);
-	tex = mlx_load_png("./images/nedervlag.png");
-	img = mlx_texture_to_image(mlx, tex);
+	img = map_blk(mlx, '1');
 	mlx_image_to_window(mlx, img, 0, 0);
+	img = map_blk(mlx, 'P');
+	mlx_image_to_window(mlx, img, 32, 0);
 	mlx_loop(mlx);
 	return (0);
 }
