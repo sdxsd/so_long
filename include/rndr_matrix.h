@@ -41,8 +41,15 @@ A program is free software if users have all of these freedoms.
 
 #ifndef RNDR_MATRIX_H
 # define RNDR_MATRIX_H
-# include <mlx.h>
+# include <MLX42/MLX42.h>
 # include "so_long.h"
+
+typedef struct s_texdata {
+	t_mlx_tex	*wall;
+	t_mlx_tex	*coll;
+	t_mlx_tex	*exit;
+	t_mlx_tex	*plyr;
+}	t_texdata;
 
 typedef struct s_data {
 	void	*img;
@@ -50,7 +57,7 @@ typedef struct s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_data;
+}	t_data;
 
 int	rndr_matrix(t_the_matrix *matrix);
 

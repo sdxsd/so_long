@@ -37,8 +37,6 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
-#include <mlx.h>
-#include <stdio.h>
 #include "../include/so_long.h"
 #include "../include/parse.h"
 #include "../include/rndr_matrix.h"

@@ -39,21 +39,27 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/rndr_matrix.h"
 
+t_texdata	*load_textures()
+{
+	t_texdata	*tex_struct;
+
+	tex_struct = malloc(sizeof(tex_struct));
+	tex_struct -> wall = mlx_load_png("./images/wall.png");
+	tex_struct -> coll = mlx_load_png("./images/coll.png");
+	tex_struct -> plyr = mlx_load_png("./images/plyr.png");
+	tex_struct -> exit = mlx_load_png("./images/plyr.png");
+}
+
 int	rndr_matrix(t_the_matrix *matrix)
 {
-	void	*mlx;
-	void	*win;
-	int		img_x;
-	int		img_y;
-	t_data	render_data;
+	void		*mlx;
+	t_mlx_image	*img;
+	t_mlx_tex	*tex;
 
-	img_y = BLKSIZ;
-	mlx = mlx_init();
-	render_data.img = mlx_xpm_file_to_image(mlx, "./images/wall.xpm", &img_x, &img_y);
-	win = mlx_new_window(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ, "so_long");
-	matrix -> simulation_data -= matrix -> y;
-	ft_printf("%s\n", *matrix -> simulation_data - 2);
-	mlx_put_image_to_window(mlx, win, render_data.img, 0, 0);
+	mlx = mlx_init(matrix -> x * BLKSIZ, matrix -> y * BLKSIZ, "so_long", TRUE);
+	tex = mlx_load_png("./images/nedervlag.png");
+	img = mlx_texture_to_image(mlx, tex);
+	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_loop(mlx);
 	return (0);
 }

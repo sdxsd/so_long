@@ -11,7 +11,7 @@ LINKEN = ""
 
 ifeq ($(shell uname -s),Linux)
 	OSFLAG := linux
-	LINKEN := -lmlx -Ilmlx -L/usr/include/../lib -lXext -lX11 -lm -lbsd
+	LINKEN := -lmlx42 -ldl -lGL -lglfw -lX11 -lpthread -lXrandr -lXi
 else
 	OSFLAG := darwin
 	LINKEN := -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit
@@ -25,7 +25,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@echo "Building for: $(OSFLAG)"
 	make -C libft/
-	$(CC) -Wall -Wextra -Werror $(CFILES) -Lmlx_$(OSFLAG) $(LINKEN) libft/libft.a -g -o $(NAME)
+	$(CC) -Wall -Wextra -Werror $(CFILES) $(LINKEN) libft/libft.a -g -o $(NAME)
 
 test: re
 	./so_long maps/map01.ber

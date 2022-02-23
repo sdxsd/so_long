@@ -61,7 +61,7 @@ static int	valline(char *line, int y)
 static int	chline(char *line, int x, int y)
 {
 	const char	*dict = "01CEP\n";
-	int	iterator;
+	int			iterator;
 
 	iterator = 0;
 	if ((int)ft_strlen(line) != x)
@@ -86,22 +86,21 @@ static int	chline(char *line, int x, int y)
 	return (1);
 }
 
-static t_the_matrix* 	chmap_val(char *path, t_the_matrix* matrix)
+static t_the_matrix	*chmap_val(char *path, t_the_matrix	*matrix)
 {
-	int		temp_x;
 	char	*line;
 	int		fd;
 
-	temp_x = -1;
+	matrix -> x = -1;
 	fd = open(path, O_RDONLY);
 	while (TRUE)
 	{
 		line = get_next_line(fd);
 		if (line)
 		{
-			if (temp_x == -1)
-				temp_x = ft_strlen(line);
-			if (!chline(line, temp_x, matrix -> y))
+			if (matrix -> x == -1)
+				matrix -> x = ft_strlen(line);
+			if (!chline(line, matrix -> x, matrix -> y))
 				return (NULL);
 			else
 				matrix -> y++;
@@ -112,14 +111,12 @@ static t_the_matrix* 	chmap_val(char *path, t_the_matrix* matrix)
 		else
 			return (NULL);
 	}
-	matrix -> x = temp_x;
 	return (matrix);
 }
 
-
-t_the_matrix*	matrix_init(int argc, char *argv[])
+t_the_matrix	*matrix_init(int argc, char *argv[])
 {
-	t_the_matrix *matrix;
+	t_the_matrix	*matrix;
 
 	if (argc < 2 || argv[1] == NULL)
 		return (NULL);
