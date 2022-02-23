@@ -39,7 +39,7 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/rndr_matrix.h"
 
-static t_texdata	*load_textures()
+static t_texdata	*load_textures(void)
 {
 	t_texdata	*tex_struct;
 
@@ -75,19 +75,22 @@ static t_mlx_image	*map_blk(void *mlx, char blk)
 		return (NULL);
 }
 
-static int	rndr_line(void *mlx, char *mline, int lsize)
+static int	rndr_line(void *mlx, char *mline, int lsize, int y)
 {
 	int			iterator;
-	int			pos;
+	int			pos_x;
+	int			pos_y;
 	t_mlx_image	*img;
 
 	iterator = 0;
-	pos = 0;
+	pos_x = 0;
+	pos_y = y * 32;
 	while (iterator < lsize)
 	{
 		img = map_blk(mlx, mline[iterator]);
-		mlx_image_to_window(mlx, img, pos, 0);
-		pos += 32;
+		mlx_image_to_window(mlx, img, pos_x, pos_y);
+		pos_x += 32;
+		iterator++;
 	}
 	return (TRUE);
 }
@@ -95,13 +98,15 @@ static int	rndr_line(void *mlx, char *mline, int lsize)
 int	rndr_matrix(t_the_matrix *matrix)
 {
 	void		*mlx;
-	t_mlx_image	*img;
+	char		*line;
 
+	line = "1CEP1PEC1CEE1EEP";
 	mlx = mlx_init(matrix -> x * BLKSIZ, matrix -> y * BLKSIZ, "so_long", TRUE);
-	img = map_blk(mlx, '1');
-	mlx_image_to_window(mlx, img, 0, 0);
-	img = map_blk(mlx, 'P');
-	mlx_image_to_window(mlx, img, 32, 0);
+	rndr_line(mlx, line, 16, 0);
+	rndr_line(mlx, line, 16, 1);
+	rndr_line(mlx, line, 16, 2);
+	rndr_line(mlx, line, 16, 3);
+	rndr_line(mlx, line, 16, 4);
 	mlx_loop(mlx);
 	return (0);
 }
