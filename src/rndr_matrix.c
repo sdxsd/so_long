@@ -75,6 +75,16 @@ static t_mlx_image	*map_blk(void *mlx, char blk)
 		return (NULL);
 }
 
+static int	rndr_background(void *mlx, int win_x, int win_y)
+{
+	t_mlx_image	*bckgrnd;
+	int 		px;
+	int			py;
+
+	bckgrnd = mlx_new_image(mlx, win_x, win_y);
+
+}
+
 static int	rndr_line(void *mlx, char *mline, int lsize, int y)
 {
 	int			iterator;
