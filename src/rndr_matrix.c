@@ -75,14 +75,27 @@ static t_mlx_image	*map_blk(void *mlx, char blk)
 		return (NULL);
 }
 
-static int	rndr_background(void *mlx, int win_x, int win_y)
+static t_mlx_image	*rndr_background(void *mlx, int win_x, int win_y)
 {
 	t_mlx_image	*bckgrnd;
-	int 		px;
+	int			px;
 	int			py;
 
+	px = 0;
+	py = 0;
 	bckgrnd = mlx_new_image(mlx, win_x, win_y);
+	while (py++ < win_y)
+	{
+		while (px++ < win_x && (py < (win_y / 3)))
+			mlx_putpixel(bckgrnd, px, py, 0xFF9B00FF);
+		while (px++ < win_x && (py < ((win_y / 3) * 2)))
+			mlx_putpixel(bckgrnd, px, py, 0xFFFFFFFF);
+		while (px++ < win_x && (py < ((win_y / 3) * 3)))
+			mlx_putpixel(bckgrnd, px, py, 0x0B72FFFF);
 
+		px = 0;
+	}
+	return (bckgrnd);
 }
 
 static int	rndr_line(void *mlx, char *mline, int lsize, int y)
@@ -108,10 +121,13 @@ static int	rndr_line(void *mlx, char *mline, int lsize, int y)
 int	rndr_matrix(t_the_matrix *matrix)
 {
 	void		*mlx;
+	t_mlx_image	*bckgrnd;
 	char		*line;
 
 	line = "1CEP1PEC1CEE1EEP";
 	mlx = mlx_init(matrix -> x * BLKSIZ, matrix -> y * BLKSIZ, "so_long", TRUE);
+	bckgrnd = rndr_background(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ);
+	mlx_image_to_window(mlx, bckgrnd, 0, 0);
 	rndr_line(mlx, line, 16, 0);
 	rndr_line(mlx, line, 16, 1);
 	rndr_line(mlx, line, 16, 2);
