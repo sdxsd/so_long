@@ -38,11 +38,12 @@ A program is free software if users have all of these freedoms.
 */
 
 // The design of this so_long is intentional.
-// The player sprite represents the primacy of The Netherlands in the world.
+
+// The player sprite represents the primacy of The Netherlands.
 // The wall sprite represents how the Belgian menace holds us back.
-// The collectible sprite represents the goal that all good Dutch people strive towards.
+// The collectible sprite represents the goal that all good Dutch people desire.
 // The exit represents Mark Rutte as our exit.
-// The background is symbolic of the monarchy acting as the backbone of the nation.
+// The background is symbolic of the monarchy, the backbone of the nation.
 // Je maintiendrai!
 
 #include "../include/so_long.h"
