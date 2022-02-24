@@ -84,20 +84,25 @@ static t_mlx_image	*rndr_background(void *mlx, int win_x, int win_y)
 	t_mlx_image	*bckgrnd;
 	int			px;
 	int			py;
+	int			colour;
 
 	px = 0;
 	py = 0;
+	colour = 0xFF9B00FF;
 	bckgrnd = mlx_new_image(mlx, win_x, win_y);
-	while (py++ < win_y)
+	while (py < win_y)
 	{
-		while (px++ < win_x && (py < (win_y / 3)))
-			mlx_putpixel(bckgrnd, px, py, 0xFF9B00FF);
-		while (px++ < win_x && (py < ((win_y / 3) * 2)))
-			mlx_putpixel(bckgrnd, px, py, 0xFFFFFFFF);
-		while (px++ < win_x && (py < ((win_y / 3) * 3)))
-			mlx_putpixel(bckgrnd, px, py, 0x0B72FFFF);
-
+		while (px < win_x)
+		{
+			mlx_putpixel(bckgrnd, px, py, colour);
+			px++;
+		}
+		if (py > (win_y / 3))
+			colour = 0xFFFFFFFF;
+		if (py > (win_y / 3 * 2))
+			colour = 0x0B72FFFF;
 		px = 0;
+		py++;
 	}
 	return (bckgrnd);
 }
