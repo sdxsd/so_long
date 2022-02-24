@@ -46,6 +46,6 @@ A program is free software if users have all of these freedoms.
 # include <fcntl.h>
 # include <stdlib.h>
 
-t_the_matrix	*matrix_init(int argc, char *argv[]);
+t_matrix	*matrix_init(int argc, char *argv[]);
 
 #endif // PARSE_H

@@ -46,7 +46,7 @@ static int	valline(char *line, int y)
 	int			iterator;
 
 	iterator = 0;
-	if (y == 0)
+	if (y == 0 || y == -1)
 	{
 		while (line[iterator] != '\0')
 		{
@@ -86,7 +86,7 @@ static int	chline(char *line, int x, int y)
 	return (1);
 }
 
-static t_the_matrix	*chmap_val(char *path, t_the_matrix	*matrix)
+static t_matrix	*chmap_val(char *path, t_matrix	*matrix)
 {
 	char	*line;
 	int		fd;
@@ -114,13 +114,13 @@ static t_the_matrix	*chmap_val(char *path, t_the_matrix	*matrix)
 	return (matrix);
 }
 
-t_the_matrix	*matrix_init(int argc, char *argv[])
+t_matrix	*matrix_init(int argc, char *argv[])
 {
-	t_the_matrix	*matrix;
+	t_matrix	*matrix;
 
 	if (argc < 2 || argv[1] == NULL)
 		return (NULL);
-	matrix = malloc(sizeof(t_the_matrix));
+	matrix = malloc(sizeof(t_matrix));
 	if (!matrix)
 		return (NULL);
 	if (!chmap_val(argv[1], matrix))

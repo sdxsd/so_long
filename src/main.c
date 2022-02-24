@@ -52,15 +52,16 @@ A program is free software if users have all of these freedoms.
 
 int	main(int argc, char *argv[])
 {
-	t_the_matrix	*sim_env;
+	t_matrix	*matrix;
 
-	sim_env = matrix_init(argc, argv);
-	if (!sim_env)
+	matrix = matrix_init(argc, argv);
+	if (!matrix)
 	{
 		ft_putstr("Invalid map...\n");
 		return (1);
 	}
-	ft_printf("X: %d\nY: %d\n", sim_env -> x, sim_env -> y);
-	ft_printf("BLKNUM: %d\n", sim_env -> x * sim_env -> y);
-	rndr_matrix(sim_env);
+	ft_printf("so_long Copyright (C) 2022 Will Maguire\n");
+	ft_printf("X: %d\nY: %d\n", matrix -> x, matrix -> y);
+	ft_printf("BLKNUM: %d\n", matrix -> x * matrix -> y);
+	rndr_matrix(matrix);
 }

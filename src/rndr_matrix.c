@@ -127,7 +127,7 @@ static int	rndr_line(void *mlx, char *mline, int lsize, int y)
 	return (TRUE);
 }
 
-int	rndr_matrix(t_the_matrix *matrix)
+int	rndr_matrix(t_matrix *matrix)
 {
 	void		*mlx;
 	t_mlx_image	*bckgrnd;

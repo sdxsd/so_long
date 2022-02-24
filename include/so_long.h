@@ -42,11 +42,11 @@ A program is free software if users have all of these freedoms.
 # define BLKSIZ 32
 # include "../libft/libft.h"
 
-typedef struct the_matrix {
+typedef struct s_matrix {
 	int		x;
 	int		y;
 	char	**wired_entry;
 	char	**simulation_data;
-}	t_the_matrix;
+}	t_matrix;
 
 #endif // SO_LONG_H
