@@ -62,7 +62,11 @@ static t_mlx_image	*map_blk(void *mlx, char blk)
 	static t_texdata	*tex_struct;
 
 	if (!tex_struct)
+	{
 		tex_struct = load_textures();
+		if (!tex_struct)
+			return (NULL);
+	}
 	if (blk == 'C')
 		return (mlx_texture_to_image(mlx, tex_struct -> coll));
 	if (blk == 'P')
