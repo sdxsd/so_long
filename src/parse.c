@@ -43,7 +43,7 @@ A program is free software if users have all of these freedoms.
 // Validates a line based on the current y position.
 static int	valline(char *line, int y)
 {
-	const char	*firlst = "1\n";
+	const char	*fir_lst = "1\n";
 	int			iterator;
 
 	iterator = 0;
@@ -51,7 +51,7 @@ static int	valline(char *line, int y)
 	{
 		while (line[iterator] != '\0')
 		{
-			if (!ft_charchk(line[iterator], (char *)firlst))
+			if (!ft_charchk(line[iterator], (char *)fir_lst))
 				return (0);
 			iterator++;
 		}
@@ -69,31 +69,51 @@ static int	chline(char *line, int x, int y)
 	if ((int)ft_strlen(line) != x)
 	{
 		free(line);
-		return (0);
+		return (FALSE);
 	}
 	while (iterator < x)
 	{
 		if (!ft_charchk(line[iterator], (char *)dict))
 		{
 			free(line);
-			return (0);
+			return (FALSE);
 		}
 		if (!valline(line, y))
 		{
 			free (line);
-			return (0);
+			return (FALSE);
 		}
 		iterator++;
 	}
-	return (1);
+	return (TRUE);
 }
 
-// Loads map file line by line.
-static t_matrix	*chmap_val(char *path, t_matrix	*matrix)
+// This function validates the map, returning 1 (TRUE) if
+// the map passes validity checks.
+static int	validate_map(t_matrix *matrix)
+{
+	int	iter_y;
+
+	iter_y = 0;
+	matrix -> simulation_data = matrix -> wired_entry;
+	while (iter_y < matrix -> y)
+	{
+		ft_putstr(*matrix -> simulation_data);
+		if (!chline(*matrix -> simulation_data, matrix -> x, iter_y))
+			return (FALSE);
+		matrix -> simulation_data++;
+		iter_y++;
+	}
+	return (TRUE);
+}
+
+static t_matrix	*load_map(char *path, t_matrix *matrix)
 {
 	char	*line;
 	int		fd;
 
+	matrix -> simulation_data = malloc(sizeof(char *) * 1024);
+	matrix -> wired_entry = matrix -> simulation_data;
 	matrix -> x = -1;
 	fd = open(path, O_RDONLY);
 	while (TRUE)
@@ -103,14 +123,12 @@ static t_matrix	*chmap_val(char *path, t_matrix	*matrix)
 		{
 			if (matrix -> x == -1)
 				matrix -> x = ft_strlen(line);
-			if (!chline(line, matrix -> x, matrix -> y))
-				return (NULL);
-			else
-				matrix -> y++;
-			free(line);
+			*matrix -> simulation_data = line;
+			matrix -> simulation_data++;
+			matrix -> y++;
 		}
-		else if (matrix -> y != 0)
-			break ;
+		else if (!line && *matrix -> wired_entry != NULL)
+			break;
 		else
 			return (NULL);
 	}
@@ -128,7 +146,12 @@ t_matrix	*matrix_init(int argc, char *argv[])
 	matrix = malloc(sizeof(t_matrix));
 	if (!matrix)
 		return (NULL);
-	if (!chmap_val(argv[1], matrix))
+	if (!load_map(argv[1], matrix))
+	{
+		free(matrix);
+		return (NULL);
+	}
+	if (!validate_map(matrix))
 	{
 		free(matrix);
 		return (NULL);
