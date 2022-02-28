@@ -86,11 +86,6 @@ static int	chline(char *line, int x, int y)
 	return (1);
 }
 
-static t_matrix	*load_map(char *path, t_matrix *matrix)
-{
-	// how the fuck
-}
-
 static t_matrix	*chmap_val(char *path, t_matrix	*matrix)
 {
 	char	*line;

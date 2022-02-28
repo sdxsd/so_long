@@ -50,9 +50,8 @@ static t_texdata	*load_textures(void)
 	tex_struct -> coll = mlx_load_png("./images/coll.png");
 	tex_struct -> exit = mlx_load_png("./images/exit.png");
 	tex_struct -> plyr = mlx_load_png("./images/plyr.png");
-	if (!tex_struct -> wall || !tex_struct -> coll)
-		return (NULL);
-	if (!tex_struct -> exit || !tex_struct -> plyr)
+	if (!tex_struct -> wall || !tex_struct -> coll
+		|| !tex_struct -> exit || !tex_struct -> plyr)
 		return (NULL);
 	return (tex_struct);
 }
