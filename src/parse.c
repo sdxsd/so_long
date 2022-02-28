@@ -40,6 +40,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/parse.h"
 #include "../include/so_long.h"
 
+// Validates a line based on the current y position.
 static int	valline(char *line, int y)
 {
 	const char	*firlst = "1\n";
@@ -58,6 +59,7 @@ static int	valline(char *line, int y)
 	return (1);
 }
 
+// Checks line for invalid characters and invalid line pattern.
 static int	chline(char *line, int x, int y)
 {
 	const char	*dict = "01CEP\n";
@@ -86,6 +88,7 @@ static int	chline(char *line, int x, int y)
 	return (1);
 }
 
+// Loads map file line by line.
 static t_matrix	*chmap_val(char *path, t_matrix	*matrix)
 {
 	char	*line;
@@ -114,6 +117,8 @@ static t_matrix	*chmap_val(char *path, t_matrix	*matrix)
 	return (matrix);
 }
 
+// Initiates basic input checking before
+// passing the map parsing to subroutines.
 t_matrix	*matrix_init(int argc, char *argv[])
 {
 	t_matrix	*matrix;

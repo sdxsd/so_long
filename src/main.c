@@ -38,7 +38,6 @@ A program is free software if users have all of these freedoms.
 */
 
 // The design of this so_long is intentional.
-
 // The player sprite represents the primacy of The Netherlands.
 // The wall sprite represents how the Belgian menace holds us back.
 // The collectible sprite represents the goal that all good Dutch people desire.
@@ -50,6 +49,10 @@ A program is free software if users have all of these freedoms.
 #include "../include/parse.h"
 #include "../include/rndr_matrix.h"
 
+// This function initiates the program.
+// Begins by using the matrix_init() function to interpret the map.
+// Then begins the rendering process with rndr_matrix() before entering the game loop.
+// Upon exit will call a cleanup function to deallocate residual memory.
 int	main(int argc, char *argv[])
 {
 	t_matrix	*matrix;
@@ -57,11 +60,9 @@ int	main(int argc, char *argv[])
 	matrix = matrix_init(argc, argv);
 	if (!matrix)
 	{
-		ft_putstr("Invalid map...\n");
+		ft_putstr("ERROR:\nInvalid map...\n");
 		return (1);
 	}
-	ft_printf("so_long Copyright (C) 2022 Will Maguire\n");
-	ft_printf("X: %d\nY: %d\n", matrix -> x, matrix -> y);
-	ft_printf("BLKNUM: %d\n", matrix -> x * matrix -> y);
+	ft_putstr("so_long Copyright (C) 2022 Will Maguire\n");
 	rndr_matrix(matrix);
 }

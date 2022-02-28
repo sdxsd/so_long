@@ -39,8 +39,6 @@ A program is free software if users have all of these freedoms.
 
 #ifndef PARSE_H
 # define PARSE_H
-# define DICT "01CEP\n"
-# include "../libft/libft.h"
 # include "so_long.h"
 # include <unistd.h>
 # include <fcntl.h>
