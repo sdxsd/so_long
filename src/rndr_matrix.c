@@ -39,6 +39,7 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/rndr_matrix.h"
 
+// Loads textures into the tex_struct data structure for later use.
 static t_texdata	*load_textures(void)
 {
 	t_texdata	*tex_struct;
@@ -56,6 +57,7 @@ static t_texdata	*load_textures(void)
 	return (tex_struct);
 }
 
+// Maps characters to textures for the rndr_line() function.
 static t_mlx_image	*map_blk(void *mlx, char blk)
 {
 	static t_texdata	*tex_struct;
@@ -78,6 +80,7 @@ static t_mlx_image	*map_blk(void *mlx, char blk)
 		return (NULL);
 }
 
+// Takes the width and height of the MLX window and generates a background.
 static t_mlx_image	*rndr_background(void *mlx, int win_x, int win_y)
 {
 	t_mlx_image	*bckgrnd;
@@ -106,6 +109,7 @@ static t_mlx_image	*rndr_background(void *mlx, int win_x, int win_y)
 	return (bckgrnd);
 }
 
+// Takes a string of map data as input and outputs the rendered equivalent.
 static int	rndr_line(void *mlx, char *mline, int lsize, int y)
 {
 	int			iterator;
@@ -126,21 +130,23 @@ static int	rndr_line(void *mlx, char *mline, int lsize, int y)
 	return (TRUE);
 }
 
+// Taking the map data as input, this function renders the
+// current state of the game onto the MLX window.
 int	rndr_matrix(t_matrix *matrix)
 {
 	void		*mlx;
 	t_mlx_image	*bckgrnd;
 	char		*line;
 
-	line = "1CEP1PEC1CEE1EEP";
+	line = "";
 	mlx = mlx_init(matrix -> x * BLKSIZ, matrix -> y * BLKSIZ, "so_long", TRUE);
 	bckgrnd = rndr_background(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ);
 	mlx_image_to_window(mlx, bckgrnd, 0, 0);
-	rndr_line(mlx, line, 16, 0);
-	rndr_line(mlx, line, 16, 1);
-	rndr_line(mlx, line, 16, 2);
-	rndr_line(mlx, line, 16, 3);
-	rndr_line(mlx, line, 16, 4);
+	rndr_line(mlx, line, ft_strlen(line), 0);
+	rndr_line(mlx, line, ft_strlen(line), 1);
+	rndr_line(mlx, line, ft_strlen(line), 2);
+	rndr_line(mlx, line, ft_strlen(line), 3);
+	rndr_line(mlx, line, ft_strlen(line), 4);
 	mlx_loop(mlx);
 	return (0);
 }
