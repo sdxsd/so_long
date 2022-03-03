@@ -120,7 +120,7 @@ static t_mlx_image	*rndr_background(void *mlx, int win_x, int win_y)
 // the aforementioned line at.
 // Defines two index variables, pos_x, and pos_y.
 // pos_x is set to the first block in the
-// row. pos_y is set to the offset defined
+// row. pos_y is set to the row defined
 // by the y argument.
 // The window is defined as a series of blocks.
 // By block I mean a square of 32x32 pixels.
@@ -128,10 +128,10 @@ static t_mlx_image	*rndr_background(void *mlx, int win_x, int win_y)
 // would be expressed in pixel terms as y 160 and x 96.
 // 32 * 5 down, and 32 * 3 across.
 // For each character in the given line, the character
-// is mapped to the equivalent map texture and then pushed
-// to the image at the current offset of pos_x and at the row
-// defined by pos_y.
-// pos_x is then increased by one block to the right, and
+// is mapped to the equivalent map texture with map_blk()
+// and then pushed to the image at the current offset of pos_x
+// and at the row defined by pos_y.
+// pos_x is then increased by one block to the right (+32), and
 // the loop repeats.
 // Returns TRUE at return.
 static int	rndr_line(void *mlx, char *mline, int lsize, int y)
