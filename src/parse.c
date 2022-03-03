@@ -128,7 +128,7 @@ static t_matrix	*load_map(char *path, t_matrix *matrix)
 			matrix -> y++;
 		}
 		else if (!line && *matrix -> wired_entry != NULL)
-			break;
+			break ;
 		else
 			return (NULL);
 	}

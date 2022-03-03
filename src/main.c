@@ -50,8 +50,10 @@ A program is free software if users have all of these freedoms.
 #include "../include/rndr_matrix.h"
 
 // This function initiates the program.
-// Begins by using the matrix_init() function to interpret the map.
-// Then begins the rendering process with rndr_matrix() before entering the game loop.
+// Begins by using the matrix_init() function to interpret
+// and load the map.
+// Then begins the rendering process with
+// rndr_matrix() before entering the game loop.
 // Upon exit will call a cleanup function to deallocate residual memory.
 int	main(int argc, char *argv[])
 {
