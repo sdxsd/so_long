@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -fsanitize=address -Wall -Wextra -Werror
 NAME = so_long
 CFILES = \
 			src/main.c \
@@ -12,7 +12,7 @@ LINKEN = ""
 
 ifeq ($(shell uname -s),Linux)
 	OSFLAG := linux
-	LINKEN := -lmlx42 -L ./MLX42/ -ldl -lGL -lglfw -lX11 -lpthread -lXrandr -lXi
+	LINKEN := -I ./MLX42/include/MLX42/ -ldl -lGL -lglfw -lX11 -lpthread -lXrandr -lXi
 else
 	OSFLAG := darwin
 	LINKEN := -lglfw -L /Users/wmaguire/.brew/opt/glfw/lib/ -lmlx42 -L ./MLX42/
@@ -20,13 +20,10 @@ endif
 
 all: $(NAME)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_$(OSFLAG) -O3 -c $< -o $@
-
-$(NAME): $(OBJ)
+$(NAME):
 	@echo "Building for: $(OSFLAG)"
 	@make -C libft/
-	$(CC) -Wall -Wextra -Werror $(CFILES) $(LINKEN) libft/libft.a -g -o $(NAME)
+	$(CC) -Wall -Wextra -Werror $(CFILES) $(LINKEN) libft/libft.a MLX42/libmlx42.a -g -o $(NAME)
 
 test: re
 	./so_long maps/map02.ber
