@@ -49,4 +49,9 @@ typedef struct s_matrix {
 	char	**simulation_data;
 }	t_matrix;
 
+typedef	struct s_reality {
+	void		*mlx;
+	t_matrix	*matrix;
+}	t_reality;
+
 #endif // SO_LONG_H

@@ -60,6 +60,6 @@ typedef struct s_data {
 	int		endian;
 }	t_data;
 
-int	rndr_matrix(t_matrix *matrix);
+int	rndr_matrix(t_reality *reality);
 
 #endif // RNDR_MATRIX_H

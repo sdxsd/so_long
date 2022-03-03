@@ -49,6 +49,17 @@ A program is free software if users have all of these freedoms.
 #include "../include/parse.h"
 #include "../include/rndr_matrix.h"
 
+static void	*init_reality(t_reality *reality)
+{
+	t_matrix	*matr;
+
+	matr = reality -> matrix;
+	reality -> mlx = mlx_init(matr -> x * BLKSIZ, matr -> y * BLKSIZ, "so_long", TRUE);
+	if (!reality -> mlx)
+		return (NULL);
+	return (reality -> mlx);
+}
+
 // This function initiates the program.
 // Begins by using the matrix_init() function to interpret
 // and load the map.
@@ -57,14 +68,17 @@ A program is free software if users have all of these freedoms.
 // Upon exit will call a cleanup function to deallocate residual memory.
 int	main(int argc, char *argv[])
 {
-	t_matrix	*matrix;
+	t_reality	*reality;
 
-	matrix = matrix_init(argc, argv);
-	if (!matrix)
+	reality = malloc(sizeof(t_reality));
+	reality -> matrix = matrix_init(argc, argv);
+	if (!reality -> matrix)
 	{
 		ft_putstr("ERROR:\nInvalid map...\n");
 		return (1);
 	}
 	ft_putstr("so_long Copyright (C) 2022 Will Maguire\n");
-	rndr_matrix(matrix);
+	init_reality(reality);
+	rndr_matrix(reality);
+	mlx_loop(reality -> mlx);
 }

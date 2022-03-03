@@ -147,7 +147,8 @@ static int	rndr_line(void *mlx, char *mline, int lsize, int y)
 	while (iterator < lsize)
 	{
 		img = map_blk(mlx, mline[iterator]);
-		mlx_image_to_window(mlx, img, pos_x, pos_y);
+		if (img)
+			mlx_image_to_window(mlx, img, pos_x, pos_y);
 		pos_x += 32;
 		iterator++;
 	}
@@ -156,21 +157,24 @@ static int	rndr_line(void *mlx, char *mline, int lsize, int y)
 
 // Taking the map data as input, this function renders the
 // current state of the game onto the MLX window.
-int	rndr_matrix(t_matrix *matrix)
+int	rndr_matrix(t_reality *reality)
 {
+	int			iter;
 	void		*mlx;
+	t_matrix	*matrix;
 	t_mlx_image	*bckgrnd;
-	char		*line;
 
-	line = "";
-	mlx = mlx_init(matrix -> x * BLKSIZ, matrix -> y * BLKSIZ, "so_long", TRUE);
+	matrix = reality -> matrix;
+	mlx = reality -> mlx;
+	iter = 0;
 	bckgrnd = rndr_background(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ);
 	mlx_image_to_window(mlx, bckgrnd, 0, 0);
-	rndr_line(mlx, line, ft_strlen(line), 0);
-	rndr_line(mlx, line, ft_strlen(line), 1);
-	rndr_line(mlx, line, ft_strlen(line), 2);
-	rndr_line(mlx, line, ft_strlen(line), 3);
-	rndr_line(mlx, line, ft_strlen(line), 4);
-	mlx_loop(mlx);
-	return (0);
+	matrix -> simulation_data = matrix -> wired_entry;
+	while (iter < matrix -> y)
+	{
+		rndr_line(mlx, *matrix -> simulation_data, matrix -> x, iter);
+		matrix -> simulation_data++;
+		iter++;
+	}
+	return (TRUE);
 }

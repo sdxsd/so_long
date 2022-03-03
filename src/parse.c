@@ -231,5 +231,6 @@ t_matrix	*matrix_init(int argc, char *argv[])
 		free(matrix);
 		return (NULL);
 	}
+	matrix -> x--;
 	return (matrix);
 }
