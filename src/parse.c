@@ -90,6 +90,26 @@ static int	chline(char *line, int x, int y)
 
 // This function validates the map, returning 1 (TRUE) if
 // the map passes validity checks.
+// Functions by defining an iterative variable
+// referencing the current y position
+// when indexing the map data.
+// **simulation_data is set to **wired_entry
+// with the latter pointing to the first
+// element of the map data, loaded as an array
+// of strings.
+// While the variable iter_y does not yet
+// equal the total rows (y value) of the map
+// then the following is executed.
+// The function chline() (short for check line)
+// is provided the current row being indexed,
+// the line of map data associated with the
+// aforementioned row, and the length of the row
+// being represented as the x value.
+// If the function does not return TRUE
+// then false is returned and the validation fails.
+// Otherwise the function continues, incrementing
+// the iter_y value and moving down a row
+// in simulation_data.
 static int	validate_map(t_matrix *matrix)
 {
 	int	iter_y;
@@ -98,7 +118,6 @@ static int	validate_map(t_matrix *matrix)
 	matrix -> simulation_data = matrix -> wired_entry;
 	while (iter_y < matrix -> y)
 	{
-		ft_putstr(*matrix -> simulation_data);
 		if (!chline(*matrix -> simulation_data, matrix -> x, iter_y))
 			return (FALSE);
 		matrix -> simulation_data++;
@@ -150,6 +169,20 @@ static t_matrix	*load_map(char *path, t_matrix *matrix)
 
 // Initiates basic input checking before
 // passing the map parsing to subroutines.
+// Functions by defining a pointer to a t_matrix
+// which will eventually hold the map data
+// and other necessary data such as the
+// width and height. Then operates basic argument
+// checking and returns NULL if the arguments are
+// insufficient. Allocates memory for the t_matrix
+// struct. Runs the load map function,
+// which loads the map into memory and
+// defines the map dimensions.
+// Then runs the validate_map() function
+// to validate that the aforementioned
+// map_data constitutes a valid map
+// according to the project definitions.
+// Finally returns the populated Matrix struct.
 t_matrix	*matrix_init(int argc, char *argv[])
 {
 	t_matrix	*matrix;
