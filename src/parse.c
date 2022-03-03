@@ -73,8 +73,22 @@ static int	valline(char *line, int y)
 	return (TRUE);
 }
 
-// Checks line for invalid characters and invalid line pattern.
-//
+// chline() (check line) takes a line of map data
+// represented as a char pointer, a length value
+// represented as x, and the current y value pertaining
+// to the line provided.
+// The dict variable defines acceptable characters within the map.
+// If the strlen() of line does not equal the x value
+// given, then the line is invalid, as lines must all be of
+// equal width.
+// The function then simply iterates through the line
+// while running the ft_charchk() function which compares
+// a given character to see if it contains any
+// characters outside of the provided set.
+// Continuing, the function runs the valline() function
+// which validates the line based on the given y position.
+// If any of the checks fail, the line is freed, and false is returned.
+// Otherwise the function returns true.
 static int	chline(char *line, int x, int y)
 {
 	const char	*dict = "01CEP\n";
@@ -93,12 +107,12 @@ static int	chline(char *line, int x, int y)
 			free(line);
 			return (FALSE);
 		}
-		if (!valline(line, y))
-		{
-			free (line);
-			return (FALSE);
-		}
 		iterator++;
+	}
+	if (!valline(line, y))
+	{
+		free (line);
+		return (FALSE);
 	}
 	return (TRUE);
 }
