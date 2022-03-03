@@ -15,7 +15,7 @@ ifeq ($(shell uname -s),Linux)
 	LINKEN := -lmlx42 -L ./MLX42/ -ldl -lGL -lglfw -lX11 -lpthread -lXrandr -lXi
 else
 	OSFLAG := darwin
-	LINKEN := -lglfw -L /Users/wmaguire/.brew/opt/glfw/libft/ -lmlx42 -L ./MLX42/
+	LINKEN := -lglfw -L /Users/wmaguire/.brew/opt/glfw/lib/ -lmlx42 -L ./MLX42/
 endif
 
 all: $(NAME)
