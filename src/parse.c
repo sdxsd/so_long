@@ -40,7 +40,21 @@ A program is free software if users have all of these freedoms.
 #include "../include/parse.h"
 #include "../include/so_long.h"
 
-// Validates a line based on the current y position.
+// valline() (short for validate line)
+// takes the y position of the given line,
+// and checks for validity of the line
+// based on said position.
+// The variable fir_lst (first last)
+// defines the acceptable characters that can be present
+// in the first and last line of the map.
+// If the value of y is -1
+// this indicates the last line of the map data.
+// This function simply iterates through a line
+// passing each character to a subroutine
+// that checks the given character against a dictionary
+// of characters in the form of a char pointer.
+// Returns false if ft_charchk() fails
+// at any time.
 static int	valline(char *line, int y)
 {
 	const char	*fir_lst = "1\n";
@@ -52,14 +66,15 @@ static int	valline(char *line, int y)
 		while (line[iterator] != '\0')
 		{
 			if (!ft_charchk(line[iterator], (char *)fir_lst))
-				return (0);
+				return (FALSE);
 			iterator++;
 		}
 	}
-	return (1);
+	return (TRUE);
 }
 
 // Checks line for invalid characters and invalid line pattern.
+//
 static int	chline(char *line, int x, int y)
 {
 	const char	*dict = "01CEP\n";
