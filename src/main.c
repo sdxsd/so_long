@@ -51,7 +51,7 @@ A program is free software if users have all of these freedoms.
 
 static void	*init_reality(t_reality *reality)
 {
-	void		*mlx;
+	mlx_t		*mlx;
 	t_matrix	*matr;
 
 	matr = reality -> matrix;

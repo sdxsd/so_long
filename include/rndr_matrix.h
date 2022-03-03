@@ -42,16 +42,9 @@ A program is free software if users have all of these freedoms.
 #ifndef RNDR_MATRIX_H
 # define RNDR_MATRIX_H
 # include <stdlib.h>
-# include "../MLX42/include/MLX42/MLX42.h"
 # include "so_long.h"
 
-typedef struct s_texdata {
-	mlx_texture_t	*wall;
-	mlx_texture_t	*coll;
-	mlx_texture_t	*exit;
-	mlx_texture_t	*plyr;
-}	t_texdata;
-
-int	rndr_matrix(t_reality *reality);
+int			rndr_matrix(t_reality *reality);
+t_texdata	*load_textures(void);
 
 #endif // RNDR_MATRIX_H

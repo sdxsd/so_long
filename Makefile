@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -fsanitize=address -Wall -Wextra -Werror
+CFLAGS = -g
 NAME = so_long
 CFILES = \
 			src/main.c \
@@ -23,7 +23,7 @@ all: $(NAME)
 $(NAME):
 	@echo "Building for: $(OSFLAG)"
 	@make -C libft/
-	$(CC) -Wall -Wextra -Werror $(CFILES) $(LINKEN) libft/libft.a MLX42/libmlx42.a -g -o $(NAME)
+	$(CC) $(CFLAGS) $(CFILES) $(LINKEN) libft/libft.a MLX42/libmlx42.a -g -o $(NAME)
 
 test: re
 	./so_long maps/map02.ber

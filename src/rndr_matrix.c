@@ -40,7 +40,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/rndr_matrix.h"
 
 // Loads textures into the tex_struct data structure for later use.
-static t_texdata	*load_textures(void)
+t_texdata	*load_textures(void)
 {
 	t_texdata	*tex_struct;
 
@@ -58,26 +58,21 @@ static t_texdata	*load_textures(void)
 }
 
 // Maps characters to textures for the rndr_line() function.
-static mlx_image_t	*map_blk(void *mlx, char blk)
+static mlx_image_t	*map_blk(mlx_t *mlx, t_texdata *tex_struct, char blk)
 {
-	static t_texdata	*tex_struct;
+	mlx_image_t	*img;
 
-	if (!tex_struct)
-	{
-		tex_struct = load_textures();
-		if (!tex_struct)
-			return (NULL);
-	}
 	if (blk == 'C')
-		return (mlx_texture_to_image(mlx, tex_struct -> coll));
-	if (blk == 'P')
-		return (mlx_texture_to_image(mlx, tex_struct -> plyr));
-	if (blk == '1')
-		return (mlx_texture_to_image(mlx, tex_struct -> wall));
-	if (blk == 'E')
-		return (mlx_texture_to_image(mlx, tex_struct -> exit));
+		img = mlx_texture_to_image(mlx, tex_struct -> coll);
+	else if (blk == 'P')
+		img = mlx_texture_to_image(mlx, tex_struct -> plyr);
+	else if (blk == '1')
+		img = mlx_texture_to_image(mlx, tex_struct -> wall);
+	else if (blk == 'E')
+		img = mlx_texture_to_image(mlx, tex_struct -> exit);
 	else
 		return (NULL);
+	return (img);
 }
 
 // Takes the width and height of the MLX window and generates a background.
@@ -86,7 +81,7 @@ static mlx_image_t	*map_blk(void *mlx, char blk)
 // value based on said stages.
 // The win_x value is used as an iterator and fills each line of the
 // image with the colour defined.
-static mlx_image_t	*rndr_background(void *mlx, int win_x, int win_y)
+static mlx_image_t	*rndr_background(mlx_t *mlx, int win_x, int win_y)
 {
 	mlx_image_t	*bckgrnd;
 	int			px;
@@ -134,7 +129,7 @@ static mlx_image_t	*rndr_background(void *mlx, int win_x, int win_y)
 // pos_x is then increased by one block to the right (+32), and
 // the loop repeats.
 // Returns TRUE at return.
-static int	rndr_line(void *mlx, char *mline, int lsize, int y)
+static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 {
 	int			iterator;
 	int			pos_x;
@@ -146,9 +141,9 @@ static int	rndr_line(void *mlx, char *mline, int lsize, int y)
 	pos_y = y * 32;
 	while (iterator < lsize)
 	{
-		img = map_blk(mlx, mline[iterator]);
+		img = map_blk(reality -> mlx, reality -> textures, mline[iterator]);
 		if (img)
-			mlx_image_to_window(mlx, img, pos_x, pos_y);
+			mlx_image_to_window(reality -> mlx, img, pos_x, pos_y);
 		pos_x += 32;
 		iterator++;
 	}
@@ -160,19 +155,20 @@ static int	rndr_line(void *mlx, char *mline, int lsize, int y)
 int	rndr_matrix(t_reality *reality)
 {
 	int			iter;
-	void		*mlx;
+	mlx_t		*mlx;
 	t_matrix	*matrix;
 	mlx_image_t	*bckgrnd;
 
 	matrix = reality -> matrix;
 	mlx = reality -> mlx;
-	iter = 0;
+	reality -> textures = load_textures();
 	bckgrnd = rndr_background(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ);
 	mlx_image_to_window(mlx, bckgrnd, 0, 0);
 	matrix -> simulation_data = matrix -> wired_entry;
+	iter = 0;
 	while (iter < matrix -> y)
 	{
-		rndr_line(mlx, *matrix -> simulation_data, matrix -> x, iter);
+		rndr_line(reality, *matrix -> simulation_data, matrix -> x, iter);
 		matrix -> simulation_data++;
 		iter++;
 	}
