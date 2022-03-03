@@ -46,19 +46,11 @@ A program is free software if users have all of these freedoms.
 # include "so_long.h"
 
 typedef struct s_texdata {
-	t_mlx_tex	*wall;
-	t_mlx_tex	*coll;
-	t_mlx_tex	*exit;
-	t_mlx_tex	*plyr;
+	mlx_texture_t	*wall;
+	mlx_texture_t	*coll;
+	mlx_texture_t	*exit;
+	mlx_texture_t	*plyr;
 }	t_texdata;
-
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
 
 int	rndr_matrix(t_reality *reality);
 

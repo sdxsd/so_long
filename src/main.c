@@ -51,10 +51,12 @@ A program is free software if users have all of these freedoms.
 
 static void	*init_reality(t_reality *reality)
 {
+	void		*mlx;
 	t_matrix	*matr;
 
 	matr = reality -> matrix;
-	reality -> mlx = mlx_init(matr -> x * BLKSIZ, matr -> y * BLKSIZ, "so_long", TRUE);
+	mlx = mlx_init(matr -> x * BLKSIZ, matr -> y * BLKSIZ, "so_long", TRUE);
+	reality -> mlx = mlx;
 	if (!reality -> mlx)
 		return (NULL);
 	return (reality -> mlx);

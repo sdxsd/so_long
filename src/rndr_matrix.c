@@ -58,7 +58,7 @@ static t_texdata	*load_textures(void)
 }
 
 // Maps characters to textures for the rndr_line() function.
-static t_mlx_image	*map_blk(void *mlx, char blk)
+static mlx_image_t	*map_blk(void *mlx, char blk)
 {
 	static t_texdata	*tex_struct;
 
@@ -86,9 +86,9 @@ static t_mlx_image	*map_blk(void *mlx, char blk)
 // value based on said stages.
 // The win_x value is used as an iterator and fills each line of the
 // image with the colour defined.
-static t_mlx_image	*rndr_background(void *mlx, int win_x, int win_y)
+static mlx_image_t	*rndr_background(void *mlx, int win_x, int win_y)
 {
-	t_mlx_image	*bckgrnd;
+	mlx_image_t	*bckgrnd;
 	int			px;
 	int			py;
 	int			colour;
@@ -101,7 +101,7 @@ static t_mlx_image	*rndr_background(void *mlx, int win_x, int win_y)
 	{
 		while (px < win_x)
 		{
-			mlx_putpixel(bckgrnd, px, py, colour);
+			mlx_put_pixel(bckgrnd, px, py, colour);
 			px++;
 		}
 		if (py > (win_y / 3))
@@ -139,7 +139,7 @@ static int	rndr_line(void *mlx, char *mline, int lsize, int y)
 	int			iterator;
 	int			pos_x;
 	int			pos_y;
-	t_mlx_image	*img;
+	mlx_image_t	*img;
 
 	iterator = 0;
 	pos_x = 0;
@@ -162,7 +162,7 @@ int	rndr_matrix(t_reality *reality)
 	int			iter;
 	void		*mlx;
 	t_matrix	*matrix;
-	t_mlx_image	*bckgrnd;
+	mlx_image_t	*bckgrnd;
 
 	matrix = reality -> matrix;
 	mlx = reality -> mlx;

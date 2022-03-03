@@ -4,7 +4,8 @@ NAME = so_long
 CFILES = \
 			src/main.c \
 			src/parse.c \
-			src/rndr_matrix.c
+			src/rndr_matrix.c \
+			src/game.c
 OFILES = $(CFILES:.c=.o)
 OSFLAG = ""
 LINKEN = ""
@@ -28,7 +29,7 @@ $(NAME): $(OBJ)
 	$(CC) -Wall -Wextra -Werror $(CFILES) $(LINKEN) libft/libft.a -g -o $(NAME)
 
 test: re
-	./so_long maps/map01.ber
+	./so_long maps/map02.ber
 
 valtest: re
 	valgrind --tool=memcheck ./so_long maps/map01.ber

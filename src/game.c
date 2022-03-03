@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /*
-THIS FILE IS LICENSED UNDER THE GNU GPLv3
+SO_LONG (Implementation of Codam project so_long)
 Copyright (C) 2021  Will Maguire
 
 This program is free software: you can redistribute it and/or modify
@@ -28,48 +28,21 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 The definition of Free Software is as follows:
-				- The freedom to run the program, for any purpose.
-				- The freedom to study how the program works, and adapt it to your needs.
-				- The freedom to redistribute copies so you can help your neighbor.
-				- The freedom to improve the program, and release
-				your improvements to the public, so that the whole community benefits.
+		- The freedom to run the program, for any purpose.
+		- The freedom to study how the program works, and adapt it to your needs.
+		- The freedom to redistribute copies so you can help your neighbor.
+		- The freedom to improve the program, and release
+		your improvements to the public, so that the whole community benefits.
 
 A program is free software if users have all of these freedoms.
 */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# define BLKSIZ 32
-# include "../libft/libft.h"
+#include "../include/game.h"
 
-// Struct for holding map data.
-// Contains a width and height variable
-// and two double pointers.
-// Map data is stored as an array
-// of char pointers. **simulation_data
-// is used as a mutable index, pointing
-// to the current line of map data
-// being operated upon or interpreted.
-// **wired_entry will always point to the
-// first line of map data.
-typedef struct s_matrix {
-	int		x;
-	int		y;
-	char	**wired_entry;
-	char	**simulation_data;
-}	t_matrix;
-
-// Struct for holding game and engine data.
-// *mlx is the mlx pointer, and passed to rendering
-// functions.
-// plyr_x and plyr_y contains the current position of
-// the player.
-// *matrix contains the map data.
-typedef struct s_reality {
-	void		*mlx;
-	int			*plyr_x;
-	int			*plyr_y;
-	t_matrix	*matrix;
-}	t_reality;
-
-#endif // SO_LONG_H
+int	gameloop(t_reality *reality)
+{
+	reality = 0x0;
+	if (reality)
+		;
+	return (TRUE);
+}
