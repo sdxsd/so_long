@@ -107,6 +107,19 @@ static int	validate_map(t_matrix *matrix)
 	return (TRUE);
 }
 
+// Loads the map into memory for later parsing.
+// Returns null on failure.
+// Functions by defining a starting pointer (wired_entry)
+// and a index pointer (simulation_data)
+// index pointer is iterated upon while
+// loading file line by line.
+// starting pointer points to the first element in the
+// index pointer.
+// if get_next_line() does not return a line
+// the function checks if there has been any line
+// found. If true, then the loop is broken.
+// If there isn't a line, and no line
+// has been loaded, the function returns null.
 static t_matrix	*load_map(char *path, t_matrix *matrix)
 {
 	char	*line;
