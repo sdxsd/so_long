@@ -41,7 +41,7 @@ A program is free software if users have all of these freedoms.
 
 #ifndef RNDR_MATRIX_H
 # define RNDR_MATRIX_H
-# include <MLX42/MLX42.h>
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <stdlib.h>
 # include "so_long.h"
 

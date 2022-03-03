@@ -12,7 +12,7 @@ LINKEN = ""
 
 ifeq ($(shell uname -s),Linux)
 	OSFLAG := linux
-	LINKEN := -lmlx42 -ldl -lGL -lglfw -lX11 -lpthread -lXrandr -lXi
+	LINKEN := -lmlx42 -L ./MLX42/ -ldl -lGL -lglfw -lX11 -lpthread -lXrandr -lXi
 else
 	OSFLAG := darwin
 	LINKEN := -lglfw -L /Users/wmaguire/.brew/opt/glfw/libft/ -lmlx42 -L ./MLX42/
@@ -25,7 +25,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "Building for: $(OSFLAG)"
-	make -C libft/
+	@make -C libft/
 	$(CC) -Wall -Wextra -Werror $(CFILES) $(LINKEN) libft/libft.a -g -o $(NAME)
 
 test: re
