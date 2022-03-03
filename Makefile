@@ -15,7 +15,7 @@ ifeq ($(shell uname -s),Linux)
 	LINKEN := -lmlx42 -ldl -lGL -lglfw -lX11 -lpthread -lXrandr -lXi
 else
 	OSFLAG := darwin
-	LINKEN := -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit
+	LINKEN := -lglfw -L /Users/wmaguire/.brew/opt/glfw/libft/ -lmlx42 -L ./MLX42/
 endif
 
 all: $(NAME)
@@ -39,5 +39,5 @@ re: clean all
 clean:
 	rm -f so_long
 	rm -f *vgcore*
-	rm -f so_long.dSYM
+	rm -rfv so_long.dSYM
 	make -C libft/ clean
