@@ -81,6 +81,11 @@ static t_mlx_image	*map_blk(void *mlx, char blk)
 }
 
 // Takes the width and height of the MLX window and generates a background.
+// Functions by taking the win_y argument and
+// defining 3 distinct stages and changing the background colour
+// value based on said stages.
+// The win_x value is used as an iterator and fills each line of the
+// image with the colour defined.
 static t_mlx_image	*rndr_background(void *mlx, int win_x, int win_y)
 {
 	t_mlx_image	*bckgrnd;
