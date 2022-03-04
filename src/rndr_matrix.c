@@ -104,27 +104,32 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 	pos_y = y * 32;
 	while (iterator < lsize)
 	{
-		mlx_image_to_window(reality -> mlx, map_blk(reality -> textures, mline[iterator]), pos_x, pos_y);
+		mlx_image_to_window(reality -> mlx,\
+							map_blk(reality -> textures, mline[iterator]),\
+							pos_x, pos_y);
 		pos_x += 32;
 		iterator++;
 	}
 	return (TRUE);
 }
 
-// Taking the map data as input, this function renders the
-// current state of the game onto the MLX window.
+// Takes the game state as an argument
+// which includes the matrix struct.
+// Checks for existing textures and loads
+// them if needed.
 int	rndr_matrix(t_reality *reality)
 {
 	int			iter;
 	mlx_t		*mlx;
 	t_matrix	*matrix;
-	mlx_image_t	*bckgrnd;
 
 	matrix = reality -> matrix;
 	mlx = reality -> mlx;
-	reality -> textures = load_textures(reality -> mlx);
-	bckgrnd = rndr_background(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ);
-	mlx_image_to_window(mlx, bckgrnd, 0, 0);
+	if (!reality -> textures)
+		reality -> textures = load_textures(reality -> mlx);
+	if (!matrix -> bckgrnd)
+		matrix -> bckgrnd = rndr_background(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ);
+	mlx_image_to_window(mlx, matrix -> bckgrnd, 0, 0);
 	matrix -> simulation_data = matrix -> wired_entry;
 	iter = 0;
 	while (iter < matrix -> y)

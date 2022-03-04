@@ -72,10 +72,11 @@ typedef struct s_imgdata {
 //	load_map()		- parse.c
 //	rndr_matrix()	- rndr_matrix.c
 typedef struct s_matrix {
-	int		x;
-	int		y;
-	char	**wired_entry;
-	char	**simulation_data;
+	int			x;
+	int			y;
+	char		**wired_entry;
+	char		**simulation_data;
+	mlx_image_t	*bckgrnd;
 }	t_matrix;
 
 // Struct for holding game and engine data.
