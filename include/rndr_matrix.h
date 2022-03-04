@@ -43,8 +43,8 @@ A program is free software if users have all of these freedoms.
 # define RNDR_MATRIX_H
 # include <stdlib.h>
 # include "so_long.h"
+# include "textures.h"
 
 int			rndr_matrix(t_reality *reality);
-t_imgdata	*load_textures(mlx_t *mlx);
 
 #endif // RNDR_MATRIX_H

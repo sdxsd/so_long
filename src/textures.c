@@ -37,7 +37,6 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
-#include "../include/so_long.h"
 #include "../include/textures.h"
 
 // Loads a texture indicated by argument
@@ -68,6 +67,13 @@ static mlx_image_t	*load_img(mlx_t *mlx, char blk)
 }
 
 // Loads textures into the tex_struct data structure for later use.
+// Functions by declaring and allocating enough
+// memory for a structure that holds the programs
+// image data.
+// Loads each texture by individual calls to load_img()
+// Checks for any failures in texture loading, and then
+// if there are no problems, returns a pointer
+// to the struct to the calling function.
 t_imgdata	*load_textures(mlx_t *mlx)
 {
 	t_imgdata	*img_struct;
@@ -83,4 +89,23 @@ t_imgdata	*load_textures(mlx_t *mlx)
 		|| !img_struct -> exit || !img_struct -> plyr)
 		return (NULL);
 	return (img_struct);
+}
+
+// Simple mapping function
+// Takes a t_imgdata pointer and a blk
+// returns the image associated with blk from the
+// t_imgdata struct to the calling function
+// If input is invalid (such as '0') returns NULL
+mlx_image_t	*map_blk(t_imgdata *textures, char blk)
+{
+	if (blk == '1')
+		return (textures -> wall);
+	else if (blk == 'C')
+		return (textures -> coll);
+	else if (blk == 'E')
+		return (textures -> exit);
+	else if (blk == 'P')
+		return (textures -> plyr);
+	else
+		return (NULL);
 }
