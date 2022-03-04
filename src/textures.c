@@ -74,6 +74,8 @@ mlx_image_t	*load_img(mlx_t *mlx, char blk)
 // Checks for any failures in texture loading, and then
 // if there are no problems, returns a pointer
 // to the struct to the calling function.
+// If allocated with malloc(sizeof(img_struct)) then
+// a heap based buffer overflow will occur.
 t_imgdata	*load_textures(mlx_t *mlx)
 {
 	t_imgdata	*img_struct;
