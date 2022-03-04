@@ -44,19 +44,19 @@ A program is free software if users have all of these freedoms.
 // Converts the texture to an mlx_image_t pointer
 // then purges the texture from RAM
 // before returning.
-static mlx_image_t	*load_img(mlx_t *mlx, char blk)
+mlx_image_t	*load_img(mlx_t *mlx, char blk)
 {
 	mlx_texture_t	*tex;
 	mlx_image_t		*img;
 
 	if (blk == 'C')
-		tex = mlx_load_png(".images/coll.png");
+		tex = mlx_load_png("images/coll.png");
 	else if (blk == 'P')
-		tex = mlx_load_png(".images/plyr.png");
+		tex = mlx_load_png("images/plyr.png");
 	else if (blk == '1')
-		tex = mlx_load_png(".images/wall.png");
+		tex = mlx_load_png("images/wall.png");
 	else if (blk == 'E')
-		tex = mlx_load_png(".images/exit.png");
+		tex = mlx_load_png("images/exit.png");
 	else
 		return (NULL);
 	if (!tex)

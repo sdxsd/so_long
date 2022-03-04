@@ -1,11 +1,12 @@
 CC = clang
-CFLAGS = -g
+CFLAGS = -g -fsanitize=address
 NAME = so_long
 CFILES = \
 			src/main.c \
 			src/parse.c \
 			src/rndr_matrix.c \
-			src/game.c
+			src/game.c \
+			src/textures.c
 OFILES = $(CFILES:.c=.o)
 OSFLAG = ""
 LINKEN = ""

@@ -42,7 +42,8 @@ A program is free software if users have all of these freedoms.
 # include "so_long.h"
 # include <stdlib.h>
 
-static mlx_image_t	*load_img(mlx_t *mlx, char blk);
+mlx_image_t			*load_img(mlx_t *mlx, char blk);
 t_imgdata			*load_textures(mlx_t *mlx);
+mlx_image_t			*map_blk(t_imgdata *textures, char blk);
 
 #endif // TEXTURES_H

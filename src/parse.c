@@ -176,6 +176,7 @@ static t_matrix	*load_map(char *path, t_matrix *matrix)
 	matrix -> simulation_data = malloc(sizeof(char *) * 1024);
 	matrix -> wired_entry = matrix -> simulation_data;
 	matrix -> x = -1;
+	matrix -> y = 0;
 	fd = open(path, O_RDONLY);
 	while (TRUE)
 	{
