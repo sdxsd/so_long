@@ -39,6 +39,27 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/rndr_matrix.h"
 
+// Maps characters to textures for the rndr_line() function.
+static mlx_image_t	*load_tex(mlx_t *mlx, char blk)
+{
+	mlx_texture_t	*tex;
+	mlx_image_t		*img;
+
+	if (blk == 'C')
+		tex = mlx_load_png(".images/coll.png");
+	else if (blk == 'P')
+		tex = mlx_load_png(".images/plyr.png");
+	else if (blk == '1')
+		tex = mlx_load_png(".images/wall.png");
+	else if (blk == 'E')
+		tex = mlx_load_png(".images/exit.png");
+	else
+		return (NULL);
+	img = mlx_texture_to_image(mlx, tex);
+	mlx_delete_texture(tex);
+	return (img);
+}
+
 // Loads textures into the tex_struct data structure for later use.
 t_imgdata	*load_textures(mlx_t *mlx)
 {
@@ -55,24 +76,6 @@ t_imgdata	*load_textures(mlx_t *mlx)
 		|| !img_struct -> exit || !img_struct -> plyr)
 		return (NULL);
 	return (img_struct);
-}
-
-// Maps characters to textures for the rndr_line() function.
-static mlx_image_t	*load_tex(mlx_t *mlx, char blk)
-{
-	mlx_image_t	*img;
-
-	if (blk == 'C')
-		img = mlx_texture_to_image(mlx, tex_struct -> coll);
-	else if (blk == 'P')
-		img = mlx_texture_to_image(mlx, tex_struct -> plyr);
-	else if (blk == '1')
-		img = mlx_texture_to_image(mlx, tex_struct -> wall);
-	else if (blk == 'E')
-		img = mlx_texture_to_image(mlx, tex_struct -> exit);
-	else
-		return (NULL);
-	return (img);
 }
 
 // Takes the width and height of the MLX window and generates a background.
