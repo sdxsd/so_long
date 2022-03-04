@@ -39,45 +39,6 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/rndr_matrix.h"
 
-// Maps characters to textures for the rndr_line() function.
-static mlx_image_t	*load_tex(mlx_t *mlx, char blk)
-{
-	mlx_texture_t	*tex;
-	mlx_image_t		*img;
-
-	if (blk == 'C')
-		tex = mlx_load_png(".images/coll.png");
-	else if (blk == 'P')
-		tex = mlx_load_png(".images/plyr.png");
-	else if (blk == '1')
-		tex = mlx_load_png(".images/wall.png");
-	else if (blk == 'E')
-		tex = mlx_load_png(".images/exit.png");
-	else
-		return (NULL);
-	img = mlx_texture_to_image(mlx, tex);
-	mlx_delete_texture(tex);
-	return (img);
-}
-
-// Loads textures into the tex_struct data structure for later use.
-t_imgdata	*load_textures(mlx_t *mlx)
-{
-	t_imgdata	*img_struct;
-
-	img_struct = malloc(sizeof(img_struct));
-	if (!img_struct)
-		return (NULL);
-	img_struct -> wall = load_tex('1');
-	img_struct -> coll = load_tex('C');
-	img_struct -> exit = load_tex('E');
-	img_struct -> plyr = load_tex('P');
-	if (!img_struct -> wall || !img_struct -> coll
-		|| !img_struct -> exit || !img_struct -> plyr)
-		return (NULL);
-	return (img_struct);
-}
-
 // Takes the width and height of the MLX window and generates a background.
 // Functions by taking the win_y argument and
 // defining 3 distinct stages and changing the background colour
@@ -144,9 +105,7 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 	pos_y = y * 32;
 	while (iterator < lsize)
 	{
-		img = map_blk(reality -> mlx, reality -> textures, mline[iterator]);
-		if (img)
-			mlx_image_to_window(reality -> mlx, img, pos_x, pos_y);
+		mlx_image_to_window(reality -> mlx, img, pos_x, pos_y);
 		pos_x += 32;
 		iterator++;
 	}
