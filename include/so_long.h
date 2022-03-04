@@ -43,12 +43,19 @@ A program is free software if users have all of these freedoms.
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-typedef struct s_texdata {
-	mlx_texture_t	*wall;
-	mlx_texture_t	*coll;
-	mlx_texture_t	*exit;
-	mlx_texture_t	*plyr;
-}	t_texdata;
+// Structure for holding the texture data
+// represented as pointers to mlx image types.
+// Part of the game data stuct s_reality.
+// ASSOCIATED FUNCTIONS:
+// 	load_texture()	- rndr_matrix.c
+// 	map_blk() 		- rndr_matrix.c
+// 	rndr_line()		- rndr_matrix.c
+typedef struct s_imgdata {
+	mlx_image_t	*wall;
+	mlx_image_t	*coll;
+	mlx_image_t	*exit;
+	mlx_image_t	*plyr;
+}	t_imgdata;
 
 // Struct for holding map data.
 // Contains a width and height variable
@@ -60,6 +67,10 @@ typedef struct s_texdata {
 // being operated upon or interpreted.
 // **wired_entry will always point to the
 // first line of map data.
+// ASSOCIATED FUNCTIONS:
+// 	init_matrix()	- parse.c
+//	load_map()		- parse.c
+//	rndr_matrix()	- rndr_matrix.c
 typedef struct s_matrix {
 	int		x;
 	int		y;
@@ -73,12 +84,17 @@ typedef struct s_matrix {
 // plyr_x and plyr_y contains the current position of
 // the player.
 // *matrix contains the map data.
+// *textures contains the image/sprite data.
+// ASSOCIATED FUNCTIONS:
+// 	init_reality()	- main.c
+// 	init_matrix()	- parse.c
+// 	rndr_matrix()	- rndr_matrix.c
 typedef struct s_reality {
 	mlx_t		*mlx;
 	int			*plyr_x;
 	int			*plyr_y;
 	t_matrix	*matrix;
-	t_texdata	*textures;
+	t_imgdata	*textures;
 }	t_reality;
 
 #endif // SO_LONG_H

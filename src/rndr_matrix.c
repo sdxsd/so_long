@@ -40,25 +40,25 @@ A program is free software if users have all of these freedoms.
 #include "../include/rndr_matrix.h"
 
 // Loads textures into the tex_struct data structure for later use.
-t_texdata	*load_textures(void)
+t_imgdata	*load_textures(mlx_t *mlx)
 {
-	t_texdata	*tex_struct;
+	t_imgdata	*img_struct;
 
-	tex_struct = malloc(sizeof(tex_struct));
-	if (!tex_struct)
+	img_struct = malloc(sizeof(img_struct));
+	if (!img_struct)
 		return (NULL);
-	tex_struct -> wall = mlx_load_png("./images/wall.png");
-	tex_struct -> coll = mlx_load_png("./images/coll.png");
-	tex_struct -> exit = mlx_load_png("./images/exit.png");
-	tex_struct -> plyr = mlx_load_png("./images/plyr.png");
-	if (!tex_struct -> wall || !tex_struct -> coll
-		|| !tex_struct -> exit || !tex_struct -> plyr)
+	img_struct -> wall = load_tex('1');
+	img_struct -> coll = load_tex('C');
+	img_struct -> exit = load_tex('E');
+	img_struct -> plyr = load_tex('P');
+	if (!img_struct -> wall || !img_struct -> coll
+		|| !img_struct -> exit || !img_struct -> plyr)
 		return (NULL);
-	return (tex_struct);
+	return (img_struct);
 }
 
 // Maps characters to textures for the rndr_line() function.
-static mlx_image_t	*map_blk(mlx_t *mlx, t_texdata *tex_struct, char blk)
+static mlx_image_t	*load_tex(mlx_t *mlx, char blk)
 {
 	mlx_image_t	*img;
 
@@ -161,7 +161,7 @@ int	rndr_matrix(t_reality *reality)
 
 	matrix = reality -> matrix;
 	mlx = reality -> mlx;
-	reality -> textures = load_textures();
+	reality -> textures = load_textures(reality -> mlx);
 	bckgrnd = rndr_background(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ);
 	mlx_image_to_window(mlx, bckgrnd, 0, 0);
 	matrix -> simulation_data = matrix -> wired_entry;

@@ -45,6 +45,6 @@ A program is free software if users have all of these freedoms.
 # include "so_long.h"
 
 int			rndr_matrix(t_reality *reality);
-t_texdata	*load_textures(void);
+t_imgdata	*load_textures(mlx_t *mlx);
 
 #endif // RNDR_MATRIX_H
