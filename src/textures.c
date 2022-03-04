@@ -78,7 +78,7 @@ t_imgdata	*load_textures(mlx_t *mlx)
 {
 	t_imgdata	*img_struct;
 
-	img_struct = malloc(sizeof(img_struct));
+	img_struct = malloc(sizeof(mlx_image_t *) * 4);
 	if (!img_struct)
 		return (NULL);
 	img_struct -> wall = load_img(mlx, '1');

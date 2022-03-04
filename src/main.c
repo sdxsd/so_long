@@ -56,7 +56,6 @@ static void	*init_reality(t_reality *reality)
 
 	matr = reality -> matrix;
 	mlx = mlx_init(matr -> x * BLKSIZ, matr -> y * BLKSIZ, "so_long", TRUE);
-	ft_printf("MLX_POINTER: %p\nX: %d, Y: %d\n", mlx, matr -> x, matr -> y);
 	reality -> mlx = mlx;
 	if (!reality -> mlx)
 		return (NULL);
@@ -75,11 +74,11 @@ int	main(int argc, char *argv[])
 
 	reality = malloc(sizeof(t_reality));
 	reality -> matrix = matrix_init(argc, argv);
-	//if (!reality -> matrix)
-	//{
-	//	ft_putstr("ERROR:\nInvalid map...\n");
-	//	return (1);
-	//}
+	if (!reality -> matrix)
+	{
+		ft_putstr("ERROR:\nInvalid map...\n");
+		return (1);
+	}
 	ft_putstr("so_long Copyright (C) 2022 Will Maguire\n");
 	init_reality(reality);
 	if (!reality -> mlx)
