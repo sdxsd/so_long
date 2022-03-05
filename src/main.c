@@ -48,6 +48,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/so_long.h"
 #include "../include/parse.h"
 #include "../include/rndr_matrix.h"
+#include "../include/game.h"
 
 // This function initializes the reality struct
 // which holds most if not all of the game state data.
@@ -93,5 +94,5 @@ int	main(int argc, char *argv[])
 	if (!init_reality(reality))
 		return (1);
 	rndr_matrix(reality);
-	mlx_loop(reality -> mlx);
+	gameloop(reality);
 }

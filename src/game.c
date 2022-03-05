@@ -37,12 +37,23 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
+// All things repeat in echo of eachother.
+
 #include "../include/game.h"
 
+static void	keycodes(mlx_key_data_t keydata)
+{
+	ft_putstr("hi");
+	return ;
+}
+
+// Function to handle the gameloop and input.
 int	gameloop(t_reality *reality)
 {
-	reality = 0x0;
-	if (reality)
-		;
+	mlx_key_data_t	*param;
+
+	mlx_key_hook(reality -> mlx, keycodes, param);
+	ft_putstr("HELLO\n");
+	mlx_loop(reality -> mlx);
 	return (TRUE);
 }
