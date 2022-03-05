@@ -38,24 +38,41 @@ A program is free software if users have all of these freedoms.
 */
 
 // All things repeat in echo of eachother.
+// But my keypresses shouldn't be...
 
 #include "../include/game.h"
 
-static void	keycodes(void *param)
+static void handle_key(char key, t_reality *reality)
 {
-	mlx_t	*mlx;
+	if (key == 'W')
+		reality -> plyr_y++;
+	if (key == 'A')
+		reality -> plyr_y--;
+	if (key == 'S')
+		reality -> plyr_x--;
+	if (key == 'D')
+		reality -> plyr_x++;
+}
 
-	mlx = param;
-	if (mlx_is_key_down(param, 'W'))
-		ft_printf("W");
+static void	keycodes(mlx_key_data_t keydata, void *param)
+{
+	t_reality	*reality;
+	const char	*keydict = "WASD";
+
+	reality = param;
+	if (keydata.action == MLX_PRESS)
+	{	if (ft_charchk(keydata.key, (char *)keydict))
+			handle_key(keydata.key, reality);
+		else if (keydata.key == MLX_KEY_ESCAPE)
+			free_and_exit(reality);
+	}
+	return ;
 }
 
 // Function to handle the gameloop and input.
 int	gameloop(t_reality *reality)
 {
-	mlx_key_data_t	*param;
-
-	mlx_loop_hook(reality -> mlx, &keycodes, reality -> mlx);
+	mlx_key_hook(reality -> mlx, keycodes, reality);
 	mlx_loop(reality -> mlx);
 	return (TRUE);
 }
