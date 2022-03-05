@@ -41,10 +41,13 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/game.h"
 
-static void	keycodes(mlx_key_data_t keydata)
+static void	keycodes(void *param)
 {
-	ft_putstr("hi");
-	return ;
+	mlx_t	*mlx;
+
+	mlx = param;
+	if (mlx_is_key_down(param, 'W'))
+		ft_printf("W");
 }
 
 // Function to handle the gameloop and input.
@@ -52,8 +55,7 @@ int	gameloop(t_reality *reality)
 {
 	mlx_key_data_t	*param;
 
-	mlx_key_hook(reality -> mlx, keycodes, param);
-	ft_putstr("HELLO\n");
+	mlx_loop_hook(reality -> mlx, &keycodes, reality -> mlx);
 	mlx_loop(reality -> mlx);
 	return (TRUE);
 }
