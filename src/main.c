@@ -56,6 +56,7 @@ static void	*init_reality(t_reality *reality)
 
 	matr = reality -> matrix;
 	mlx = mlx_init(matr -> x * BLKSIZ, matr -> y * BLKSIZ, "so_long", TRUE);
+	reality -> textures = NULL;
 	reality -> mlx = mlx;
 	if (!reality -> mlx)
 		return (NULL);

@@ -47,9 +47,9 @@ A program is free software if users have all of these freedoms.
 // represented as pointers to mlx image types.
 // Part of the game data stuct s_reality.
 // ASSOCIATED FUNCTIONS:
-// 	load_texture()	- rndr_matrix.c
-// 	map_blk() 		- rndr_matrix.c
-// 	rndr_line()		- rndr_matrix.c
+// 	load_texture()	- textures.c
+// 	map_blk() 		- textures.c
+// 	rndr_line()		- textures.c
 typedef struct s_imgdata {
 	mlx_image_t	*wall;
 	mlx_image_t	*coll;
@@ -76,7 +76,6 @@ typedef struct s_matrix {
 	int			y;
 	char		**wired_entry;
 	char		**simulation_data;
-	mlx_image_t	*bckgrnd;
 }	t_matrix;
 
 // Struct for holding game and engine data.

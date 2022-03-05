@@ -38,7 +38,7 @@ A program is free software if users have all of these freedoms.
 */
 
 #ifndef TEXTURES_H
-#define TEXTURES_H
+# define TEXTURES_H
 # include "so_long.h"
 # include <stdlib.h>
 
