@@ -49,6 +49,15 @@ A program is free software if users have all of these freedoms.
 #include "../include/parse.h"
 #include "../include/rndr_matrix.h"
 
+// This function initializes the reality struct
+// which holds most if not all of the game state data.
+// Calls mlx_init() to begin window rendering.
+// Sets reality -> textures to null, this is important because
+// otherwise it will be set to a random address in memory
+// and the check in rndr_matrix() of if the textures have loaded
+// will be invalid and segfault the program.
+// Finally checks if mlx has loaded, returning null if not.
+// Otherwise returns
 static void	*init_reality(t_reality *reality)
 {
 	mlx_t		*mlx;
@@ -81,8 +90,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	ft_putstr("so_long Copyright (C) 2022 Will Maguire\n");
-	init_reality(reality);
-	if (!reality -> mlx)
+	if (!init_reality(reality))
 		return (1);
 	rndr_matrix(reality);
 	mlx_loop(reality -> mlx);

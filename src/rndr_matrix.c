@@ -115,8 +115,23 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 
 // Takes the game state as an argument
 // which includes the matrix struct.
-// Checks for existing textures and loads
-// them if needed.
+// Checks if the textures have been loaded on
+// a previous call, and if not, calls the
+// load_textures() function to initialize them.
+// If the background for the window
+// does not yet exist, calls the rndr_background()
+// function to generate a background to fit the size of
+// the window.
+// Pushes the generated background texture to the image.
+// matrix -> simulation_data is set to matrix -> wired_entry.
+// The wired entry double char pointer represents the
+// start of the char array of map data. The
+// simulation_data double pointer represents the current
+// index of the map data.
+// The function then loops calling rndr_line() to render each
+// line of map data, held by the variable simulation_data.
+// iter is passed as the current y position.
+// Returns a value of TRUE (1) if the function exits successfully.
 int	rndr_matrix(t_reality *reality)
 {
 	int					iter;
