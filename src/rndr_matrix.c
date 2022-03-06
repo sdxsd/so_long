@@ -137,15 +137,14 @@ int	rndr_matrix(t_reality *reality)
 	int					iter;
 	mlx_t				*mlx;
 	t_matrix			*matrix;
-	static mlx_image_t	*bckgrnd;
 
 	matrix = reality -> matrix;
 	mlx = reality -> mlx;
 	if (!reality -> textures)
 		reality -> textures = load_textures(reality -> mlx);
-	if (!bckgrnd)
-		bckgrnd = rndr_background(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ);
-	mlx_image_to_window(mlx, bckgrnd, 0, 0);
+	if (!reality -> bckgrnd)
+		reality -> bckgrnd = rndr_background(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ);
+	mlx_image_to_window(mlx, reality -> bckgrnd, 0, 0);
 	matrix -> simulation_data = matrix -> wired_entry;
 	iter = 0;
 	while (iter < matrix -> y)

@@ -37,43 +37,63 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
-// All things repeat in echo of eachother.
-// But my keypresses shouldn't be...
-
-#include "../include/game.h"
 #include "../include/dealloc.h"
 
-static void handle_key(char key, t_reality *reality)
+// Deallocates the texture data.
+// Goes through each texture loaded and
+// frees them. Then frees the struct
+// and returns.
+int	free_textures(mlx_t *mlx, t_imgdata *textures)
 {
-	if (key == 'W')
-		reality -> plyr_y++;
-	if (key == 'A')
-		reality -> plyr_x--;
-	if (key == 'S')
-		reality -> plyr_y--;
-	if (key == 'D')
-		reality -> plyr_x++;
+	if (textures -> wall)
+		mlx_delete_image(mlx, textures -> wall);
+	if (textures -> coll)
+		mlx_delete_image(mlx, textures -> coll);
+	if (textures -> plyr)
+		mlx_delete_image(mlx, textures -> plyr);
+	if (textures -> exit)
+		mlx_delete_image(mlx, textures -> exit);
+	free(textures);
+	return (0);
 }
 
-static void	keycodes(mlx_key_data_t keydata, void *param)
+// Deallocates the matrix struct.
+// Functions by first setting
+// simulation_data to the first
+// line of map data (pointed to by wired_entry)
+// and then iterating over the aforementioned
+// data freeing it one by one.
+// Then frees the allocated memory.
+// Finally frees the struct itself before returning.
+int	free_matrix(t_matrix *matrix)
 {
-	t_reality	*reality;
-	const char	*keydict = "WASD";
+	int	iter;
 
-	reality = param;
-	if (keydata.action == MLX_PRESS)
-	{	if (ft_charchk(keydata.key, (char *)keydict))
-			handle_key(keydata.key, reality);
-		else if (keydata.key == MLX_KEY_ESCAPE)
-			free_and_exit(reality);
+	iter = 0;
+	matrix -> simulation_data = matrix -> wired_entry;
+	while (iter < matrix -> y)
+	{
+		free(*matrix -> simulation_data);
+		matrix -> simulation_data++;
+		iter++;
 	}
-	return ;
+	free (matrix -> wired_entry);
+	free(matrix);
+	return (0);
 }
 
-// Function to handle the gameloop and input.
-int	gameloop(t_reality *reality)
+// Fully deallocates memory used in the program and exits.
+// Frees the matrix substruct with free_matrix()
+// and the textures substruct with free_textures()
+// Then deallocates the background image.
+// Finally terminates MLX and frees the struct
+// for holding all game data before exiting.
+int	free_and_exit(t_reality	*reality)
 {
-	mlx_key_hook(reality -> mlx, keycodes, reality);
-	mlx_loop(reality -> mlx);
-	return (TRUE);
+	free_matrix(reality -> matrix);
+	free_textures(reality -> mlx, reality -> textures);
+	mlx_delete_image(reality -> mlx, reality -> bckgrnd);
+	mlx_terminate(reality -> mlx);
+	free(reality);
+	exit (0);
 }

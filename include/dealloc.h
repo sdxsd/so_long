@@ -37,43 +37,15 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
-// All things repeat in echo of eachother.
-// But my keypresses shouldn't be...
+// Functions for deallocating memory on failure, or exit of program.
 
-#include "../include/game.h"
-#include "../include/dealloc.h"
+#ifndef DEALLOC_H
+# define DEALLOC_H
+# include "so_long.h"
+# include "rndr_matrix.h"
 
-static void handle_key(char key, t_reality *reality)
-{
-	if (key == 'W')
-		reality -> plyr_y++;
-	if (key == 'A')
-		reality -> plyr_x--;
-	if (key == 'S')
-		reality -> plyr_y--;
-	if (key == 'D')
-		reality -> plyr_x++;
-}
+int	free_and_exit(t_reality *reality);
+int	free_matrix(t_matrix *matrix);
+int	free_textures(mlx_t *mlx, t_imgdata *textures);
 
-static void	keycodes(mlx_key_data_t keydata, void *param)
-{
-	t_reality	*reality;
-	const char	*keydict = "WASD";
-
-	reality = param;
-	if (keydata.action == MLX_PRESS)
-	{	if (ft_charchk(keydata.key, (char *)keydict))
-			handle_key(keydata.key, reality);
-		else if (keydata.key == MLX_KEY_ESCAPE)
-			free_and_exit(reality);
-	}
-	return ;
-}
-
-// Function to handle the gameloop and input.
-int	gameloop(t_reality *reality)
-{
-	mlx_key_hook(reality -> mlx, keycodes, reality);
-	mlx_loop(reality -> mlx);
-	return (TRUE);
-}
+#endif // DEALLOC_H

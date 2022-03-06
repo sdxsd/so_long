@@ -96,6 +96,7 @@ typedef struct s_reality {
 	int			step_c;
 	t_matrix	*matrix;
 	t_imgdata	*textures;
+	mlx_image_t	*bckgrnd;
 }	t_reality;
 
 #endif // SO_LONG_H
