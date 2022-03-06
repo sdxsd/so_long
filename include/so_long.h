@@ -74,6 +74,8 @@ typedef struct s_imgdata {
 typedef struct s_matrix {
 	int			plyr_x;
 	int			plyr_y;
+	int			coll_c;
+	int			step_c;
 	int			x;
 	int			y;
 	char		**wired_entry;
@@ -93,7 +95,6 @@ typedef struct s_matrix {
 // 	rndr_matrix()	- rndr_matrix.c
 typedef struct s_reality {
 	mlx_t		*mlx;
-	int			step_c;
 	t_matrix	*matrix;
 	t_imgdata	*textures;
 	mlx_image_t	*bckgrnd;
