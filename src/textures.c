@@ -106,8 +106,6 @@ mlx_image_t	*map_blk(t_imgdata *textures, char blk)
 		return (textures -> coll);
 	else if (blk == 'E')
 		return (textures -> exit);
-	else if (blk == 'P')
-		return (textures -> plyr);
 	else
 		return (NULL);
 }

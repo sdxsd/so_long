@@ -43,16 +43,31 @@ A program is free software if users have all of these freedoms.
 #include "../include/game.h"
 #include "../include/dealloc.h"
 
+static int	val_move(int x, int y, t_matrix *matrix)
+{
+	matrix -> simulation_data = matrix -> wired_entry;
+	if (matrix -> simulation_data[y / 32][x / 32] == '1')
+		return (FALSE);
+	return (TRUE);
+}
+
 static void handle_key(char key, t_reality *reality)
 {
-	if (key == 'W')
-		reality -> plyr_y++;
-	if (key == 'A')
-		reality -> plyr_x--;
-	if (key == 'S')
-		reality -> plyr_y--;
-	if (key == 'D')
-		reality -> plyr_x++;
+	int	*plyr_x;
+	int	*plyr_y;
+
+	plyr_x = &reality -> matrix -> plyr_x;
+	plyr_y = &reality -> matrix -> plyr_y;
+	if (key == 'W' && val_move(*plyr_x, *plyr_y - BLKSIZ, reality -> matrix))
+		*plyr_y -= BLKSIZ;
+	if (key == 'A' && val_move(*plyr_x - BLKSIZ, *plyr_y, reality -> matrix))
+		*plyr_x -= BLKSIZ;
+	if (key == 'S' && val_move(*plyr_x, *plyr_y + BLKSIZ, reality -> matrix))
+		*plyr_y += BLKSIZ;
+	if (key == 'D' && val_move(*plyr_x + BLKSIZ, *plyr_y, reality -> matrix))
+		*plyr_x += BLKSIZ;
+	ft_printf("X: %d | Y: %d\n", *plyr_x / 32, *plyr_y / 32);
+	return ;
 }
 
 static void	keycodes(mlx_key_data_t keydata, void *param)
@@ -67,6 +82,8 @@ static void	keycodes(mlx_key_data_t keydata, void *param)
 		else if (keydata.key == MLX_KEY_ESCAPE)
 			free_and_exit(reality);
 	}
+	if (!rndr_matrix(reality))
+		ft_printf("RENDER FAILED\n");
 	return ;
 }
 

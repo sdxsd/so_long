@@ -98,10 +98,14 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 	int			iterator;
 	int			pos_x;
 	int			pos_y;
+	int			plyr_x;
+	int			plyr_y;
 
 	iterator = 0;
 	pos_x = 0;
 	pos_y = y * 32;
+	plyr_x = reality -> matrix -> plyr_x;
+	plyr_y = reality -> matrix -> plyr_y;
 	while (iterator < lsize)
 	{
 		mlx_image_to_window(reality -> mlx, \
@@ -110,6 +114,7 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 		pos_x += 32;
 		iterator++;
 	}
+	mlx_image_to_window(reality -> mlx, reality -> textures -> plyr, plyr_x, plyr_y);
 	return (TRUE);
 }
 
