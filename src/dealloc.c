@@ -65,7 +65,7 @@ int	free_textures(mlx_t *mlx, t_imgdata *textures)
 // data freeing it one by one.
 // Then frees the allocated memory.
 // Finally frees the struct itself before returning.
-int	free_matrix(t_matrix *matrix)
+t_matrix	*free_matrix(t_matrix *matrix)
 {
 	int	iter;
 
@@ -79,7 +79,7 @@ int	free_matrix(t_matrix *matrix)
 	}
 	free (matrix -> wired_entry);
 	free(matrix);
-	return (0);
+	return (NULL);
 }
 
 // Fully deallocates memory used in the program and exits.

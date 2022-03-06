@@ -58,7 +58,7 @@ static int	val_move(int x, int y, t_matrix *matrix)
 	return (TRUE);
 }
 
-static void handle_key(char key, t_reality *reality)
+static void	handle_key(char key, t_reality *reality)
 {
 	int	*plyr_x;
 	int	*plyr_y;
@@ -86,7 +86,8 @@ static void	keycodes(mlx_key_data_t keydata, void *param)
 
 	reality = param;
 	if (keydata.action == MLX_PRESS)
-	{	if (ft_charchk(keydata.key, (char *)keydict))
+	{
+		if (ft_charchk(keydata.key, (char *)keydict))
 			handle_key(keydata.key, reality);
 		else if (keydata.key == MLX_KEY_ESCAPE)
 			free_and_exit(reality);

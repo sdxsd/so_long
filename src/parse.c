@@ -39,6 +39,7 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/parse.h"
 #include "../include/so_long.h"
+#include "../include/dealloc.h"
 
 // valline() (short for validate line)
 // takes the y position of the given line,
@@ -228,10 +229,7 @@ t_matrix	*matrix_init(int argc, char *argv[])
 	if (!matrix)
 		return (NULL);
 	if (!load_map(argv[1], matrix))
-	{
-		free(matrix);
-		return (NULL);
-	}
+		return(free_matrix(matrix));
 	if (!validate_map(matrix))
 	{
 		free(matrix);

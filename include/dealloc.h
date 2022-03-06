@@ -44,8 +44,8 @@ A program is free software if users have all of these freedoms.
 # include "so_long.h"
 # include "rndr_matrix.h"
 
-int	free_and_exit(t_reality *reality);
-int	free_matrix(t_matrix *matrix);
-int	free_textures(mlx_t *mlx, t_imgdata *textures);
+int			free_and_exit(t_reality *reality);
+t_matrix	*free_matrix(t_matrix *matrix);
+int			free_textures(mlx_t *mlx, t_imgdata *textures);
 
 #endif // DEALLOC_H
