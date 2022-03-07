@@ -229,12 +229,9 @@ t_matrix	*matrix_init(int argc, char *argv[])
 	if (!matrix)
 		return (NULL);
 	if (!load_map(argv[1], matrix))
-		return(free_matrix(matrix));
+		return (free_matrix(matrix));
 	if (!validate_map(matrix))
-	{
-		free(matrix);
-		return (NULL);
-	}
+		return (free_matrix(matrix));
 	matrix -> x--;
 	return (matrix);
 }

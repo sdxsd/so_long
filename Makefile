@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -g
+CFLAGS = -g -fsanitize=address
 NAME = so_long
 CFILES = \
 			src/main.c \
@@ -31,7 +31,7 @@ test: re
 	./so_long maps/map02.ber
 
 valtest: re
-	valgrind --tool=memcheck --leak-check=full ./so_long maps/map01.ber
+	valgrind --tool=memcheck ./so_long maps/map01.ber
 
 re: clean all
 
