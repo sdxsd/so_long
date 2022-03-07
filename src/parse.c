@@ -228,6 +228,7 @@ t_matrix	*matrix_init(int argc, char *argv[])
 	matrix = malloc(sizeof(t_matrix));
 	if (!matrix)
 		return (NULL);
+	matrix->coll_c = 0;
 	if (!load_map(argv[1], matrix))
 		return (free_matrix(matrix));
 	if (!validate_map(matrix))

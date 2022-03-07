@@ -44,18 +44,18 @@ A program is free software if users have all of these freedoms.
 
 static int	val_move(int x, int y, t_matrix *matrix)
 {
-
-	matrix -> simulation_data = matrix -> wired_entry;
-	if (matrix -> simulation_data[y / 32][x / 32] == '1')
+	matrix->simulation_data = matrix->wired_entry;
+	if (matrix->simulation_data[y / 32][x / 32] == '1')
 		return (FALSE);
-	if (matrix -> simulation_data[y / 32][x / 32] == 'E')
-		if (matrix -> coll_c >= 10)
+	if (matrix->simulation_data[y / 32][x / 32] == 'E')
+		if (matrix->coll_c > 10)
 			exit (0);
 	if (matrix -> simulation_data[y / 32][x / 32] == 'C')
 	{
-		matrix -> simulation_data[y / 32][x / 32] = '0';
-		matrix -> coll_c++;
+		matrix->simulation_data[y / 32][x / 32] = '0';
+		matrix->coll_c++;
 	}
+	ft_printf("COLL: %d\n", matrix->coll_c);
 	return (TRUE);
 }
 

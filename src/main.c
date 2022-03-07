@@ -92,7 +92,6 @@ int	main(int argc, char *argv[])
 		ft_putstr("ERROR:\nInvalid map...\n");
 		return (1);
 	}
-
 	ft_putstr("so_long Copyright (C) 2022 Will Maguire\n");
 	if (!init_reality(reality))
 		return (1);

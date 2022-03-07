@@ -98,18 +98,14 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 	int			iterator;
 	int			pos_x;
 	int			pos_y;
-	int			plyr_x;
-	int			plyr_y;
 
 	iterator = 0;
 	pos_x = 0;
 	pos_y = y * 32;
-	plyr_x = reality -> matrix -> plyr_x;
-	plyr_y = reality -> matrix -> plyr_y;
 	while (iterator < lsize)
 	{
-		mlx_image_to_window(reality -> mlx, \
-							map_blk(reality -> textures, mline[iterator]), \
+		mlx_image_to_window(reality->mlx, \
+							map_blk(reality->textures, mline[iterator]), \
 							pos_x, pos_y);
 		pos_x += 32;
 		iterator++;
@@ -123,22 +119,24 @@ static int	first_rndr(t_reality *reality)
 	mlx_t				*mlx;
 	t_matrix			*matrix;
 
-	matrix = reality -> matrix;
-	mlx = reality -> mlx;
-	if (!reality -> textures)
-		reality -> textures = load_textures(reality -> mlx);
-	if (!reality -> bckgrnd)
-		reality -> bckgrnd = rndr_background(mlx, matrix -> x * BLKSIZ, matrix -> y * BLKSIZ);
-	mlx_image_to_window(mlx, reality -> bckgrnd, 0, 0);
-	matrix -> simulation_data = matrix -> wired_entry;
+	matrix = reality->matrix;
+	mlx = reality->mlx;
+	if (!reality->textures)
+		reality->textures = load_textures(reality->mlx);
+	if (!reality->bckgrnd)
+		reality->bckgrnd = \
+			rndr_background(mlx, matrix->x * BLKSIZ, matrix->y * BLKSIZ);
+	mlx_image_to_window(mlx, reality->bckgrnd, 0, 0);
+	matrix->simulation_data = matrix->wired_entry;
 	iter = 0;
-	while (iter < matrix -> y)
+	while (iter < matrix->y)
 	{
-		rndr_line(reality, *matrix -> simulation_data, matrix -> x, iter);
+		rndr_line(reality, *matrix->simulation_data, matrix->x, iter);
 		matrix -> simulation_data++;
 		iter++;
 	}
-	mlx_image_to_window(mlx, reality->textures->plyr, matrix->plyr_x, matrix->plyr_y);
+	mlx_image_to_window(mlx, reality->textures->plyr, \
+						matrix->plyr_x, matrix->plyr_y);
 	return (TRUE);
 }
 
@@ -152,8 +150,8 @@ int	rndr_matrix(t_reality *reality)
 		rndrd = first_rndr(reality);
 	if (reality->textures->plyr->instances)
 	{
-		reality->textures->plyr->instances[0].x = mtrx -> plyr_x;
-		reality->textures->plyr->instances[0].y = mtrx -> plyr_y;
+		reality->textures->plyr->instances[0].x = mtrx->plyr_x;
+		reality->textures->plyr->instances[0].y = mtrx->plyr_y;
 	}
 	return (TRUE);
 }

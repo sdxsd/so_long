@@ -53,6 +53,10 @@ int	free_textures(mlx_t *mlx, t_imgdata *textures)
 		mlx_delete_image(mlx, textures -> plyr);
 	if (textures -> exit)
 		mlx_delete_image(mlx, textures -> exit);
+	free(textures -> wall);
+	free(textures -> coll);
+	free(textures -> plyr);
+	free(textures -> exit);
 	free(textures);
 	return (0);
 }
