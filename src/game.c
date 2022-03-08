@@ -106,6 +106,17 @@ static void	handle_key(char key, t_reality *reality)
 	return ;
 }
 
+// This function handles input from the keyboard.
+// Takes a pointer to *param, aka the reality struct
+// (which stores all program data). Defines a keydictionary
+// of recognized and valid keyboard input. If the action of the keydata
+// is the press, the keydata is checked to make sure it falls within
+// the set of valid characters. If it is, then it is passed to the
+// handle_key() function, along with the t_reality* pointer.
+// Otherwise, if the key is ESC, then the entire program is freed,
+// and promptly exits.
+// Then the rndr_matrix() function is called to update the player
+// position once handle_key() has resolved.
 static void	keycodes(mlx_key_data_t keydata, void *param)
 {
 	t_reality	*reality;
