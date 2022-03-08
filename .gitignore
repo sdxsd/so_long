@@ -3,3 +3,4 @@ mlx_darwin
 mlx_linux
 MLX42
 so_long
+*.dSYM
