@@ -63,7 +63,7 @@ int	free_textures(mlx_t *mlx, t_imgdata *textures)
 
 t_haring	*free_haring(t_haring *haring)
 {
-	free(haring -> haring_entry);
+	free(haring -> haring_data);
 	free(haring);
 	return (haring);
 }

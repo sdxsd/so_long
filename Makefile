@@ -7,7 +7,8 @@ CFILES = \
 			src/rndr_matrix.c \
 			src/game.c \
 			src/textures.c \
-			src/dealloc.c
+			src/dealloc.c \
+			src/haring.c
 OFILES = $(CFILES:.c=.o)
 OSFLAG = ""
 LINKEN = ""

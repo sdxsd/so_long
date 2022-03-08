@@ -85,11 +85,10 @@ typedef struct s_matrix {
 // Haring contains the map of the collectables,
 // and the haring structs.
 typedef struct s_haring_db {
-	int			haring_c;
-	int			haring_x;
-	int			haring_y;
-	mlx_image_t	**haring_entry;
-	mlx_image_t	**haring_data;
+	int				haring_c;
+	int				haring_x;
+	int				haring_y;
+	mlx_instance_t	***haring_data;
 }	t_haring;
 
 // Struct for holding game and engine data.

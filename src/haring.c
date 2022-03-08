@@ -43,14 +43,16 @@ int	init_haring(t_haring *haring, int x, int y)
 {
 	haring = malloc(sizeof(haring));
 	haring -> haring_c = 0;
-	haring -> haring_entry = malloc(sizeof(mlx_image_t) * x + y);
-	if (!haring -> haring_entry)
+	haring -> haring_data = malloc(sizeof(mlx_instance_t) * x + y);
+	if (!haring -> haring_data)
 		return (FALSE);
-	haring -> haring_data = haring -> haring_entry;
 	return (TRUE);
 }
 
 int register_haring(t_reality *reality, int x, int y)
 {
+	t_haring	*haring;
 
+	haring = reality->haring_db;
+	haring->haring_data[y][x] = mlx_image_to_window(reality->mlx, reality->textures->coll, 32, 32);
 }

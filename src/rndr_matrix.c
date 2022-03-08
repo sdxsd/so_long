@@ -38,6 +38,8 @@ A program is free software if users have all of these freedoms.
 */
 
 #include "../include/rndr_matrix.h"
+#include "../include/dealloc.h"
+#include "../include/haring.h"
 
 // Takes the width and height of the MLX window and generates a background.
 // Functions by taking the win_y argument and
@@ -104,9 +106,12 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 	pos_y = y * 32;
 	while (iterator < lsize)
 	{
-		mlx_image_to_window(reality->mlx, \
-							map_blk(reality->textures, mline[iterator]), \
-							pos_x, pos_y);
+		if (mline[iterator] == 'C')
+			register_haring(reality, iterator, y);
+		else
+			mlx_image_to_window(reality->mlx,							\
+								map_blk(reality->textures, mline[iterator]), \
+								pos_x, pos_y);
 		pos_x += 32;
 		iterator++;
 	}
