@@ -39,14 +39,37 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/haring.h"
 
-int	init_haring(t_haring *haring, int x, int y)
+t_haring	*init_haring(int x, int y)
 {
+	int	iterator_y;
+	int	iterator_x;
+	t_haring	*haring;
+
+	iterator_x = 0;
+	iterator_y = 0;
 	haring = malloc(sizeof(haring));
-	haring -> haring_c = 0;
-	haring -> haring_data = malloc(sizeof(mlx_instance_t) * x + y);
+	haring->haring_data = malloc(sizeof(mlx_image_t **) * y);
+	if (!haring->haring_data)
+		return (NULL);
+	while (iterator_y < y)
+	{
+		haring->haring_data[iterator_y] = malloc(sizeof(mlx_image_t *) * x);
+		if (!haring->haring_data[iterator_y])
+			return (NULL);
+		while (iterator_x < x)
+		{
+			haring->haring_data[iterator_y][iterator_x] = malloc(sizeof(mlx_image_t *));
+			if (!haring->haring_data[iterator_y][iterator_x])
+				return (NULL);
+			iterator_x++;
+		}
+		iterator_y++;
+		iterator_x = 0;
+	}
+	haring->haring_c = 0;
 	if (!haring -> haring_data)
-		return (FALSE);
-	return (TRUE);
+		return (NULL);
+	return (haring);
 }
 
 int register_haring(t_reality *reality, int x, int y)
@@ -55,4 +78,5 @@ int register_haring(t_reality *reality, int x, int y)
 
 	haring = reality->haring_db;
 	haring->haring_data[y][x] = mlx_image_to_window(reality->mlx, reality->textures->coll, 32, 32);
+	return (TRUE);
 }

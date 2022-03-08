@@ -42,7 +42,7 @@ A program is free software if users have all of these freedoms.
 # include "so_long.h"
 # include <stdlib.h>
 
-int	init_haring(t_haring *haring, int x, int y);
-int	register_haring(t_reality *reality, int x, int y);
+t_haring	*init_haring(int x, int y);
+int			register_haring(t_reality *reality, int x, int y);
 
 #endif // HARING_H

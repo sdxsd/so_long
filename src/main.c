@@ -49,6 +49,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/parse.h"
 #include "../include/rndr_matrix.h"
 #include "../include/game.h"
+#include "../include/haring.h"
 
 // This function initializes the reality struct
 // which holds most if not all of the game state data.
@@ -86,12 +87,15 @@ int	main(int argc, char *argv[])
 	t_reality	*reality;
 
 	reality = malloc(sizeof(t_reality));
-	reality -> matrix = matrix_init(argc, argv);
+	reality->matrix = matrix_init(argc, argv);
 	if (!reality -> matrix)
 	{
 		ft_putstr("ERROR:\nInvalid map...\n");
 		return (1);
 	}
+	reality->haring_db = init_haring(reality->matrix->x, reality->matrix->y);
+	if (reality->haring_db)
+		ft_printf("***haring_db: %p\n**haring_db: %p\n", reality->haring_db, *reality->haring_db);
 	ft_putstr("so_long Copyright (C) 2022 Will Maguire\n");
 	if (!init_reality(reality))
 		return (1);
