@@ -107,7 +107,7 @@ typedef struct s_reality {
 	mlx_t		*mlx;
 	t_matrix	*matrix;
 	t_imgdata	*textures;
-	t_haring	*s_haring_db;
+	t_haring	*haring_db;
 	mlx_image_t	*bckgrnd;
 }	t_reality;
 

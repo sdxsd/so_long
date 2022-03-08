@@ -61,6 +61,13 @@ int	free_textures(mlx_t *mlx, t_imgdata *textures)
 	return (0);
 }
 
+t_haring	*free_haring(t_haring *haring)
+{
+	free(haring -> haring_entry);
+	free(haring);
+	return (haring);
+}
+
 // Deallocates the matrix struct.
 // Functions by first setting
 // simulation_data to the first
@@ -96,6 +103,7 @@ int	free_and_exit(t_reality	*reality)
 {
 	free_matrix(reality -> matrix);
 	free_textures(reality -> mlx, reality -> textures);
+	free_haring(reality -> haring_db);
 	mlx_delete_image(reality -> mlx, reality -> bckgrnd);
 	mlx_terminate(reality -> mlx);
 	free(reality);
