@@ -123,7 +123,8 @@ static void	keycodes(mlx_key_data_t keydata, void *param)
 	return ;
 }
 
-// Function to handle the gameloop and input.
+// The basic gameloop functions, first sets the mlx_key_hook
+// to the keycodes function, before entering the mlx_loop.
 int	gameloop(t_reality *reality)
 {
 	mlx_key_hook(reality -> mlx, keycodes, reality);
