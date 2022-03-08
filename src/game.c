@@ -52,21 +52,24 @@ static int	val_move(int x, int y, t_matrix *matrix)
 
 static	int check_pos(t_reality *reality, int x, int y)
 {
-	static	int haring_basket_pos;
+	int			curr_haring;
+	static int	haring_basket_pos;
+
 	if (reality->matrix->simulation_data[y][x] == 'C')
 	{
-		if (reality->haring_db->haring_data[y][x])
+		curr_haring = reality->haring_db->haring_data[y][x];
+		reality->textures->coll->instances[curr_haring].x = haring_basket_pos;
+		reality->textures->coll->instances[curr_haring].y = 0;
+		reality->matrix->coll_c++;
+		reality->matrix->simulation_data[y][x] = '0';
+		haring_basket_pos += 15;
+	}
+	if (reality->matrix->simulation_data[y][x] == 'E')
+	{
+		if (reality->matrix->coll_c >= reality->haring_db->haring_c)
 		{
-			ft_printf("Haring found! At x=%d, y=%d\n", reality->haring_db->haring_data[y][x]->x,
-					  reality->haring_db->haring_data[y][x]->y);
-			reality->matrix->coll_c++;
-			reality->matrix->simulation_data[y][x] = '0';
-			reality->haring_db->haring_data[y][x]->x = haring_basket_pos;
-			reality->haring_db->haring_data[y][x]->y = 0;
-			ft_printf("Modified haring address: %p\n", reality->haring_db->haring_data[y][x]);
-			ft_printf("New haring X: %d\n", reality->haring_db->haring_data[y][x]->x);
-			ft_printf("New haring Y: %d\n", reality->haring_db->haring_data[y][x]->y);
-			haring_basket_pos += 5;
+			ft_putstr("You win!\n");
+			free_and_exit(reality);
 		}
 	}
 	return (TRUE);

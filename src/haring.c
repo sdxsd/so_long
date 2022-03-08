@@ -41,27 +41,19 @@ A program is free software if users have all of these freedoms.
 
 t_haring	*init_haring(int x, int y)
 {
-	int			iterator_x;
 	int			iterator_y;
 	t_haring	*haring;
 
-	iterator_x = 0;
 	iterator_y = 0;
 	haring = malloc(sizeof(haring));
-	haring->haring_data = malloc(sizeof(mlx_instance_t **) * y);
+	haring->haring_data = malloc(sizeof(int *) * y);
 	if (!haring->haring_data)
 		return (NULL);
 	while (iterator_y < y)
 	{
-		haring->haring_data[iterator_y] = malloc(sizeof(mlx_instance_t *) * x);
+		haring->haring_data[iterator_y] = malloc(sizeof(int) * x);
 		if (!haring->haring_data[iterator_y])
 			return (NULL);
-		while (iterator_x < x)
-		{
-			haring->haring_data[iterator_y][iterator_x] = NULL;
-			iterator_x++;
-		}
-		iterator_x = 0;
 		iterator_y++;
 	}
 	haring->haring_c = 0;
@@ -75,11 +67,8 @@ int register_haring(t_reality *reality, int x, int y)
 	t_haring	*haring;
 
 	haring = reality->haring_db;
+	haring->haring_c++;
 	haring->haring_data[y][x] = \
 		mlx_image_to_window(reality->mlx, reality->textures->coll, x * BLKSIZ, y * BLKSIZ);
-	ft_printf("New haring at haring_data[%d][%d]\n", x, y);
-	ft_printf("New haring postion x: %d\n", haring->haring_data[y][x]->x / 32);
-	ft_printf("New haring postion y: %d\n", haring->haring_data[y][x]->y / 32);
-	ft_printf("Haring address: %p\n", haring->haring_data[y][x]);
 	return (TRUE);
 }
