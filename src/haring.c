@@ -56,13 +56,6 @@ t_haring	*init_haring(int x, int y)
 		haring->haring_data[iterator_y] = malloc(sizeof(mlx_image_t *) * x);
 		if (!haring->haring_data[iterator_y])
 			return (NULL);
-		while (iterator_x < x)
-		{
-			haring->haring_data[iterator_y][iterator_x] = malloc(sizeof(mlx_image_t *));
-			if (!haring->haring_data[iterator_y][iterator_x])
-				return (NULL);
-			iterator_x++;
-		}
 		iterator_y++;
 		iterator_x = 0;
 	}
