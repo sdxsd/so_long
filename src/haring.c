@@ -45,7 +45,7 @@ t_haring	*init_haring(int x, int y)
 	t_haring	*haring;
 
 	iterator_y = 0;
-	haring = malloc(sizeof(haring));
+	haring = malloc(sizeof(t_haring));
 	haring->haring_data = malloc(sizeof(int *) * y);
 	if (!haring->haring_data)
 		return (NULL);
