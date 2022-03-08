@@ -47,15 +47,27 @@ static int	val_move(int x, int y, t_matrix *matrix)
 	matrix->simulation_data = matrix->wired_entry;
 	if (matrix->simulation_data[y / 32][x / 32] == '1')
 		return (FALSE);
-	if (matrix->simulation_data[y / 32][x / 32] == 'E')
-		if (matrix->coll_c > 10)
-			exit (0);
-	if (matrix -> simulation_data[y / 32][x / 32] == 'C')
+	return (TRUE);
+}
+
+static	int check_pos(t_reality *reality, int x, int y)
+{
+	static	int haring_basket_pos;
+	if (reality->matrix->simulation_data[y][x] == 'C')
 	{
-		matrix->simulation_data[y / 32][x / 32] = '0';
-		matrix->coll_c++;
+		if (reality->haring_db->haring_data[y][x])
+		{
+			ft_printf("Haring found! At x=%d, y=%d\n", x, y);
+			reality->matrix->coll_c++;
+			reality->matrix->simulation_data[y][x] = '0';
+			reality->haring_db->haring_data[y][x]->x = haring_basket_pos;
+			reality->haring_db->haring_data[y][x]->y = 0;
+			ft_printf("Modified haring address: %p\n", reality->haring_db->haring_data[y][x]);
+			ft_printf("New haring X: %d\n", reality->haring_db->haring_data[y][x]->x / 32);
+			ft_printf("New haring Y: %d\n", reality->haring_db->haring_data[y][x]->y / 32);
+			haring_basket_pos += 10;
+		}
 	}
-	ft_printf("COLL: %d\n", matrix->coll_c);
 	return (TRUE);
 }
 
@@ -76,6 +88,7 @@ static void	handle_key(char key, t_reality *reality)
 		*plyr_y += BLKSIZ;
 	else if (key == 'D' && val_move(*plyr_x + BLKSIZ, *plyr_y, mtrx))
 		*plyr_x += BLKSIZ;
+	check_pos(reality, *plyr_x / BLKSIZ, *plyr_y / BLKSIZ);
 	ft_putstr("STEPS:");
 	ft_putnbr(reality -> matrix -> step_c++);
 	ft_putstr("\n");
