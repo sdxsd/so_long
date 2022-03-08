@@ -90,12 +90,14 @@ static int	valline(char *line, int y)
 // which validates the line based on the given y position.
 // If any of the checks fail, the line is freed, and false is returned.
 // Otherwise the function returns true.
-static int	chline(char *line, int x, int y, t_matrix *matrix)
+static int	chline(char *line, int x, int y, t_reality *reality)
 {
 	const char	*dict = "01CEP\n";
 	int			iterator;
+	t_matrix	*matrix;
 
 	iterator = 0;
+	matrix = reality -> matrix;
 	if ((int)ft_strlen(line) != x)
 	{
 		free(line);
@@ -113,6 +115,8 @@ static int	chline(char *line, int x, int y, t_matrix *matrix)
 			matrix -> plyr_x = iterator * 32;
 			matrix -> plyr_y = y * 32;
 		}
+		if (line[iterator == 'C'])
+			register_haring(reality, iterator, y);
 		iterator++;
 	}
 	if (!valline(line, y))

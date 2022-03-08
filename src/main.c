@@ -66,7 +66,7 @@ static void	*init_reality(t_reality *reality)
 
 	matr = reality -> matrix;
 	matr -> step_c = 1;
-	mlx = mlx_init(matr -> x * BLKSIZ, matr -> y * BLKSIZ, "so_long", TRUE);
+	mlx = mlx_init(matr -> x * BLKSIZ, matr -> y * BLKSIZ, "Nederland Simulator", TRUE);
 	reality -> textures = NULL;
 	reality -> bckgrnd = NULL;
 	reality -> mlx = mlx;

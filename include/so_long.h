@@ -82,6 +82,16 @@ typedef struct s_matrix {
 	char		**simulation_data;
 }	t_matrix;
 
+// Haring contains the map of the collectables,
+// and the haring structs.
+typedef struct s_haring_db {
+	int			haring_c;
+	int			haring_x;
+	int			haring_y;
+	mlx_image_t	**haring_entry;
+	mlx_image_t	**haring_data;
+}	t_haring;
+
 // Struct for holding game and engine data.
 // *mlx is the mlx pointer, and passed to rendering
 // functions.
@@ -97,6 +107,7 @@ typedef struct s_reality {
 	mlx_t		*mlx;
 	t_matrix	*matrix;
 	t_imgdata	*textures;
+	t_haring	*s_haring_db;
 	mlx_image_t	*bckgrnd;
 }	t_reality;
 
