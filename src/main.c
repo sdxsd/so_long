@@ -94,8 +94,8 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	reality->haring_db = init_haring(reality->matrix->x, reality->matrix->y);
-	if (reality->haring_db)
-		ft_printf("***haring_db: %p\n**haring_db: %p\n", reality->haring_db, *reality->haring_db);
+	if (!reality->haring_db)
+		return (0);
 	ft_putstr("so_long Copyright (C) 2022 Will Maguire\n");
 	if (!init_reality(reality))
 		return (1);

@@ -1,4 +1,4 @@
-CC = clang
+CC = clang -fsanitize=address
 CFLAGS = -g
 NAME = so_long
 CFILES = \
