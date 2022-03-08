@@ -41,9 +41,11 @@ A program is free software if users have all of these freedoms.
 
 t_haring	*init_haring(int x, int y)
 {
+	int			iterator_x;
 	int			iterator_y;
 	t_haring	*haring;
 
+	iterator_x = 0;
 	iterator_y = 0;
 	haring = malloc(sizeof(haring));
 	haring->haring_data = malloc(sizeof(mlx_instance_t **) * y);
@@ -54,10 +56,16 @@ t_haring	*init_haring(int x, int y)
 		haring->haring_data[iterator_y] = malloc(sizeof(mlx_instance_t *) * x);
 		if (!haring->haring_data[iterator_y])
 			return (NULL);
+		while (iterator_x < x)
+		{
+			haring->haring_data[iterator_y][iterator_x] = NULL;
+			iterator_x++;
+		}
+		iterator_x = 0;
 		iterator_y++;
 	}
 	haring->haring_c = 0;
-	if (!haring -> haring_data)
+	if (!haring->haring_data)
 		return (NULL);
 	return (haring);
 }

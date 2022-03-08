@@ -57,15 +57,16 @@ static	int check_pos(t_reality *reality, int x, int y)
 	{
 		if (reality->haring_db->haring_data[y][x])
 		{
-			ft_printf("Haring found! At x=%d, y=%d\n", x, y);
+			ft_printf("Haring found! At x=%d, y=%d\n", reality->haring_db->haring_data[y][x]->x,
+					  reality->haring_db->haring_data[y][x]->y);
 			reality->matrix->coll_c++;
 			reality->matrix->simulation_data[y][x] = '0';
 			reality->haring_db->haring_data[y][x]->x = haring_basket_pos;
 			reality->haring_db->haring_data[y][x]->y = 0;
 			ft_printf("Modified haring address: %p\n", reality->haring_db->haring_data[y][x]);
-			ft_printf("New haring X: %d\n", reality->haring_db->haring_data[y][x]->x / 32);
-			ft_printf("New haring Y: %d\n", reality->haring_db->haring_data[y][x]->y / 32);
-			haring_basket_pos += 10;
+			ft_printf("New haring X: %d\n", reality->haring_db->haring_data[y][x]->x);
+			ft_printf("New haring Y: %d\n", reality->haring_db->haring_data[y][x]->y);
+			haring_basket_pos += 5;
 		}
 	}
 	return (TRUE);
