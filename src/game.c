@@ -44,6 +44,11 @@ A program is free software if users have all of these freedoms.
 #include "../include/movement.h"
 #include <unistd.h>
 
+// The val_move() function takes the x, and y coordinates
+// that the player will be at due to the given keypress in handle_key()
+// and simply checks if the player is not moving into a wall.
+// If the player would be moving into a wall, the function returns
+// false, or invalid input.
 static int	val_move(int x, int y, t_matrix *matrix)
 {
 	matrix->simulation_data = matrix->wired_entry;
