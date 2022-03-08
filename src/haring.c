@@ -39,6 +39,15 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/haring.h"
 
+// This function initialises the haring struct.
+// First the struct itself is allocated,
+// and then then the vertical rows of the
+// haring_data. If any of these mallocs fail
+// the function returns NULL. Then the function
+// iterates through each vertical row, and allocates
+// the horizontal row. If this fail at any points NULL is returned.
+// The haring count is set to 0 to later be set by the register_haring()
+// function.
 t_haring	*init_haring(int x, int y)
 {
 	int			iterator_y;
@@ -64,7 +73,8 @@ t_haring	*init_haring(int x, int y)
 
 // When the program encounters a collectible on the map
 // it calls this function, and sets the location of the collectible
-// onto the haring matrix.
+// onto the haring matrix while also making a new instance
+// on the map of the haring matrix.
 int register_haring(t_reality *reality, int x, int y)
 {
 	t_haring	*haring;
