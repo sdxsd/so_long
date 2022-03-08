@@ -41,8 +41,8 @@ A program is free software if users have all of these freedoms.
 
 // Deallocates the texture data.
 // Goes through each texture loaded and
-// frees them. Then frees the struct
-// and returns.
+// frees them. Then frees the pointers, and finally the
+// struct before returning.
 int	free_textures(mlx_t *mlx, t_imgdata *textures)
 {
 	if (textures -> wall)
@@ -61,6 +61,9 @@ int	free_textures(mlx_t *mlx, t_imgdata *textures)
 	return (0);
 }
 
+// Deallocates the memory associated with the t_haring struct.
+// Iterates over the vertical and horizontal rows freeing
+// as it goes. Then returns a pointer to the freed memory.
 t_haring	*free_haring(t_haring *haring)
 {
 	free(haring -> haring_data);
