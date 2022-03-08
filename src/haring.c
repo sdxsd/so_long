@@ -62,6 +62,9 @@ t_haring	*init_haring(int x, int y)
 	return (haring);
 }
 
+// When the program encounters a collectible on the map
+// it calls this function, and sets the location of the collectible
+// onto the haring matrix.
 int register_haring(t_reality *reality, int x, int y)
 {
 	t_haring	*haring;

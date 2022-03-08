@@ -41,6 +41,8 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/game.h"
 #include "../include/dealloc.h"
+#include "../include/movement.h"
+#include <unistd.h>
 
 static int	val_move(int x, int y, t_matrix *matrix)
 {
@@ -53,13 +55,18 @@ static int	val_move(int x, int y, t_matrix *matrix)
 static	int check_pos(t_reality *reality, int x, int y)
 {
 	int			curr_haring;
+	int			*haring_x;
+	int			*haring_y;
 	static int	haring_basket_pos;
 
 	if (reality->matrix->simulation_data[y][x] == 'C')
 	{
 		curr_haring = reality->haring_db->haring_data[y][x];
-		reality->textures->coll->instances[curr_haring].x = haring_basket_pos;
-		reality->textures->coll->instances[curr_haring].y = 0;
+		haring_x = &reality->textures->coll->instances[curr_haring].x;
+		haring_y = &reality->textures->coll->instances[curr_haring].y;
+		//smooth_move(reality, haring_x, haring_y, haring_basket_pos, 0);
+		*haring_x = haring_basket_pos;
+		*haring_y = 0;
 		reality->matrix->coll_c++;
 		reality->matrix->simulation_data[y][x] = '0';
 		haring_basket_pos += 15;

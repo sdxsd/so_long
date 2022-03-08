@@ -8,7 +8,8 @@ CFILES = \
 			src/game.c \
 			src/textures.c \
 			src/dealloc.c \
-			src/haring.c
+			src/haring.c \
+			src/movement.c
 OFILES = $(CFILES:.c=.o)
 OSFLAG = ""
 LINKEN = ""
