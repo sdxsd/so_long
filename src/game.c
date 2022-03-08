@@ -57,6 +57,17 @@ static int	val_move(int x, int y, t_matrix *matrix)
 	return (TRUE);
 }
 
+// This function checks the position of the player against the map
+// and takes actions accordingly.
+// if the current player position falls on a collectible the following occurs.
+// Sets a current_haring int which refers to the index of the instance array in the
+// coll image held by the textures struct. Then two pointers, one to the x of the
+// current instance, and the other to the y. Sets the x of the haring instance
+// to the current haring_basket_pos. And then the y to 0 (referring to the first row).
+// The position on the map (formerly a collectible tile) is set to a blank.
+// The offset of the haring (intended to create a stacking effect) is incremented by 15.
+// Otherwise, if the player is on an exit. And all the collectibles have been collected
+// the program's memory is deallocated and the program exits.
 static	int check_pos(t_reality *reality, int x, int y)
 {
 	int			curr_haring;
