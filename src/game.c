@@ -82,6 +82,14 @@ static	int check_pos(t_reality *reality, int x, int y)
 	return (TRUE);
 }
 
+// This function handles actions based on what key
+// is pressed. A number of convenience variables are
+// set to reduce the length of lines. The val_move() function
+// is passed used in every if to validate if a movement is valid
+// in the game. Then the requisite changes are made to the player coordinates.
+// check_pos() is then used to make any changes to game state
+// based on the current position of the player.
+// After that, current steps are printed out and the function returns.
 static void	handle_key(char key, t_reality *reality)
 {
 	int			*plyr_x;
