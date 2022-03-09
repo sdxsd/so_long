@@ -37,16 +37,16 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
-// All things repeat in echo of eachother.
+/* All things repeat in echo of eachother. */
 
 #include "../include/game.h"
 #include "../include/dealloc.h"
 
-// The val_move() function takes the x, and y coordinates
-// that the player will be at due to the given keypress in handle_key()
-// and simply checks if the player is not moving into a wall.
-// If the player would be moving into a wall, the function returns
-// false, or invalid input.
+/* The val_move() function takes the x, and y coordinates */
+/* that the player will be at due to the given keypress in handle_key() */
+/* and simply checks if the player is not moving into a wall. */
+/* If the player would be moving into a wall, the function returns */
+/* false, or invalid input. */
 static int	val_move(int x, int y, t_matrix *matrix)
 {
 	matrix->simulation_data = matrix->wired_entry;
@@ -55,17 +55,17 @@ static int	val_move(int x, int y, t_matrix *matrix)
 	return (TRUE);
 }
 
-// This function checks the position of the player against the map
-// and takes actions accordingly.
-// if the current player position falls on a collectible the following occurs.
-// Sets a current_haring int which refers to the index of the instance array in the
-// coll image held by the textures struct. Then two pointers, one to the x of the
-// current instance, and the other to the y. Sets the x of the haring instance
-// to the current haring_basket_pos. And then the y to 0 (referring to the first row).
-// The position on the map (formerly a collectible tile) is set to a blank.
-// The offset of the haring (intended to create a stacking effect) is incremented by 15.
-// Otherwise, if the player is on an exit. And all the collectibles have been collected
-// the program's memory is deallocated and the program exits.
+/* This function checks the position of the player against the map */
+/* and takes actions accordingly. */
+/* if the current player position falls on a collectible the following occurs. */
+/* Sets a current_haring int which refers to the index of the instance array in the */
+/* coll image held by the textures struct. Then two pointers, one to the x of the */
+/* current instance, and the other to the y. Sets the x of the haring instance */
+/* to the current haring_basket_pos. And then the y to 0 (referring to the first row). */
+/* The position on the map (formerly a collectible tile) is set to a blank. */
+/* The offset of the haring (intended to create a stacking effect) is incremented by 15. */
+/* Otherwise, if the player is on an exit. And all the collectibles have been collected */
+/* the program's memory is deallocated and the program exits. */
 static	int check_pos(t_reality *reality, int x, int y)
 {
 	int			curr_haring;
@@ -95,14 +95,14 @@ static	int check_pos(t_reality *reality, int x, int y)
 	return (TRUE);
 }
 
-// This function handles actions based on what key
-// is pressed. A number of convenience variables are
-// set to reduce the length of lines. The val_move() function
-// is passed used in every if to validate if a movement is valid
-// in the game. Then the requisite changes are made to the player coordinates.
-// check_pos() is then used to make any changes to game state
-// based on the current position of the player.
-// After that, current steps are printed out and the function returns.
+/* This function handles actions based on what key */
+/* is pressed. A number of convenience variables are */
+/* set to reduce the length of lines. The val_move() function */
+/* is passed used in every if to validate if a movement is valid */
+/* in the game. Then the requisite changes are made to the player coordinates. */
+/* check_pos() is then used to make any changes to game state */
+/* based on the current position of the player. */
+/* After that, current steps are printed out and the function returns. */
 static void	handle_key(char key, t_reality *reality)
 {
 	int			*plyr_x;
@@ -125,17 +125,17 @@ static void	handle_key(char key, t_reality *reality)
 	return ;
 }
 
-// This function handles input from the keyboard.
-// Takes a pointer to *param, aka the reality struct
-// (which stores all program data). Defines a keydictionary
-// of recognized and valid keyboard input. If the action of the keydata
-// is the press, the keydata is checked to make sure it falls within
-// the set of valid characters. If it is, then it is passed to the
-// handle_key() function, along with the t_reality* pointer.
-// Otherwise, if the key is ESC, then the entire program is freed,
-// and promptly exits.
-// Then the rndr_matrix() function is called to update the player
-// position once handle_key() has resolved.
+/* This function handles input from the keyboard. */
+/* Takes a pointer to *param, aka the reality struct */
+/* (which stores all program data). Defines a keydictionary */
+/* of recognized and valid keyboard input. If the action of the keydata */
+/* is the press, the keydata is checked to make sure it falls within */
+/* the set of valid characters. If it is, then it is passed to the */
+/* handle_key() function, along with the t_reality* pointer. */
+/* Otherwise, if the key is ESC, then the entire program is freed, */
+/* and promptly exits. */
+/* Then the rndr_matrix() function is called to update the player */
+/* position once handle_key() has resolved. */
 static void	keycodes(mlx_key_data_t keydata, void *param)
 {
 	t_reality	*reality;
@@ -153,8 +153,8 @@ static void	keycodes(mlx_key_data_t keydata, void *param)
 	return ;
 }
 
-// The basic gameloop functions, first sets the mlx_key_hook
-// to the keycodes function, before entering the mlx_loop.
+/* The basic gameloop functions, first sets the mlx_key_hook */
+/* to the keycodes function, before entering the mlx_loop. */
 int	gameloop(t_reality *reality)
 {
 	mlx_key_hook(reality -> mlx, keycodes, reality);

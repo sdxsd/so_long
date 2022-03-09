@@ -37,13 +37,13 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
-// The design of this so_long is intentional.
-// The player sprite represents the primacy of The Netherlands.
-// The wall sprite represents how the Belgian menace holds us back.
-// The collectible sprite represents the goal that all good Dutch people desire.
-// The exit represents Mark Rutte as our exit.
-// The background is symbolic of the monarchy, the backbone of the nation.
-// Je maintiendrai!
+/* The design of this so_long is intentional. */
+/* The player sprite represents the primacy of The Netherlands. */
+/* The wall sprite represents how the Belgian menace holds us back. */
+/* The collectible sprite represents the goal that all good Dutch people desire. */
+/* The exit represents Mark Rutte as our exit. */
+/* The background is symbolic of the monarchy, the backbone of the nation. */
+/* Je maintiendrai! */
 
 #include "../include/so_long.h"
 #include "../include/parse.h"
@@ -51,15 +51,15 @@ A program is free software if users have all of these freedoms.
 #include "../include/game.h"
 #include "../include/haring.h"
 
-// This function initializes the reality struct
-// which holds most if not all of the game state data.
-// Calls mlx_init() to begin window rendering.
-// Sets reality -> textures to null, this is important because
-// otherwise it will be set to a random address in memory
-// and the check in rndr_matrix() of if the textures have loaded
-// will be invalid and segfault the program.
-// Finally checks if mlx has loaded, returning null if not.
-// Otherwise returns
+/* This function initializes the reality struct */
+/* which holds most if not all of the game state data. */
+/* Calls mlx_init() to begin window rendering. */
+/* Sets reality -> textures to null, this is important because */
+/* otherwise it will be set to a random address in memory */
+/* and the check in rndr_matrix() of if the textures have loaded */
+/* will be invalid and segfault the program. */
+/* Finally checks if mlx has loaded, returning null if not. */
+/* Otherwise returns */
 static void	*init_reality(t_reality *reality)
 {
 	mlx_t		*mlx;
@@ -76,12 +76,12 @@ static void	*init_reality(t_reality *reality)
 	return (reality -> mlx);
 }
 
-// This function initiates the program.
-// Begins by using the matrix_init() function to interpret
-// and load the map.
-// Then begins the rendering process with
-// rndr_matrix() before entering the game loop.
-// Upon exit will call a cleanup function to deallocate residual memory.
+/* This function initiates the program. */
+/* Begins by using the matrix_init() function to interpret */
+/* and load the map. */
+/* Then begins the rendering process with */
+/* rndr_matrix() before entering the game loop. */
+/* Upon exit will call a cleanup function to deallocate residual memory. */
 int	main(int argc, char *argv[])
 {
 	t_reality	*reality;
