@@ -66,7 +66,7 @@ int	free_textures(mlx_t *mlx, t_imgdata *textures)
 /* as it goes. Then returns a pointer to the freed memory. */
 t_haring	*free_haring(t_haring *haring)
 {
-	free(haring -> haring_data);
+
 	free(haring);
 	return (haring);
 }
@@ -104,11 +104,11 @@ t_matrix	*free_matrix(t_matrix *matrix)
 /* for holding all game data before exiting. */
 int	free_and_exit(t_reality	*reality)
 {
-	free_matrix(reality -> matrix);
-	free_textures(reality -> mlx, reality -> textures);
-	free_haring(reality -> haring_db);
-	mlx_delete_image(reality -> mlx, reality -> bckgrnd);
-	mlx_terminate(reality -> mlx);
+	free_matrix(reality->matrix);
+	free_textures(reality->mlx, reality->textures);
+	free_haring(reality->haring_db);
+	mlx_delete_image(reality->mlx, reality->bckgrnd);
+	mlx_terminate(reality->mlx);
 	free(reality);
 	exit (0);
 }
