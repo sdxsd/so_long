@@ -119,6 +119,7 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 	return (TRUE);
 }
 
+/* Handles the first render of the game, */
 static int	first_rndr(t_reality *reality)
 {
 	int					iter;
@@ -146,6 +147,7 @@ static int	first_rndr(t_reality *reality)
 	return (TRUE);
 }
 
+/* Notes: reimplement movement later with lerp() */
 int	rndr_matrix(t_reality *reality)
 {
 	static int	rndrd;
@@ -160,8 +162,10 @@ int	rndr_matrix(t_reality *reality)
 	{
 		i_plyr_x = &reality->textures->plyr->instances[0].x;
 		i_plyr_y = &reality->textures->plyr->instances[0].y;
-		*i_plyr_x = lerp(*i_plyr_x, mtrx->plyr_x, 0.1);
-		*i_plyr_y = lerp(*i_plyr_y, mtrx->plyr_y, 0.1);
+		*i_plyr_x = mtrx->plyr_x;
+		*i_plyr_y = mtrx->plyr_y;
+		/* *i_plyr_x = lerp(*i_plyr_x, mtrx->plyr_x, 0.1); */
+		/* *i_plyr_y = lerp(*i_plyr_y, mtrx->plyr_y, 0.1); */
 	}
 	return (TRUE);
 }

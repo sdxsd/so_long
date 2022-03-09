@@ -26,16 +26,20 @@ endif
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): libft
 	@echo "Building for: $(OSFLAG)"
-	@make -C libft/
-	@make -C MLX42/
 	$(CC) $(CFLAGS) $(CFILES) $(LINKEN) libft/libft.a MLX42/libmlx42.a -g -o $(NAME)
 
 test: re
 	./so_long maps/map02.ber
 
-valtest: re
+MLX42:
+	@make -C MLX42/
+
+libft:
+	@make -C libft/
+
+valtest: libft
 	valgrind --tool=memcheck --leak-check=full ./so_long maps/map02.ber
 
 re: fclean all
@@ -47,4 +51,4 @@ fclean: clean
 	rm -f *vgcore*
 	rm -rfv so_long.dSYM
 	make -C libft/ clean
-	make -C MLX42/ fclean
+# make -C MLX42/ fclean
