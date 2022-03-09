@@ -39,10 +39,10 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/dealloc.h"
 
-// Deallocates the texture data.
-// Goes through each texture loaded and
-// frees them. Then frees the pointers, and finally the
-// struct before returning.
+/* Deallocates the texture data. */
+/* Goes through each texture loaded and */
+/* frees them. Then frees the pointers, and finally the */
+/* struct before returning. */
 int	free_textures(mlx_t *mlx, t_imgdata *textures)
 {
 	if (textures -> wall)
@@ -61,9 +61,9 @@ int	free_textures(mlx_t *mlx, t_imgdata *textures)
 	return (0);
 }
 
-// Deallocates the memory associated with the t_haring struct.
-// Iterates over the vertical and horizontal rows freeing
-// as it goes. Then returns a pointer to the freed memory.
+/* Deallocates the memory associated with the t_haring struct. */
+/* Iterates over the vertical and horizontal rows freeing */
+/* as it goes. Then returns a pointer to the freed memory. */
 t_haring	*free_haring(t_haring *haring)
 {
 	free(haring -> haring_data);
@@ -71,14 +71,14 @@ t_haring	*free_haring(t_haring *haring)
 	return (haring);
 }
 
-// Deallocates the matrix struct.
-// Functions by first setting
-// simulation_data to the first
-// line of map data (pointed to by wired_entry)
-// and then iterating over the aforementioned
-// data freeing it one by one.
-// Then frees the allocated memory.
-// Finally frees the struct itself before returning.
+/* Deallocates the matrix struct. */
+/* Functions by first setting */
+/* simulation_data to the first */
+/* line of map data (pointed to by wired_entry) */
+/* and then iterating over the aforementioned */
+/* data freeing it one by one. */
+/* Then frees the allocated memory. */
+/* Finally frees the struct itself before returning. */
 t_matrix	*free_matrix(t_matrix *matrix)
 {
 	int	iter;
@@ -96,12 +96,12 @@ t_matrix	*free_matrix(t_matrix *matrix)
 	return (NULL);
 }
 
-// Fully deallocates memory used in the program and exits.
-// Frees the matrix substruct with free_matrix()
-// and the textures substruct with free_textures()
-// Then deallocates the background image.
-// Finally terminates MLX and frees the struct
-// for holding all game data before exiting.
+/* Fully deallocates memory used in the program and exits. */
+/* Frees the matrix substruct with free_matrix() */
+/* and the textures substruct with free_textures() */
+/* Then deallocates the background image. */
+/* Finally terminates MLX and frees the struct */
+/* for holding all game data before exiting. */
 int	free_and_exit(t_reality	*reality)
 {
 	free_matrix(reality -> matrix);

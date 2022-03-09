@@ -41,21 +41,21 @@ A program is free software if users have all of these freedoms.
 #include "../include/so_long.h"
 #include "../include/dealloc.h"
 
-// valline() (short for validate line)
-// takes the y position of the given line,
-// and checks for validity of the line
-// based on said position.
-// The variable fir_lst (first last)
-// defines the acceptable characters that can be present
-// in the first and last line of the map.
-// If the value of y is -1
-// this indicates the last line of the map data.
-// This function simply iterates through a line
-// passing each character to a subroutine
-// that checks the given character against a dictionary
-// of characters in the form of a char pointer.
-// Returns false if ft_charchk() fails
-// at any time.
+/* valline() (short for validate line) */
+/* takes the y position of the given line, */
+/* and checks for validity of the line */
+/* based on said position. */
+/* The variable fir_lst (first last) */
+/* defines the acceptable characters that can be present */
+/* in the first and last line of the map. */
+/* If the value of y is -1 */
+/* this indicates the last line of the map data. */
+/* This function simply iterates through a line */
+/* passing each character to a subroutine */
+/* that checks the given character against a dictionary */
+/* of characters in the form of a char pointer. */
+/* Returns false if ft_charchk() fails */
+/* at any time. */
 static int	valline(char *line, int y)
 {
 	const char	*fir_lst = "1\n";
@@ -74,22 +74,22 @@ static int	valline(char *line, int y)
 	return (TRUE);
 }
 
-// chline() (check line) takes a line of map data
-// represented as a char pointer, a length value
-// represented as x, and the current y value pertaining
-// to the line provided.
-// The dict variable defines acceptable characters within the map.
-// If the strlen() of line does not equal the x value
-// given, then the line is invalid, as lines must all be of
-// equal width.
-// The function then simply iterates through the line
-// while running the ft_charchk() function which compares
-// a given character to see if it contains any
-// characters outside of the provided set.
-// Continuing, the function runs the valline() function
-// which validates the line based on the given y position.
-// If any of the checks fail, the line is freed, and false is returned.
-// Otherwise the function returns true.
+/* chline() (check line) takes a line of map data */
+/* represented as a char pointer, a length value */
+/* represented as x, and the current y value pertaining */
+/* to the line provided. */
+/* The dict variable defines acceptable characters within the map. */
+/* If the strlen() of line does not equal the x value */
+/* given, then the line is invalid, as lines must all be of */
+/* equal width. */
+/* The function then simply iterates through the line */
+/* while running the ft_charchk() function which compares */
+/* a given character to see if it contains any */
+/* characters outside of the provided set. */
+/* Continuing, the function runs the valline() function */
+/* which validates the line based on the given y position. */
+/* If any of the checks fail, the line is freed, and false is returned. */
+/* Otherwise the function returns true. */
 static int	chline(char *line, int x, int y, t_matrix *matrix)
 {
 	const char	*dict = "01CEP\n";
@@ -123,28 +123,28 @@ static int	chline(char *line, int x, int y, t_matrix *matrix)
 	return (TRUE);
 }
 
-// This function validates the map, returning 1 (TRUE) if
-// the map passes validity checks.
-// Functions by defining an iterative variable
-// referencing the current y position
-// when indexing the map data.
-// **simulation_data is set to **wired_entry
-// with the latter pointing to the first
-// element of the map data, loaded as an array
-// of strings.
-// While the variable iter_y does not yet
-// equal the total rows (y value) of the map
-// then the following is executed.
-// The function chline() (short for check line)
-// is provided the current row being indexed,
-// the line of map data associated with the
-// aforementioned row, and the length of the row
-// being represented as the x value.
-// If the function does not return TRUE
-// then false is returned and the validation fails.
-// Otherwise the function continues, incrementing
-// the iter_y value and moving down a row
-// in simulation_data.
+/* This function validates the map, returning 1 (TRUE) if */
+/* the map passes validity checks. */
+/* Functions by defining an iterative variable */
+/* referencing the current y position */
+/* when indexing the map data. */
+/* **simulation_data is set to **wired_entry */
+/* with the latter pointing to the first */
+/* element of the map data, loaded as an array */
+/* of strings. */
+/* While the variable iter_y does not yet */
+/* equal the total rows (y value) of the map */
+/* then the following is executed. */
+/* The function chline() (short for check line) */
+/* is provided the current row being indexed, */
+/* the line of map data associated with the */
+/* aforementioned row, and the length of the row */
+/* being represented as the x value. */
+/* If the function does not return TRUE */
+/* then false is returned and the validation fails. */
+/* Otherwise the function continues, incrementing */
+/* the iter_y value and moving down a row */
+/* in simulation_data. */
 static int	validate_map(t_matrix *matrix)
 {
 	int	iter_y;
@@ -161,19 +161,19 @@ static int	validate_map(t_matrix *matrix)
 	return (TRUE);
 }
 
-// Loads the map into memory for later parsing.
-// Returns null on failure.
-// Functions by defining a starting pointer (wired_entry)
-// and a index pointer (simulation_data)
-// index pointer is iterated upon while
-// loading file line by line.
-// starting pointer points to the first element in the
-// index pointer.
-// if get_next_line() does not return a line
-// the function checks if there has been any line
-// found. If true, then the loop is broken.
-// If there isn't a line, and no line
-// has been loaded, the function returns null.
+/* Loads the map into memory for later parsing. */
+/* Returns null on failure. */
+/* Functions by defining a starting pointer (wired_entry) */
+/* and a index pointer (simulation_data) */
+/* index pointer is iterated upon while */
+/* loading file line by line. */
+/* starting pointer points to the first element in the */
+/* index pointer. */
+/* if get_next_line() does not return a line */
+/* the function checks if there has been any line */
+/* found. If true, then the loop is broken. */
+/* If there isn't a line, and no line */
+/* has been loaded, the function returns null. */
 static t_matrix	*load_map(char *path, t_matrix *matrix)
 {
 	char	*line;
@@ -203,22 +203,22 @@ static t_matrix	*load_map(char *path, t_matrix *matrix)
 	return (matrix);
 }
 
-// Initiates basic input checking before
-// passing the map parsing to subroutines.
-// Functions by defining a pointer to a t_matrix
-// which will eventually hold the map data
-// and other necessary data such as the
-// width and height. Then operates basic argument
-// checking and returns NULL if the arguments are
-// insufficient. Allocates memory for the t_matrix
-// struct. Runs the load map function,
-// which loads the map into memory and
-// defines the map dimensions.
-// Then runs the validate_map() function
-// to validate that the aforementioned
-// map_data constitutes a valid map
-// according to the project definitions.
-// Finally returns the populated Matrix struct.
+/* Initiates basic input checking before */
+/* passing the map parsing to subroutines. */
+/* Functions by defining a pointer to a t_matrix */
+/* which will eventually hold the map data */
+/* and other necessary data such as the */
+/* width and height. Then operates basic argument */
+/* checking and returns NULL if the arguments are */
+/* insufficient. Allocates memory for the t_matrix */
+/* struct. Runs the load map function, */
+/* which loads the map into memory and */
+/* defines the map dimensions. */
+/* Then runs the validate_map() function */
+/* to validate that the aforementioned */
+/* map_data constitutes a valid map */
+/* according to the project definitions. */
+/* Finally returns the populated Matrix struct. */
 t_matrix	*matrix_init(int argc, char *argv[])
 {
 	t_matrix	*matrix;

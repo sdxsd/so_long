@@ -43,13 +43,13 @@ A program is free software if users have all of these freedoms.
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-// Structure for holding the texture data
-// represented as pointers to mlx image types.
-// Part of the game data stuct s_reality.
-// ASSOCIATED FUNCTIONS:
-// 	load_texture()	- textures.c
-// 	map_blk() 		- textures.c
-// 	rndr_line()		- textures.c
+/* Structure for holding the texture data */
+/* represented as pointers to mlx image types. */
+/* Part of the game data stuct s_reality. */
+/* ASSOCIATED FUNCTIONS: */
+/* 	load_texture()	- textures.c */
+/* 	map_blk() 		- textures.c */
+/* 	rndr_line()		- textures.c */
 typedef struct s_imgdata {
 	mlx_image_t	*wall;
 	mlx_image_t	*coll;
@@ -57,20 +57,20 @@ typedef struct s_imgdata {
 	mlx_image_t	*plyr;
 }	t_imgdata;
 
-// Struct for holding map data.
-// Contains a width and height variable
-// and two double pointers.
-// Map data is stored as an array
-// of char pointers. **simulation_data
-// is used as a mutable index, pointing
-// to the current line of map data
-// being operated upon or interpreted.
-// **wired_entry will always point to the
-// first line of map data.
-// ASSOCIATED FUNCTIONS:
-// 	init_matrix()	- parse.c
-//	load_map()		- parse.c
-//	rndr_matrix()	- rndr_matrix.c
+/* Struct for holding map data. */
+/* Contains a width and height variable */
+/* and two double pointers. */
+/* Map data is stored as an array */
+/* of char pointers. **simulation_data */
+/* is used as a mutable index, pointing */
+/* to the current line of map data */
+/* being operated upon or interpreted. */
+/* **wired_entry will always point to the */
+/* first line of map data. */
+/* ASSOCIATED FUNCTIONS: */
+/* 	init_matrix()	- parse.c */
+/* 	load_map()		- parse.c */
+/* 	rndr_matrix()	- rndr_matrix.c */
 typedef struct s_matrix {
 	int			plyr_x;
 	int			plyr_y;
@@ -82,8 +82,8 @@ typedef struct s_matrix {
 	char		**simulation_data;
 }	t_matrix;
 
-// Haring contains the map of the collectables,
-// and the haring structs.
+/* Haring contains the map of the collectables, */
+/* and the haring structs. */
 typedef struct s_haring_db {
 	int	haring_c;
 	int	haring_x;
@@ -91,17 +91,17 @@ typedef struct s_haring_db {
 	int	**haring_data;
 }	t_haring;
 
-// Struct for holding game and engine data.
-// *mlx is the mlx pointer, and passed to rendering
-// functions.
-// plyr_x and plyr_y contains the current position of
-// the player.
-// *matrix contains the map data.
-// *textures contains the image/sprite data.
-// ASSOCIATED FUNCTIONS:
-// 	init_reality()	- main.c
-// 	init_matrix()	- parse.c
-// 	rndr_matrix()	- rndr_matrix.c
+/* Struct for holding game and engine data. */
+/* *mlx is the mlx pointer, and passed to rendering */
+/* functions. */
+/* plyr_x and plyr_y contains the current position of */
+/* the player. */
+/* *matrix contains the map data. */
+/* *textures contains the image/sprite data. */
+/* ASSOCIATED FUNCTIONS: */
+/* 	init_reality()	- main.c */
+/* 	init_matrix()	- parse.c */
+/* 	rndr_matrix()	- rndr_matrix.c */
 typedef struct s_reality {
 	mlx_t		*mlx;
 	t_matrix	*matrix;

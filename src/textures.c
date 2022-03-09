@@ -39,11 +39,11 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/textures.h"
 
-// Loads a texture indicated by argument
-// blk from the equivalent file.
-// Converts the texture to an mlx_image_t pointer
-// then purges the texture from RAM
-// before returning.
+/* Loads a texture indicated by argument */
+/* blk from the equivalent file. */
+/* Converts the texture to an mlx_image_t pointer */
+/* then purges the texture from RAM */
+/* before returning. */
 mlx_image_t	*load_img(mlx_t *mlx, char blk)
 {
 	mlx_texture_t	*tex;
@@ -66,16 +66,16 @@ mlx_image_t	*load_img(mlx_t *mlx, char blk)
 	return (img);
 }
 
-// Loads textures into the tex_struct data structure for later use.
-// Functions by declaring and allocating enough
-// memory for a structure that holds the programs
-// image data.
-// Loads each texture by individual calls to load_img()
-// Checks for any failures in texture loading, and then
-// if there are no problems, returns a pointer
-// to the struct to the calling function.
-// If allocated with malloc(sizeof(img_struct)) then
-// a heap based buffer overflow will occur.
+/* Loads textures into the tex_struct data structure for later use. */
+/* Functions by declaring and allocating enough */
+/* memory for a structure that holds the programs */
+/* image data. */
+/* Loads each texture by individual calls to load_img() */
+/* Checks for any failures in texture loading, and then */
+/* if there are no problems, returns a pointer */
+/* to the struct to the calling function. */
+/* If allocated with malloc(sizeof(img_struct)) then */
+/* a heap based buffer overflow will occur. */
 t_imgdata	*load_textures(mlx_t *mlx)
 {
 	t_imgdata	*img_struct;
@@ -93,11 +93,11 @@ t_imgdata	*load_textures(mlx_t *mlx)
 	return (img_struct);
 }
 
-// Simple mapping function
-// Takes a t_imgdata pointer and a blk
-// returns the image associated with blk from the
-// t_imgdata struct to the calling function
-// If input is invalid (such as '0') returns NULL
+/* Simple mapping function */
+/* Takes a t_imgdata pointer and a blk */
+/* returns the image associated with blk from the */
+/* t_imgdata struct to the calling function */
+/* If input is invalid (such as '0') returns NULL */
 mlx_image_t	*map_blk(t_imgdata *textures, char blk)
 {
 	if (blk == '1')

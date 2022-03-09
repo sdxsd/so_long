@@ -37,7 +37,7 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
-// I am become Demiurge of this false world.
+/* I am become Demiurge of this false world. */
 
 #ifndef RNDR_MATRIX_H
 # define RNDR_MATRIX_H
