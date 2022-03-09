@@ -42,12 +42,12 @@ A program is free software if users have all of these freedoms.
 #include "../include/haring.h"
 #include "../include/movement.h"
 
-// Takes the width and height of the MLX window and generates a background.
-// Functions by taking the win_y argument and
-// defining 3 distinct stages and changing the background colour
-// value based on said stages.
-// The win_x value is used as an iterator and fills each line of the
-// image with the colour defined.
+/* Takes the width and height of the MLX window and generates a background. */
+/* Functions by taking the win_y argument and */
+/* defining 3 distinct stages and changing the background colour */
+/* value based on said stages. */
+/* The win_x value is used as an iterator and fills each line of the */
+/* image with the colour defined. */
 static mlx_image_t	*rndr_background(mlx_t *mlx, int win_x, int win_y)
 {
 	mlx_image_t	*bckgrnd;
@@ -76,26 +76,26 @@ static mlx_image_t	*rndr_background(mlx_t *mlx, int win_x, int win_y)
 	return (bckgrnd);
 }
 
-// Takes a string of map data as input and outputs the rendered equivalent.
-// Functions by taking a line to interpret, the
-// total size of the line, and a y position to render
-// the aforementioned line at.
-// Defines two index variables, pos_x, and pos_y.
-// pos_x is set to the first block in the
-// row. pos_y is set to the row defined
-// by the y argument.
-// The window is defined as a series of blocks.
-// By block I mean a square of 32x32 pixels.
-// For example vertical row five, at horizontal position 3
-// would be expressed in pixel terms as y 160 and x 96.
-// 32 * 5 down, and 32 * 3 across.
-// For each character in the given line, the character
-// is mapped to the equivalent map texture with map_blk()
-// and then pushed to the image at the current offset of pos_x
-// and at the row defined by pos_y.
-// pos_x is then increased by one block to the right (+32), and
-// the loop repeats.
-// Returns TRUE at return.
+/* Takes a string of map data as input and outputs the rendered equivalent. */
+/* Functions by taking a line to interpret, the */
+/* total size of the line, and a y position to render */
+/* the aforementioned line at. */
+/* Defines two index variables, pos_x, and pos_y. */
+/* pos_x is set to the first block in the */
+/* row. pos_y is set to the row defined */
+/* by the y argument. */
+/* The window is defined as a series of blocks. */
+/* By block I mean a square of 32x32 pixels. */
+/* For example vertical row five, at horizontal position 3 */
+/* would be expressed in pixel terms as y 160 and x 96. */
+/* 32 * 5 down, and 32 * 3 across. */
+/* For each character in the given line, the character */
+/* is mapped to the equivalent map texture with map_blk() */
+/* and then pushed to the image at the current offset of pos_x */
+/* and at the row defined by pos_y. */
+/* pos_x is then increased by one block to the right (+32), and */
+/* the loop repeats. */
+/* Returns TRUE at return. */
 static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 {
 	int			iterator;
