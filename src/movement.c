@@ -40,24 +40,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/movement.h"
 #include <unistd.h>
 
-static int	lerp(int start, int dest, double time)
+int	lerp(int start, int dest, double time)
 {
 	return (start + (dest - start) * time);
-}
-
-int	smooth_move(t_reality *reality, int *object_x, int *object_y, int dest_x, int dest_y)
-{
-	while (*object_y > dest_y)
-	{
-		if (*object_x < dest_x)
-			*object_x += lerp(*object_x, dest_x, 0.5);
-		else if (*object_x > dest_x)
-			*object_x -= lerp(*object_x, dest_x, 0.5);
-		if (*object_y < dest_y)
-			*object_y += lerp(*object_y, dest_y, 0.5);
-		else if (*object_y > dest_y)
-			*object_y += lerp(*object_y, dest_y, 0.5);
-		ft_printf("X: %d | Y: %d\n", *object_x, *object_y);
-	}
-	return (1);
 }

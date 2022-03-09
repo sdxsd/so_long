@@ -40,6 +40,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/rndr_matrix.h"
 #include "../include/dealloc.h"
 #include "../include/haring.h"
+#include "../include/movement.h"
 
 // Takes the width and height of the MLX window and generates a background.
 // Functions by taking the win_y argument and
@@ -149,14 +150,18 @@ int	rndr_matrix(t_reality *reality)
 {
 	static int	rndrd;
 	t_matrix	*mtrx;
+	int			*i_plyr_x;
+	int			*i_plyr_y;
 
 	mtrx = reality -> matrix;
 	if (!rndrd)
 		rndrd = first_rndr(reality);
 	if (reality->textures->plyr->instances)
 	{
-		reality->textures->plyr->instances[0].x = mtrx->plyr_x;
-		reality->textures->plyr->instances[0].y = mtrx->plyr_y;
+		i_plyr_x = &reality->textures->plyr->instances[0].x;
+		i_plyr_y = &reality->textures->plyr->instances[0].y;
+		*i_plyr_x = lerp(*i_plyr_x, mtrx->plyr_x, 0.1);
+		*i_plyr_y = lerp(*i_plyr_y, mtrx->plyr_y, 0.1);
 	}
 	return (TRUE);
 }

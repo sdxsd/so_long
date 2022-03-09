@@ -41,8 +41,6 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/game.h"
 #include "../include/dealloc.h"
-#include "../include/movement.h"
-#include <unistd.h>
 
 // The val_move() function takes the x, and y coordinates
 // that the player will be at due to the given keypress in handle_key()
@@ -80,7 +78,6 @@ static	int check_pos(t_reality *reality, int x, int y)
 		curr_haring = reality->haring_db->haring_data[y][x];
 		haring_x = &reality->textures->coll->instances[curr_haring].x;
 		haring_y = &reality->textures->coll->instances[curr_haring].y;
-		//smooth_move(reality, haring_x, haring_y, haring_basket_pos, 0);
 		*haring_x = haring_basket_pos;
 		*haring_y = 0;
 		reality->matrix->coll_c++;
@@ -113,8 +110,8 @@ static void	handle_key(char key, t_reality *reality)
 	t_matrix	*mtrx;
 
 	mtrx = reality -> matrix;
-	plyr_x = &reality -> matrix -> plyr_x;
-	plyr_y = &reality -> matrix -> plyr_y;
+	plyr_x = &reality->matrix->plyr_x;
+	plyr_y = &reality->matrix->plyr_y;
 	if (key == 'W' && val_move(*plyr_x, *plyr_y - BLKSIZ, mtrx))
 		*plyr_y -= BLKSIZ;
 	else if (key == 'A' && val_move(*plyr_x - BLKSIZ, *plyr_y, mtrx))
@@ -124,9 +121,7 @@ static void	handle_key(char key, t_reality *reality)
 	else if (key == 'D' && val_move(*plyr_x + BLKSIZ, *plyr_y, mtrx))
 		*plyr_x += BLKSIZ;
 	check_pos(reality, *plyr_x / BLKSIZ, *plyr_y / BLKSIZ);
-	ft_putstr("STEPS:");
-	ft_putnbr(reality -> matrix -> step_c++);
-	ft_putstr("\n");
+	ft_printf("STEPS: %d\n", reality->matrix->step_c++);
 	return ;
 }
 
@@ -163,6 +158,6 @@ static void	keycodes(mlx_key_data_t keydata, void *param)
 int	gameloop(t_reality *reality)
 {
 	mlx_key_hook(reality -> mlx, keycodes, reality);
-	mlx_loop(reality -> mlx);
+	mlx_loop(reality->mlx);
 	return (TRUE);
 }

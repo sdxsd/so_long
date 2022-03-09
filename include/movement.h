@@ -40,6 +40,7 @@ A program is free software if users have all of these freedoms.
 #ifndef MOVEMENT_H
 # define MOVEMENT_H
 # include "so_long.h"
-int smooth_move(t_reality *reality, int *object_x, int *object_y, int dest_x, int dest_y);
+
+int	lerp(int start, int dest, double time);
 
 #endif // MOVEMENT_H
