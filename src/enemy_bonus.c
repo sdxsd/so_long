@@ -64,7 +64,32 @@ static int	enemy_limit(x, y)
 	return ((x * y) / 64);
 }
 
-static int	gen_enemies(t_matrix *matrix, int limit, )
+t_enemy_db *alloc_enemies(int enemy_count)
+{
+	t_enemy_db	*enemies;
+	int			iter;
+
+	enemies = malloc(sizeof(t_enemy_db));
+	while (iter < enemy_count)
+	{
+		enemies->e_registry[iter] = malloc(sizeof(t_enemy));
+		iter++;
+	}
+	return (enemies);
+}
+
+static int	register_enemy(mlx_t mlx, t_enemy_db *enemies, int x, int y)
+{
+	static int	e_index;
+	if (!enemies->enemy_tex)
+		load_enemy_tex(mlx, enemies);
+	enemies->e_registry[e_index]->x = &enemies->enemy_tex->instances[e_index].x;
+	enemies->e_registry[e_index]->y = &enemies->enemy_tex->instances[e_index].y;
+	enemies->e_registry[e_index]->i_index = e_index;
+	e_index++;
+}
+
+static int	gen_enemies(mlx_t mlx, t_matrix *matrix)
 {
 	int			generated;
 	int			temp_x;
@@ -82,6 +107,6 @@ static int	gen_enemies(t_matrix *matrix, int limit, )
 				temp_y = get_random(0, matrix->y);
 			}
 		}
-		register_enemy(enemies, temp_x, temp_y);
+		register_enemy(mlx, enemies, temp_x, temp_y);
 	}
 }

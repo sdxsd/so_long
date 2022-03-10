@@ -62,7 +62,7 @@ typedef struct s_enemy {
 typedef struct s_enemy_db {
 	int			enemy_count;
 	mlx_image_t	*enemy_tex;
-	t_enemy		*e_registry;
+	t_enemy		**e_registry;
 }	t_enemy_db;
 
 #endif // ENEMY_BONUS_H
