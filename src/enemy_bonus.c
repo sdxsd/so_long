@@ -48,7 +48,10 @@ static int	get_random(int min, int max)
 	num = malloc(sizeof(int));
 	if (!num)
 		return (-1);
-	fd = open("/dev/urandom", O_RDONLY);
+	if (LINUX)
+		fd = open("/dev/urandom", O_RDONLY);
+	else if (DARWIN)
+		fd = open("/dev/random", O_RDONLY);
 	read(fd, num, 4);
 	ft_printf("RANDOM_NUMBER: %d\n", *num);
 	ret = *num;
@@ -63,9 +66,22 @@ static int	enemy_limit(x, y)
 
 static int	gen_enemies(t_matrix *matrix, int limit, )
 {
-	int	generated;
+	int			generated;
+	int			temp_x;
+	int			temp_y;
+	t_enemy_db	*enemies;
+
+	enemies = alloc_enemies(enemy_limit(matrix->x, matrix->y));
 	while (generated < enemy_limit(matrix->x, matrix->y))
 	{
-
+		while (matrix->simulation_data[temp_y][temp_x] == '1')
+		{
+			while (temp_x < 0 || temp_y < 0)
+			{
+				temp_x = get_random(0, matrix->x);
+				temp_y = get_random(0, matrix->y);
+			}
+		}
+		register_enemy(enemies, temp_x, temp_y);
 	}
 }
