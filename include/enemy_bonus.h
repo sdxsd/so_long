@@ -38,8 +38,31 @@ A program is free software if users have all of these freedoms.
 */
 
 #ifndef ENEMY_BONUS_H
-#define ENEMY_BONUS_H
+# define ENEMY_BONUS_H
+# include "so_long.h"
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
 
+/* Contains the basic data of representative */
+/* of an enemy within the program. */
+/* A pointer to the x and y positions */
+/* of the enemy instance, and an integer */
+/* referring to it's position in the array of */
+/* instances held in the mlx_image_t struct. */
+typedef struct s_enemy {
+	int	*x;
+	int	*y;
+	int	i_index;
+}	t_enemy;
 
+/* A database containing the number of enemy instances */
+/* in the program, the enemy texture, and an array */
+/* holding the data of each individual enemy. */
+typedef struct s_enemy_db {
+	int			enemy_count;
+	mlx_image_t	*enemy_tex;
+	t_enemy		*e_registry;
+}	t_enemy_db;
 
 #endif // ENEMY_BONUS_H

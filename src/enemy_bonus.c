@@ -38,3 +38,34 @@ A program is free software if users have all of these freedoms.
 */
 
 #include "../include/enemy_bonus.h"
+
+static int	get_random(int min, int max)
+{
+	int	fd;
+	int	*num;
+	int	ret;
+
+	num = malloc(sizeof(int));
+	if (!num)
+		return (-1);
+	fd = open("/dev/urandom", O_RDONLY);
+	read(fd, num, 4);
+	ft_printf("RANDOM_NUMBER: %d\n", *num);
+	ret = *num;
+	free(num);
+	return (ret % (min - max + 1) + min);
+}
+
+static int	enemy_limit(x, y)
+{
+	return ((x * y) / 64);
+}
+
+static int	gen_enemies(t_matrix *matrix, int limit, )
+{
+	int	generated;
+	while (generated < enemy_limit(matrix->x, matrix->y))
+	{
+
+	}
+}
