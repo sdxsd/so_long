@@ -39,6 +39,12 @@ A program is free software if users have all of these freedoms.
 
 #ifndef ENEMY_BONUS_H
 # define ENEMY_BONUS_H
+# ifndef LINUX
+#  define LINUX 0
+# endif
+# ifndef DARWIN
+#  define DARWIN 0
+# endif
 # include "so_long.h"
 # include <fcntl.h>
 # include <stdlib.h>
