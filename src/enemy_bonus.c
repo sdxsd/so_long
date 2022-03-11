@@ -68,6 +68,9 @@ static int	get_random(int min, int max)
 	return (ret % (min - max + 1) + min);
 }
 
+// Simple function to return a non hardcoded
+// but hopefully relatively logical limit for
+// the number of enemies.
 static int	enemy_limit(x, y)
 {
 	return ((x * y) / 64);
