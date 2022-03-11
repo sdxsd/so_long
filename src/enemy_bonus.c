@@ -85,6 +85,7 @@ t_enemy_db *alloc_enemies(int enemy_count)
 	t_enemy_db	*enemies;
 	int			iter;
 
+	iter = 0;
 	enemies = malloc(sizeof(t_enemy_db));
 	while (iter < enemy_count)
 	{

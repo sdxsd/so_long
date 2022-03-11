@@ -38,8 +38,9 @@ A program is free software if users have all of these freedoms.
 */
 
 #ifndef FEMMAX_BONUS_H
-#define FEMMAX_BONUS_H
-
+# define FEMMAX_BONUS_H
+# include "rndr_matrix.h"
+# include "enemy_bonus.h"
 
 
 #endif // FEMMAX_BONUS_H
