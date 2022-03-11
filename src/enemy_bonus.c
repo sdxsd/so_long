@@ -109,6 +109,20 @@ static int	register_enemy(mlx_t mlx, t_enemy_db *enemies, int x, int y)
 	e_index++;
 }
 
+// Handles the initialisation of the enemies within the game. Only
+// called if compiled with bonus. First the t_enemy_db pointer
+// is allocated and set up freshly by the alloc_enemies function.
+// Then a loop is declared until a sufficient amount of enemies
+// are initialised as defined by the enemy limit function
+// which bases the limit off the dimensions of the map.
+// The second while loop continuously generates numbers
+// till the chosen coordinate is not a wall.
+// The third while loop ensures that the generated numbers
+// are not outside the bounds of the map.
+// Once the two inner while loops have generated
+// a suitable coordinate for the new enemy, the
+// enemy is registered by the register_enemy() function
+// and the process is repeated.
 static int	gen_enemies(mlx_t mlx, t_matrix *matrix)
 {
 	int			generated;
@@ -117,11 +131,12 @@ static int	gen_enemies(mlx_t mlx, t_matrix *matrix)
 	t_enemy_db	*enemies;
 
 	enemies = alloc_enemies(enemy_limit(matrix->x, matrix->y));
+	generated = 0;
 	while (generated < enemy_limit(matrix->x, matrix->y))
 	{
 		while (matrix->simulation_data[temp_y][temp_x] == '1')
 		{
-			while (temp_x < 0 || temp_y < 0)
+			while (temp_x < 0 && temp_y < 0)
 			{
 				temp_x = get_random(0, matrix->x);
 				temp_y = get_random(0, matrix->y);
@@ -129,4 +144,5 @@ static int	gen_enemies(mlx_t mlx, t_matrix *matrix)
 		}
 		register_enemy(mlx, enemies, temp_x, temp_y);
 	}
+	return (0);
 }
