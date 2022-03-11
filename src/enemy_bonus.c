@@ -76,6 +76,10 @@ static int	enemy_limit(x, y)
 	return ((x * y) / 64);
 }
 
+// Allocates memory for the t_enemy_db struct
+// and enough for each enemy as defined by the
+// enemy_count argument. Enemies are stored
+// as an array of pointers to t_enemy types.
 t_enemy_db *alloc_enemies(int enemy_count)
 {
 	t_enemy_db	*enemies;
