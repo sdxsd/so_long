@@ -94,6 +94,10 @@ t_enemy_db *alloc_enemies(int enemy_count)
 	return (enemies);
 }
 
+// Registers an enemy on the e_registry within the t_enemy_db
+// struct. Sets the pointer to the enemies x, and y accordingly.
+// Sets the enemies index in the mlx_image_t instance arrray.
+// The static variable e_index holds the current index.
 static int	register_enemy(mlx_t mlx, t_enemy_db *enemies, int x, int y)
 {
 	static int	e_index;
