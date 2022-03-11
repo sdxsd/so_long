@@ -39,13 +39,13 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/enemy_bonus.h"
 
-// This function returns a random integer
-// between int min and int max. Functions
-// by reading 4 bytes in from the device file /dev/urandom
-// or on Darwin /dev/random. Uses a int pointer as the
-// "buffer" for the integer. Sets the int ret
-// to the value of the aforementioned buffer
-// frees the *num pointer, and returns.
+/* This function returns a random integer */
+/* between int min and int max. Functions */
+/* by reading 4 bytes in from the device file /dev/urandom */
+/* or on Darwin /dev/random. Uses a int pointer as the */
+/* "buffer" for the integer. Sets the int ret */
+/* to the value of the aforementioned buffer */
+/* frees the *num pointer, and returns. */
 static int	get_random(int min, int max)
 {
 	int	fd;
@@ -68,18 +68,18 @@ static int	get_random(int min, int max)
 	return (ret % (min - max + 1) + min);
 }
 
-// Simple function to return a non hardcoded
-// but hopefully relatively logical limit for
-// the number of enemies.
+/* Simple function to return a non hardcoded */
+/* but hopefully relatively logical limit for */
+/* the number of enemies. */
 static int	enemy_limit(x, y)
 {
 	return ((x * y) / 64);
 }
 
-// Allocates memory for the t_enemy_db struct
-// and enough for each enemy as defined by the
-// enemy_count argument. Enemies are stored
-// as an array of pointers to t_enemy types.
+/* Allocates memory for the t_enemy_db struct */
+/* and enough for each enemy as defined by the */
+/* enemy_count argument. Enemies are stored */
+/* as an array of pointers to t_enemy types. */
 t_enemy_db *alloc_enemies(int enemy_count)
 {
 	t_enemy_db	*enemies;
@@ -94,35 +94,35 @@ t_enemy_db *alloc_enemies(int enemy_count)
 	return (enemies);
 }
 
-// Registers an enemy on the e_registry within the t_enemy_db
-// struct. Sets the pointer to the enemies x, and y accordingly.
-// Sets the enemies index in the mlx_image_t instance arrray.
-// The static variable e_index holds the current index.
+/* Registers an enemy on the e_registry within the t_enemy_db */
+/* struct. Sets the pointer to the enemies x, and y accordingly. */
+/* Sets the enemies index in the mlx_image_t instance arrray. */
+/* The static variable e_index holds the current index. */
 static int	register_enemy(mlx_t mlx, t_enemy_db *enemies, int x, int y)
 {
 	static int	e_index;
 	if (!enemies->enemy_tex)
-		load_enemy_tex(mlx, enemies);
+		load_femmax(mlx, enemies);
 	enemies->e_registry[e_index]->x = &enemies->enemy_tex->instances[e_index].x;
 	enemies->e_registry[e_index]->y = &enemies->enemy_tex->instances[e_index].y;
 	enemies->e_registry[e_index]->i_index = e_index;
 	e_index++;
 }
 
-// Handles the initialisation of the enemies within the game. Only
-// called if compiled with bonus. First the t_enemy_db pointer
-// is allocated and set up freshly by the alloc_enemies function.
-// Then a loop is declared until a sufficient amount of enemies
-// are initialised as defined by the enemy limit function
-// which bases the limit off the dimensions of the map.
-// The second while loop continuously generates numbers
-// till the chosen coordinate is not a wall.
-// The third while loop ensures that the generated numbers
-// are not outside the bounds of the map.
-// Once the two inner while loops have generated
-// a suitable coordinate for the new enemy, the
-// enemy is registered by the register_enemy() function
-// and the process is repeated.
+/* Handles the initialisation of the enemies within the game. Only */
+/* called if compiled with bonus. First the t_enemy_db pointer */
+/* is allocated and set up freshly by the alloc_enemies function. */
+/* Then a loop is declared until a sufficient amount of enemies */
+/* are initialised as defined by the enemy limit function */
+/* which bases the limit off the dimensions of the map. */
+/* The second while loop continuously generates numbers */
+/* till the chosen coordinate is not a wall. */
+/* The third while loop ensures that the generated numbers */
+/* are not outside the bounds of the map. */
+/* Once the two inner while loops have generated */
+/* a suitable coordinate for the new enemy, the */
+/* enemy is registered by the register_enemy() function */
+/* and the process is repeated. */
 static int	gen_enemies(mlx_t mlx, t_matrix *matrix)
 {
 	int			generated;
