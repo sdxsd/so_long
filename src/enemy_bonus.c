@@ -39,6 +39,13 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/enemy_bonus.h"
 
+// This function returns a random integer
+// between int min and int max. Functions
+// by reading 4 bytes in from the device file /dev/urandom
+// or on Darwin /dev/random. Uses a int pointer as the
+// "buffer" for the integer. Sets the int ret
+// to the value of the aforementioned buffer
+// frees the *num pointer, and returns.
 static int	get_random(int min, int max)
 {
 	int	fd;
@@ -52,6 +59,8 @@ static int	get_random(int min, int max)
 		fd = open("/dev/urandom", O_RDONLY);
 	else if (DARWIN)
 		fd = open("/dev/random", O_RDONLY);
+	else
+		return (-1);
 	read(fd, num, 4);
 	ft_printf("RANDOM_NUMBER: %d\n", *num);
 	ret = *num;
