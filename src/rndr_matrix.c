@@ -146,6 +146,8 @@ static int	first_rndr(t_reality *reality)
 	mlx_image_to_window(mlx, reality->textures->plyr, \
 						matrix->plyr_x, matrix->plyr_y);
 	matrix->simulation_data = matrix->wired_entry;
+	if (BONUS)
+		gen_enemies(reality->mlx, reality->matrix);
 	return (TRUE);
 }
 
@@ -169,7 +171,5 @@ int	rndr_matrix(t_reality *reality)
 		/* *i_plyr_x = lerp(*i_plyr_x, mtrx->plyr_x, 0.1); */
 		/* *i_plyr_y = lerp(*i_plyr_y, mtrx->plyr_y, 0.1); */
 	}
-	if (BONUS)
-	 	gen_enemies(reality->mlx, reality->matrix);
 	return (TRUE);
 }

@@ -42,6 +42,7 @@ A program is free software if users have all of these freedoms.
 # include "so_long.h"
 # include "rndr_matrix.h"
 
+int	val_move(int x, int y, t_matrix *matrix);
 int	gameloop(t_reality *reality);
 
 #endif // GAME_H

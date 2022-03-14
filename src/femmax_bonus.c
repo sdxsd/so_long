@@ -41,60 +41,39 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/femmax_bonus.h"
 #include "../include/enemy_bonus.h"
+#include "../include/game.h"
 
-static int	ret_move(int dir, int x, int y, t_matrix *matrix)
+static int	ret_move(void)
 {
 	int	move;
-	int	valid_move;
-
-	valid_move = 0;
-	while (!valid_move)
-	{
-		move = get_random(0, 1);
-		if (!move)
-			move--;
-		if (dir)
-		{
-			if (matrix->simulation_data[y][x + move] != '1')
-				valid_move = 1;
-			else if (matrix->simulation_data[y][x - move] != '1')
-				return (-1 * 32);
-			else
-				return (0);
-		}
-		else
-		{
-			if (matrix->simulation_data[y + move][x] != '1')
-				valid_move = 1;
-			else if (matrix->simulation_data[y - move][x] != '1')
-				return (-1 * 32);
-			else
-				return (0);
-		}
-	}
-	ft_printf("MOVE: %d\n", move);
-	return (move * 32);
+	move = get_random(0, 2);
+	if (!move)
+		return (-32);
+	return (32);
 }
 
 int	move_femmaxen(t_matrix *mtrx, t_enemy_db *enemies)
 {
 	int				iter;
-	int				dir;
+	int				move;
 	int				curr_x;
 	int				curr_y;
-	int				index;
 
 	iter = 0;
 	while (iter < enemies->enemy_count)
 	{
-		index = enemies->e_registry[iter]->i_index;
-		curr_x = enemies->enemy_tex->instances[index].x / 32;
-		curr_y = enemies->enemy_tex->instances[index].y / 32;
-		dir = get_random(0, 1);
-		if (dir)
-			enemies->enemy_tex->instances[index].x += ret_move(dir, curr_x, curr_y, mtrx);
-		else
-			enemies->enemy_tex->instances[index].y += ret_move(dir, curr_x, curr_y, mtrx);
+		curr_x = enemies->enemy_tex->instances[iter].x;
+		curr_y = enemies->enemy_tex->instances[iter].y;
+		move = ret_move();
+		if (get_random(0, 2) == 1)
+			curr_x += move;
+		else if (get_random(0, 2) == 0)
+			curr_y += move;
+		if (val_move(curr_x, curr_y, mtrx))
+		{
+			enemies->enemy_tex->instances[iter].x = curr_x;
+			enemies->enemy_tex->instances[iter].y = curr_y;
+		}
 		iter++;
 	}
 	return (TRUE);

@@ -48,7 +48,7 @@ A program is free software if users have all of these freedoms.
 /* and simply checks if the player is not moving into a wall. */
 /* If the player would be moving into a wall, the function returns */
 /* false, or invalid input. */
-static int	val_move(int x, int y, t_matrix *matrix)
+int	val_move(int x, int y, t_matrix *matrix)
 {
 	matrix->simulation_data = matrix->wired_entry;
 	if (matrix->simulation_data[y / 32][x / 32] == '1')
@@ -149,6 +149,8 @@ static void	keycodes(mlx_key_data_t keydata, void *param)
 			handle_key(keydata.key, reality);
 		else if (keydata.key == MLX_KEY_ESCAPE)
 			free_and_exit(reality);
+		if (BONUS)
+			gen_enemies(reality->mlx, reality->matrix);
 	}
 	rndr_matrix(reality);
 	return ;
