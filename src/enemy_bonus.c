@@ -67,7 +67,7 @@ int	get_random(int min, int max)
 	if (ret < 0)
 		ret = -ret;
 	free(num);
-	ft_printf("RET: %d\n", ret);
+	close(fd);
 	return (ret);
 }
 
@@ -148,17 +148,14 @@ int	gen_enemies(mlx_t *mlx, t_matrix *matrix)
 		{
 			temp_x = get_random(0, matrix->x);
 			temp_y = get_random(0, matrix->y);
-			ft_printf("X: %d Y: %d\n", temp_x, temp_y);
 		}
 		if (rndr_femmax(mlx, temp_x, temp_y, enemies))
-		{
 			register_enemy(enemies);
-			ft_printf("FEMMAX X: %d, FEMMAX Y: %d\n", temp_x, temp_y);
-		}
 		temp_y = 0;
 		temp_x = 0;
 		generated++;
 	}
+	enemies->enemy_count = generated;
 	move_femmaxen(matrix, enemies);
 	return (0);
 }

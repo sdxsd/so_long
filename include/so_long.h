@@ -111,7 +111,6 @@ typedef struct s_reality {
 	t_imgdata	*textures;
 	t_haring	*haring_db;
 	mlx_image_t	*bckgrnd;
-	void		*bonus;
 }	t_reality;
 
 #endif // SO_LONG_H
