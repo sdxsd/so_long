@@ -59,5 +59,14 @@ A program is free software if users have all of these freedoms.
 // the cosmick totality of the rituals ingrained within Ethos Programmera.
 int	load_femmax(mlx_t *mlx, t_enemy_db *enemies)
 {
+	mlx_texture_t	*tex;
 
+	tex = mlx_load_png(".images/femmax.png");
+	if (!tex)
+		return (FALSE);
+	enemies->enemy_tex = mlx_texture_to_image(mlx, tex);
+	if (!enemies->enemy_tex)
+		return (FALSE);
+	mlx_delete_texture(tex);
+	return (1);
 }
