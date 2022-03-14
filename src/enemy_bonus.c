@@ -38,6 +38,7 @@ A program is free software if users have all of these freedoms.
 */
 
 #include "../include/enemy_bonus.h"
+#include "../include/femmax_bonus.h"
 
 /* This function returns a random integer */
 /* between int min and int max. Functions */
@@ -80,18 +81,13 @@ static int	enemy_limit(x, y)
 /* and enough for each enemy as defined by the */
 /* enemy_count argument. Enemies are stored */
 /* as an array of pointers to t_enemy types. */
-t_enemy_db *alloc_enemies(int enemy_count)
+t_enemy_db *alloc_enemies(void)
 {
 	t_enemy_db	*enemies;
-	int			iter;
 
-	iter = 0;
 	enemies = malloc(sizeof(t_enemy_db));
-	while (iter < enemy_count)
-	{
-		enemies->e_registry[iter] = malloc(sizeof(t_enemy));
-		iter++;
-	}
+	if (!enemies)
+		return (NULL);
 	return (enemies);
 }
 
@@ -99,15 +95,19 @@ t_enemy_db *alloc_enemies(int enemy_count)
 /* struct. Sets the pointer to the enemies x, and y accordingly. */
 /* Sets the enemies index in the mlx_image_t instance arrray. */
 /* The static variable e_index holds the current index. */
-static int	register_enemy(mlx_t mlx, t_enemy_db *enemies, int x, int y)
+static int	register_enemy(mlx_t *mlx, t_enemy_db *enemies)
 {
 	static int	e_index;
 	if (!enemies->enemy_tex)
 		load_femmax(mlx, enemies);
+	enemies->e_registry[e_index] = malloc(sizeof(t_enemy));
+	if (!enemies->e_registry)
+		return (FALSE);
 	enemies->e_registry[e_index]->x = &enemies->enemy_tex->instances[e_index].x;
 	enemies->e_registry[e_index]->y = &enemies->enemy_tex->instances[e_index].y;
 	enemies->e_registry[e_index]->i_index = e_index;
 	e_index++;
+	return (TRUE);
 }
 
 /* Handles the initialisation of the enemies within the game. Only */
@@ -124,15 +124,17 @@ static int	register_enemy(mlx_t mlx, t_enemy_db *enemies, int x, int y)
 /* a suitable coordinate for the new enemy, the */
 /* enemy is registered by the register_enemy() function */
 /* and the process is repeated. */
-static int	gen_enemies(mlx_t mlx, t_matrix *matrix)
+int	gen_enemies(mlx_t *mlx, t_matrix *matrix)
 {
 	int			generated;
 	int			temp_x;
 	int			temp_y;
 	t_enemy_db	*enemies;
 
-	enemies = alloc_enemies(enemy_limit(matrix->x, matrix->y));
+	enemies = alloc_enemies();
 	generated = 0;
+	temp_x = 0;
+	temp_y = 0;
 	while (generated < enemy_limit(matrix->x, matrix->y))
 	{
 		while (matrix->simulation_data[temp_y][temp_x] == '1')
@@ -143,7 +145,7 @@ static int	gen_enemies(mlx_t mlx, t_matrix *matrix)
 				temp_y = get_random(0, matrix->y);
 			}
 		}
-		register_enemy(mlx, enemies, temp_x, temp_y);
+		register_enemy(mlx, enemies);
 	}
 	return (0);
 }

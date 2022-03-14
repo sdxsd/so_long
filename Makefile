@@ -11,6 +11,10 @@ CFILES = \
 			src/dealloc.c \
 			src/haring.c \
 			src/movement.c
+B_FILES = \
+			src/enemy_bonus.c \
+			src/femmax_bonus.c
+BFLAGS = -D BONUS=1
 OFILES = $(CFILES:.c=.o)
 OSFLAG = ""
 LINKEN = ""
@@ -27,6 +31,10 @@ endif
 all: $(NAME)
 
 $(NAME): libft
+	@echo "Building for: $(OSFLAG)"
+	$(CC) $(CFLAGS) $(BFLAGS) $(CFILES) $(B_FILES) $(LINKEN) libft/libft.a MLX42/libmlx42.a -o $(NAME)
+
+bonus: libft
 	@echo "Building for: $(OSFLAG)"
 	$(CC) $(CFLAGS) $(CFILES) $(LINKEN) libft/libft.a MLX42/libmlx42.a -g -o $(NAME)
 

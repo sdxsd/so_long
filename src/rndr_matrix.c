@@ -41,6 +41,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/dealloc.h"
 #include "../include/haring.h"
 #include "../include/movement.h"
+#include "../include/enemy_bonus.h"
 
 /* Takes the width and height of the MLX window and generates a background. */
 /* Functions by taking the win_y argument and */
@@ -144,6 +145,8 @@ static int	first_rndr(t_reality *reality)
 	}
 	mlx_image_to_window(mlx, reality->textures->plyr, \
 						matrix->plyr_x, matrix->plyr_y);
+	if (BONUS)
+		gen_enemies(reality->mlx, reality->matrix);
 	return (TRUE);
 }
 

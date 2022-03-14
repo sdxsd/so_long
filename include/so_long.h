@@ -39,6 +39,9 @@ A program is free software if users have all of these freedoms.
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# ifndef BONUS
+#  define BONUS 0
+# endif
 # define BLKSIZ 32
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
