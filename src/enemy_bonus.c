@@ -63,7 +63,6 @@ static int	get_random(int min, int max)
 	else
 		return (-1);
 	read(fd, num, 4);
-	ft_printf("RANDOM_NUMBER: %d\n", *num);
 	ret = *num;
 	free(num);
 	return (ret % (min - max + 1) + min);
@@ -74,18 +73,27 @@ static int	get_random(int min, int max)
 /* the number of enemies. */
 static int	enemy_limit(x, y)
 {
-	return ((x * y) / 64);
+	return ((x * y) / 32);
 }
 
 /* Allocates memory for the t_enemy_db struct */
 /* and enough for each enemy as defined by the */
 /* enemy_count argument. Enemies are stored */
 /* as an array of pointers to t_enemy types. */
-t_enemy_db *alloc_enemies(void)
+t_enemy_db *alloc_enemies(int enemy_count)
 {
 	t_enemy_db	*enemies;
+	int			iter;
 
+	iter = 0;
 	enemies = malloc(sizeof(t_enemy_db));
+	enemies->e_registry = malloc(sizeof(t_enemy *) * enemy_count);
+	while (iter < enemy_count)
+	{
+		enemies->e_registry[iter] = malloc(sizeof(t_enemy));
+		enemies->e_registry[iter]->i_index = 0;
+		iter++;
+	}
 	if (!enemies)
 		return (NULL);
 	return (enemies);
@@ -100,9 +108,6 @@ static int	register_enemy(mlx_t *mlx, t_enemy_db *enemies)
 	static int	e_index;
 	if (!enemies->enemy_tex)
 		load_femmax(mlx, enemies);
-	enemies->e_registry[e_index] = malloc(sizeof(t_enemy));
-	if (!enemies->e_registry)
-		return (FALSE);
 	enemies->e_registry[e_index]->x = &enemies->enemy_tex->instances[e_index].x;
 	enemies->e_registry[e_index]->y = &enemies->enemy_tex->instances[e_index].y;
 	enemies->e_registry[e_index]->i_index = e_index;
@@ -131,7 +136,7 @@ int	gen_enemies(mlx_t *mlx, t_matrix *matrix)
 	int			temp_y;
 	t_enemy_db	*enemies;
 
-	enemies = alloc_enemies();
+	enemies = alloc_enemies(enemy_limit(matrix->x, matrix->y));
 	generated = 0;
 	temp_x = 0;
 	temp_y = 0;
@@ -139,13 +144,14 @@ int	gen_enemies(mlx_t *mlx, t_matrix *matrix)
 	{
 		while (matrix->simulation_data[temp_y][temp_x] == '1')
 		{
-			while (temp_x < 0 && temp_y < 0)
+			while (temp_x < 1 || temp_y < 1)
 			{
 				temp_x = get_random(0, matrix->x);
 				temp_y = get_random(0, matrix->y);
 			}
 		}
 		register_enemy(mlx, enemies);
+		generated++;
 	}
 	return (0);
 }

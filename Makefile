@@ -22,10 +22,10 @@ LINKEN = ""
 # Checks for OS and compiles accordingly.
 ifeq ($(shell uname -s),Linux)
 	OSFLAG := linux
-	LINKEN := -I ./MLX42/include/MLX42/ -ldl -lGL -lglfw -lX11 -lpthread -lXrandr -lXi
+	LINKEN := -D LINUX=1 -I ./MLX42/include/MLX42/ -ldl -lGL -lglfw -lX11 -lpthread -lXrandr -lXi
 else
 	OSFLAG := darwin
-	LINKEN := -lglfw -L /Users/wmaguire/.brew/opt/glfw/lib/ -lmlx42 -L ./MLX42/
+	LINKEN := -D DARWIN=1 -lglfw -L /Users/wmaguire/.brew/opt/glfw/lib/ -lmlx42 -L ./MLX42/
 endif
 
 all: $(NAME)
