@@ -63,9 +63,12 @@ static int	get_random(int min, int max)
 	else
 		return (-1);
 	read(fd, num, 4);
-	ret = *num;
+	ret = (*num % (min - max) + min);
+	if (ret < 0)
+		ret = -ret;
 	free(num);
-	return (ret % (min - max + 1) + min);
+	ft_printf("RET: %d\n", ret);
+	return (ret);
 }
 
 /* Simple function to return a non hardcoded */
@@ -73,14 +76,14 @@ static int	get_random(int min, int max)
 /* the number of enemies. */
 static int	enemy_limit(x, y)
 {
-	return ((x * y) / 32);
+	return ((x * y) / 64);
 }
 
 /* Allocates memory for the t_enemy_db struct */
 /* and enough for each enemy as defined by the */
 /* enemy_count argument. Enemies are stored */
 /* as an array of pointers to t_enemy types. */
-t_enemy_db *alloc_enemies(int enemy_count)
+static t_enemy_db *alloc_enemies(mlx_t *mlx, int enemy_count)
 {
 	t_enemy_db	*enemies;
 	int			iter;
@@ -96,6 +99,7 @@ t_enemy_db *alloc_enemies(int enemy_count)
 	}
 	if (!enemies)
 		return (NULL);
+	load_femmax(mlx, enemies);
 	return (enemies);
 }
 
@@ -103,11 +107,9 @@ t_enemy_db *alloc_enemies(int enemy_count)
 /* struct. Sets the pointer to the enemies x, and y accordingly. */
 /* Sets the enemies index in the mlx_image_t instance arrray. */
 /* The static variable e_index holds the current index. */
-static int	register_enemy(mlx_t *mlx, t_enemy_db *enemies)
+static int	register_enemy(t_enemy_db *enemies)
 {
 	static int	e_index;
-	if (!enemies->enemy_tex)
-		load_femmax(mlx, enemies);
 	enemies->e_registry[e_index]->x = &enemies->enemy_tex->instances[e_index].x;
 	enemies->e_registry[e_index]->y = &enemies->enemy_tex->instances[e_index].y;
 	enemies->e_registry[e_index]->i_index = e_index;
@@ -136,7 +138,7 @@ int	gen_enemies(mlx_t *mlx, t_matrix *matrix)
 	int			temp_y;
 	t_enemy_db	*enemies;
 
-	enemies = alloc_enemies(enemy_limit(matrix->x, matrix->y));
+	enemies = alloc_enemies(mlx, enemy_limit(matrix->x, matrix->y));
 	generated = 0;
 	temp_x = 0;
 	temp_y = 0;
@@ -144,13 +146,17 @@ int	gen_enemies(mlx_t *mlx, t_matrix *matrix)
 	{
 		while (matrix->simulation_data[temp_y][temp_x] == '1')
 		{
-			while (temp_x < 1 || temp_y < 1)
-			{
-				temp_x = get_random(0, matrix->x);
-				temp_y = get_random(0, matrix->y);
-			}
+			temp_x = get_random(0, matrix->x);
+			temp_y = get_random(0, matrix->y);
+			ft_printf("X: %d Y: %d\n", temp_x, temp_y);
 		}
-		register_enemy(mlx, enemies);
+		if (rndr_femmax(mlx, temp_x, temp_y, enemies))
+		{
+			register_enemy(enemies);
+			ft_printf("FEMMAX X: %d, FEMMAX Y: %d\n", temp_x, temp_y);
+		}
+		temp_y = 0;
+		temp_x = 0;
 		generated++;
 	}
 	return (0);

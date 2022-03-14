@@ -41,27 +41,19 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/femmax_bonus.h"
 
-// It loads, that which it loads lingers as an eternal question
-// etched upon the minds of the pitiful fool who chooses to read
-// the code so lovingly curled between the damnable curly braces.
-// In the swirling cerebrum of the programmer who wrote this
-// function is the answer to the question of the queer meaning of such
-// a function, the definition of symbol "femmax". Perhaps
-// it was the alien influence of the cold void of the beyond
-// that first made contact with the latter poor programmer
-// who ordained this function to be written. Perhaps from man's
-// first steps it was decided that this function be written, lest
-// some terrible truth be uncovered as to shake all moral
-// foundations that good humanity rests its cosmic hopes
-// and laurels upon. Perhaps it ought to be thought upon
-// that the meaning of this function is not meant to be known for human minds
-// or for the minds of any thinking creature that does not comprehend
-// the cosmick totality of the rituals ingrained within Ethos Programmera.
+int	rndr_femmax(mlx_t *mlx, int x, int y, t_enemy_db *enemies)
+{
+	mlx_image_to_window(mlx, enemies->enemy_tex, x * BLKSIZ, y * BLKSIZ);
+	return (TRUE);
+}
+
+/* What is femmax? A question etched upon the minds of the */
+/* pitiful fool who chooses to read the code curled between the curly braces. */
 int	load_femmax(mlx_t *mlx, t_enemy_db *enemies)
 {
 	mlx_texture_t	*tex;
 
-	tex = mlx_load_png(".images/femmax.png");
+	tex = mlx_load_png("images/femmax.png");
 	if (!tex)
 		return (FALSE);
 	enemies->enemy_tex = mlx_texture_to_image(mlx, tex);
