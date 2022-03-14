@@ -42,6 +42,8 @@ A program is free software if users have all of these freedoms.
 # include "rndr_matrix.h"
 # include "enemy_bonus.h"
 
+int	move_femmaxen(t_matrix *mtrx, t_enemy_db *enemies);
+int	get_random(int min, int max);
 int	rndr_femmax(mlx_t *mlx, int x, int y, t_enemy_db *enemies);
 int	load_femmax(mlx_t *mlx, t_enemy_db *enemies);
 

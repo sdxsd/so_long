@@ -47,7 +47,7 @@ A program is free software if users have all of these freedoms.
 /* "buffer" for the integer. Sets the int ret */
 /* to the value of the aforementioned buffer */
 /* frees the *num pointer, and returns. */
-static int	get_random(int min, int max)
+int	get_random(int min, int max)
 {
 	int	fd;
 	int	*num;
@@ -133,13 +133,13 @@ static int	register_enemy(t_enemy_db *enemies)
 /* and the process is repeated. */
 int	gen_enemies(mlx_t *mlx, t_matrix *matrix)
 {
-	int			generated;
-	int			temp_x;
-	int			temp_y;
-	t_enemy_db	*enemies;
+	static int			generated;
+	int					temp_x;
+	int					temp_y;
+	static t_enemy_db	*enemies;
 
-	enemies = alloc_enemies(mlx, enemy_limit(matrix->x, matrix->y));
-	generated = 0;
+	if (!generated)
+		enemies = alloc_enemies(mlx, enemy_limit(matrix->x, matrix->y));
 	temp_x = 0;
 	temp_y = 0;
 	while (generated < enemy_limit(matrix->x, matrix->y))
@@ -159,5 +159,6 @@ int	gen_enemies(mlx_t *mlx, t_matrix *matrix)
 		temp_x = 0;
 		generated++;
 	}
+	move_femmaxen(matrix, enemies);
 	return (0);
 }

@@ -40,6 +40,47 @@ A program is free software if users have all of these freedoms.
 /* The name of this file is a #WQ TQWRE$T$#QWER#EZ@EZ@T # */
 
 #include "../include/femmax_bonus.h"
+#include "../include/enemy_bonus.h"
+
+static int	ret_move(int dir, int x, int y, t_matrix *matrix)
+{
+	int	move;
+
+	move = 0;
+	if (dir)
+	{
+		while (matrix->simulation_data[x + move][y] == '1' && move != 0)
+			move = get_random(-1, 1);
+		return (move);
+	}
+	else
+	{
+		while (matrix->simulation_data[x][y + move] && move != 0)
+			move = get_random(-1, 1);
+		return (move);
+	}
+}
+
+int	move_femmaxen(t_matrix *mtrx, t_enemy_db *enemies)
+{
+	int				iter;
+	int				dir;
+	int				curr_x;
+	int				curr_y;
+
+	iter = 0;
+	while (iter < enemies->enemy_count)
+	{
+		curr_x = *enemies->e_registry[iter]->x;
+		curr_y = *enemies->e_registry[iter]->y;
+		dir = get_random(0, 1);
+		if (dir)
+			*enemies->e_registry[iter]->x = ret_move(dir, curr_x, curr_y, mtrx);
+		else
+			*enemies->e_registry[iter]->y = ret_move(dir, curr_x, curr_y, mtrx);
+	}
+	return (TRUE);
+}
 
 int	rndr_femmax(mlx_t *mlx, int x, int y, t_enemy_db *enemies)
 {

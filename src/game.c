@@ -41,6 +41,7 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/game.h"
 #include "../include/dealloc.h"
+#include "../include/femmax_bonus.h"
 
 /* The val_move() function takes the x, and y coordinates */
 /* that the player will be at due to the given keypress in handle_key() */
