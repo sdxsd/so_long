@@ -159,7 +159,7 @@ static void	keycodes(mlx_key_data_t keydata, void *param)
 		else if (keydata.key == MLX_KEY_ESCAPE)
 			free_and_exit(reality);
 		if (BONUS)
-			gen_enemies(reality->mlx, reality->matrix);
+			gen_enemies(reality->mlx, reality);
 	}
 	rndr_matrix(reality);
 	return ;

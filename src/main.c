@@ -96,7 +96,8 @@ int	main(int argc, char *argv[])
 	reality->haring_db = init_haring(reality->matrix->x, reality->matrix->y);
 	if (!reality->haring_db)
 		return (0);
-	ft_putstr("so_long Copyright (C) 2022 Will Maguire\n");
+	ft_putstr("NederSim Copyright (C) 2022 Will Maguire\n");
+	ft_putstr("\tGreat design shows, never tells.\n");
 	if (!init_reality(reality))
 		return (1);
 	rndr_matrix(reality);

@@ -50,7 +50,7 @@ A program is free software if users have all of these freedoms.
 # include <stdlib.h>
 # include <unistd.h>
 
-int	gen_enemies(mlx_t *mlx, t_matrix *matrix);
+int	gen_enemies(mlx_t *mlx, t_reality *reality);
 
 /* Contains the basic data of representative */
 /* of an enemy within the program. */

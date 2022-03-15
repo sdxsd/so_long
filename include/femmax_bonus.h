@@ -46,5 +46,6 @@ int	move_femmaxen(t_matrix *mtrx, t_enemy_db *enemies);
 int	get_random(int min, int max);
 int	rndr_femmax(mlx_t *mlx, int x, int y, t_enemy_db *enemies);
 int	load_femmax(mlx_t *mlx, t_enemy_db *enemies);
+int	femmax_check(t_reality *reality, t_enemy_db *enemies);
 
 #endif // FEMMAX_BONUS_H

@@ -44,7 +44,7 @@ A program is free software if users have all of these freedoms.
 # include "so_long.h"
 # include "rndr_matrix.h"
 
-t_haring	*free_haring(t_haring *haring);
+t_haring	*free_haring(t_haring *haring, int y);
 int			free_and_exit(t_reality *reality);
 t_matrix	*free_matrix(t_matrix *matrix);
 int			free_textures(mlx_t *mlx, t_imgdata *textures);

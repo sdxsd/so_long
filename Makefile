@@ -47,8 +47,8 @@ MLX:
 lib:
 	@make -C libft/
 
-valtest: test libft
-	valgrind --tool=memcheck --leak-check=full ./so_long maps/map02.ber
+valtest: re_test libft
+	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./so_long maps/map02.ber
 
 re_test: clean bonus
 

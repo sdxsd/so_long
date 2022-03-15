@@ -58,12 +58,19 @@ int	free_textures(mlx_t *mlx, t_imgdata *textures)
 }
 
 /* Deallocates the memory associated with the t_haring struct. */
-/* Iterates over the vertical and horizontal rows freeing */
+/* Iterates over the vertical rows, freeing */
 /* as it goes. Then returns a pointer to the freed memory. */
-t_haring	*free_haring(t_haring *haring)
+t_haring	*free_haring(t_haring *haring, int y)
 {
 	int	iter;
-	while
+
+	iter = 0;
+	while (iter < y)
+	{
+		free(haring->haring_data[iter]);
+		iter++;
+	}
+	free(haring->haring_data);
 	free(haring);
 	return (haring);
 }
@@ -101,9 +108,9 @@ t_matrix	*free_matrix(t_matrix *matrix)
 /* for holding all game data before exiting. */
 int	free_and_exit(t_reality	*reality)
 {
-	free_matrix(reality->matrix);
 	free_textures(reality->mlx, reality->textures);
-	free_haring(reality->haring_db);
+	free_haring(reality->haring_db, reality->matrix->y);
+	free_matrix(reality->matrix);
 	mlx_delete_image(reality->mlx, reality->bckgrnd);
 	mlx_terminate(reality->mlx);
 	free(reality);

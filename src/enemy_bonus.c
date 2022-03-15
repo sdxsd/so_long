@@ -132,13 +132,15 @@ static int	register_enemy(t_enemy_db *enemies)
 /* a suitable coordinate for the new enemy, the */
 /* enemy is registered by the register_enemy() function */
 /* and the process is repeated. */
-int	gen_enemies(mlx_t *mlx, t_matrix *matrix)
+int	gen_enemies(mlx_t *mlx, t_reality *reality)
 {
 	static int			generated;
 	int					temp_x;
 	int					temp_y;
 	static t_enemy_db	*enemies;
+	t_matrix			*matrix;
 
+	matrix = reality->matrix;
 	if (!generated)
 		enemies = alloc_enemies(mlx, enemy_limit(matrix->x, matrix->y));
 	temp_x = 0;
@@ -158,5 +160,6 @@ int	gen_enemies(mlx_t *mlx, t_matrix *matrix)
 	}
 	enemies->enemy_count = generated;
 	move_femmaxen(matrix, enemies);
+	femmax_check(reality, enemies);
 	return (0);
 }
