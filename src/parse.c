@@ -110,8 +110,8 @@ static int	chline(char *line, int x, int y, t_matrix *matrix)
 		}
 		if (line[iterator] == 'P')
 		{
-			matrix -> plyr_x = iterator * 32;
-			matrix -> plyr_y = y * 32;
+			matrix -> plyr_x = iterator * BLKSIZ;
+			matrix -> plyr_y = y * BLKSIZ;
 		}
 		iterator++;
 	}

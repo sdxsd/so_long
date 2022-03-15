@@ -51,10 +51,10 @@ static mlx_image_t *rndr_black(mlx_t *mlx, t_matrix *matrix)
 	px = 0;
 	py = 0;
 	colour = 0x00000000;
-	bckgrnd = mlx_new_image(mlx, matrix->x * 32, matrix->y * 32);
-	while (py < matrix->x * 32)
+	bckgrnd = mlx_new_image(mlx, matrix->x * BLKSIZ, matrix->y * BLKSIZ);
+	while (py < matrix->x * BLKSIZ)
 	{
-		while (px < matrix->y * 32)
+		while (px < matrix->y * BLKSIZ)
 		{
 			mlx_put_pixel(bckgrnd, px, py, colour);
 			px++;

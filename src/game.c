@@ -53,7 +53,7 @@ A program is free software if users have all of these freedoms.
 int	val_move(int x, int y, t_matrix *matrix)
 {
 	matrix->simulation_data = matrix->wired_entry;
-	if (matrix->simulation_data[y / 32][x / 32] == '1')
+	if (matrix->simulation_data[y / BLKSIZ][x / BLKSIZ] == '1')
 		return (FALSE);
 	return (TRUE);
 }

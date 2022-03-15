@@ -38,6 +38,7 @@ A program is free software if users have all of these freedoms.
 */
 
 #include "../include/textures.h"
+#include "../include/so_long.h"
 
 /* Loads a texture indicated by argument */
 /* blk from the equivalent file. */
@@ -48,21 +49,24 @@ mlx_image_t	*load_img(mlx_t *mlx, char blk)
 {
 	mlx_texture_t	*tex;
 	mlx_image_t		*img;
+	char			*t_path;
 
 	if (blk == 'C')
-		tex = mlx_load_png("images/coll.png");
+		t_path = ft_strjoin(TEXTURE_PACK, "coll.png");
 	else if (blk == 'P')
-		tex = mlx_load_png("images/plyr.png");
+		t_path = ft_strjoin(TEXTURE_PACK, "plyr.png");
 	else if (blk == '1')
-		tex = mlx_load_png("images/wall.png");
+		t_path = ft_strjoin(TEXTURE_PACK, "wall.png");
 	else if (blk == 'E')
-		tex = mlx_load_png("images/exit.png");
+		t_path = ft_strjoin(TEXTURE_PACK, "exit.png");
 	else
 		return (NULL);
+	tex = mlx_load_png(t_path);
 	if (!tex)
 		return (NULL);
 	img = mlx_texture_to_image(mlx, tex);
 	mlx_delete_texture(tex);
+	free(t_path);
 	return (img);
 }
 

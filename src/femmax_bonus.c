@@ -51,8 +51,8 @@ static int	ret_move(void)
 
 	move = get_random(0, 2);
 	if (!move)
-		return (-32);
-	return (32);
+		return (BLKSIZ - (BLKSIZ * 2));
+	return (BLKSIZ);
 }
 
 int	femmax_check(t_reality *reality, t_enemy_db *enemies)

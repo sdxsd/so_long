@@ -107,7 +107,7 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 
 	iterator = 0;
 	pos_x = 0;
-	pos_y = y * 32;
+	pos_y = y * BLKSIZ;
 	while (iterator < lsize)
 	{
 		if (mline[iterator] == 'C')
@@ -116,7 +116,7 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 			mlx_image_to_window(reality->mlx, \
 								map_blk(reality->textures, mline[iterator]), \
 								pos_x, pos_y);
-		pos_x += 32;
+		pos_x += BLKSIZ;
 		iterator++;
 	}
 	return (TRUE);
@@ -133,7 +133,7 @@ static int	first_rndr(t_reality *reality)
 		reality->textures = load_textures(reality->mlx);
 	if (!reality->bckgrnd)
 		reality->bckgrnd = \
-			rndr_background(reality->mlx, matrix->x * 32, matrix->y * 32);
+			rndr_background(reality->mlx, matrix->x * BLKSIZ, matrix->y * BLKSIZ);
 	mlx_image_to_window(reality->mlx, reality->bckgrnd, 0, 0);
 	matrix->simulation_data = matrix->wired_entry;
 	iter = 0;

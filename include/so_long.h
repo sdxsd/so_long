@@ -43,6 +43,7 @@ A program is free software if users have all of these freedoms.
 #  define BONUS 0
 # endif
 # define BLKSIZ 32
+# define TEXTURE_PACK "images/"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
