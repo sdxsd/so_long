@@ -41,7 +41,9 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/game.h"
 #include "../include/dealloc.h"
-#include "../include/femmax_bonus.h"
+#ifdef BONUS
+#  include "../include/femmax_bonus.h"
+#endif
 
 /* The val_move() function takes the x, and y coordinates */
 /* that the player will be at due to the given keypress in handle_key() */
@@ -58,16 +60,22 @@ int	val_move(int x, int y, t_matrix *matrix)
 
 /* This function checks the position of the player against the map */
 /* and takes actions accordingly. */
-/* if the current player position falls on a collectible the following occurs. */
-/* Sets a current_haring int which refers to the index of the instance array in the */
-/* coll image held by the textures struct. Then two pointers, one to the x of the */
-/* current instance, and the other to the y. Sets the x of the haring instance */
-/* to the current haring_basket_pos. And then the y to 0 (referring to the first row). */
+/* if the current player position falls on a collectible, */
+/* the following occurs. Sets a current_haring int */
+/* which refers to the index of the */
+/* instance array in the coll image */
+/* held by the textures struct. */
+/* Then two pointers, one to the x of the current instance, */
+/* and the other to the y. Sets the x of the haring instance */
+/* to the current haring_basket_pos. */
+/* And then the y to 0 (referring to the first row). */
 /* The position on the map (formerly a collectible tile) is set to a blank. */
-/* The offset of the haring (intended to create a stacking effect) is incremented by 15. */
-/* Otherwise, if the player is on an exit. And all the collectibles have been collected */
-/* the program's memory is deallocated and the program exits. */
-static	int check_pos(t_reality *reality, int x, int y)
+/* The offset of the haring */
+/* (intended to create a stacking effect) is incremented by 15. */
+/* Otherwise, if the player is on an exit, */
+/* and all the collectibles have been collected */
+/* the programs memory is deallocated and the program exits. */
+static int	check_pos(t_reality *reality, int x, int y)
 {
 	int			curr_haring;
 	int			*haring_x;
@@ -100,7 +108,8 @@ static	int check_pos(t_reality *reality, int x, int y)
 /* is pressed. A number of convenience variables are */
 /* set to reduce the length of lines. The val_move() function */
 /* is passed used in every if to validate if a movement is valid */
-/* in the game. Then the requisite changes are made to the player coordinates. */
+/* in the game.
+   Then the requisite changes are made to the player coordinates. */
 /* check_pos() is then used to make any changes to game state */
 /* based on the current position of the player. */
 /* After that, current steps are printed out and the function returns. */

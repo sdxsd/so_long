@@ -75,13 +75,14 @@ t_haring	*init_haring(int x, int y)
 /* it calls this function, and sets the location of the collectible */
 /* onto the haring matrix while also making a new instance */
 /* on the map of the haring matrix. */
-int register_haring(t_reality *reality, int x, int y)
+int	register_haring(t_reality *reality, int x, int y)
 {
 	t_haring	*haring;
 
 	haring = reality->haring_db;
 	haring->haring_c++;
 	haring->haring_data[y][x] = \
-		mlx_image_to_window(reality->mlx, reality->textures->coll, x * BLKSIZ, y * BLKSIZ);
+		mlx_image_to_window(reality->mlx, reality->textures->coll, \
+							x * BLKSIZ, y * BLKSIZ);
 	return (TRUE);
 }

@@ -40,7 +40,7 @@ A program is free software if users have all of these freedoms.
 /* The design of this so_long is intentional. */
 /* The player sprite represents the primacy of The Netherlands. */
 /* The wall sprite represents how the Belgian menace holds us back. */
-/* The collectible sprite represents the goal that all good Dutch people desire. */
+/* The collectible sprite represents the goal that good Dutch people desire. */
 /* The exit represents Mark Rutte as our exit. */
 /* The background is symbolic of the monarchy, the backbone of the nation. */
 /* Je maintiendrai! */
@@ -67,7 +67,7 @@ static void	*init_reality(t_reality *reality)
 
 	matr = reality -> matrix;
 	matr -> step_c = 1;
-	mlx = mlx_init(matr -> x * BLKSIZ, matr -> y * BLKSIZ, "Nederland Simulator", TRUE);
+	mlx = mlx_init(matr -> x * BLKSIZ, matr -> y * BLKSIZ, "NederSim", TRUE);
 	reality -> textures = NULL;
 	reality -> bckgrnd = NULL;
 	reality -> mlx = mlx;

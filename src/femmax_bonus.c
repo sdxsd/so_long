@@ -46,6 +46,7 @@ A program is free software if users have all of these freedoms.
 static int	ret_move(void)
 {
 	int	move;
+
 	move = get_random(0, 2);
 	if (!move)
 		return (-32);

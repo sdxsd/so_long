@@ -83,7 +83,7 @@ static int	enemy_limit(x, y)
 /* and enough for each enemy as defined by the */
 /* enemy_count argument. Enemies are stored */
 /* as an array of pointers to t_enemy types. */
-static t_enemy_db *alloc_enemies(mlx_t *mlx, int enemy_count)
+static t_enemy_db	*alloc_enemies(mlx_t *mlx, int enemy_count)
 {
 	t_enemy_db	*enemies;
 	int			iter;
@@ -110,6 +110,7 @@ static t_enemy_db *alloc_enemies(mlx_t *mlx, int enemy_count)
 static int	register_enemy(t_enemy_db *enemies)
 {
 	static int	e_index;
+
 	enemies->e_registry[e_index]->x = &enemies->enemy_tex->instances[e_index].x;
 	enemies->e_registry[e_index]->y = &enemies->enemy_tex->instances[e_index].y;
 	enemies->e_registry[e_index]->i_index = e_index;

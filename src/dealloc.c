@@ -45,18 +45,14 @@ A program is free software if users have all of these freedoms.
 /* struct before returning. */
 int	free_textures(mlx_t *mlx, t_imgdata *textures)
 {
-	if (textures -> wall)
+	if (textures->wall)
 		mlx_delete_image(mlx, textures -> wall);
-	if (textures -> coll)
+	if (textures->coll)
 		mlx_delete_image(mlx, textures -> coll);
-	if (textures -> plyr)
+	if (textures->plyr)
 		mlx_delete_image(mlx, textures -> plyr);
-	if (textures -> exit)
+	if (textures->exit)
 		mlx_delete_image(mlx, textures -> exit);
-	free(textures -> wall);
-	free(textures -> coll);
-	free(textures -> plyr);
-	free(textures -> exit);
 	free(textures);
 	return (0);
 }
@@ -66,7 +62,8 @@ int	free_textures(mlx_t *mlx, t_imgdata *textures)
 /* as it goes. Then returns a pointer to the freed memory. */
 t_haring	*free_haring(t_haring *haring)
 {
-
+	int	iter;
+	while
 	free(haring);
 	return (haring);
 }

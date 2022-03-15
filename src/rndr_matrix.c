@@ -41,8 +41,9 @@ A program is free software if users have all of these freedoms.
 #include "../include/dealloc.h"
 #include "../include/haring.h"
 #include "../include/movement.h"
-#include "../include/enemy_bonus.h"
-
+#ifdef BONUS
+# include "../include/enemy_bonus.h"
+#endif
 /* Takes the width and height of the MLX window and generates a background. */
 /* Functions by taking the win_y argument and */
 /* defining 3 distinct stages and changing the background colour */
@@ -111,7 +112,7 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 		if (mline[iterator] == 'C')
 			register_haring(reality, iterator, y);
 		else
-			mlx_image_to_window(reality->mlx,							\
+			mlx_image_to_window(reality->mlx, \
 								map_blk(reality->textures, mline[iterator]), \
 								pos_x, pos_y);
 		pos_x += 32;
@@ -124,17 +125,15 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 static int	first_rndr(t_reality *reality)
 {
 	int					iter;
-	mlx_t				*mlx;
 	t_matrix			*matrix;
 
 	matrix = reality->matrix;
-	mlx = reality->mlx;
 	if (!reality->textures)
 		reality->textures = load_textures(reality->mlx);
 	if (!reality->bckgrnd)
 		reality->bckgrnd = \
-			rndr_background(mlx, matrix->x * BLKSIZ, matrix->y * BLKSIZ);
-	mlx_image_to_window(mlx, reality->bckgrnd, 0, 0);
+			rndr_background(reality->mlx, matrix->x * 32, matrix->y * 32);
+	mlx_image_to_window(reality->mlx, reality->bckgrnd, 0, 0);
 	matrix->simulation_data = matrix->wired_entry;
 	iter = 0;
 	while (iter < matrix->y)
@@ -143,7 +142,7 @@ static int	first_rndr(t_reality *reality)
 		matrix -> simulation_data++;
 		iter++;
 	}
-	mlx_image_to_window(mlx, reality->textures->plyr, \
+	mlx_image_to_window(reality->mlx, reality->textures->plyr, \
 						matrix->plyr_x, matrix->plyr_y);
 	matrix->simulation_data = matrix->wired_entry;
 	if (BONUS)
