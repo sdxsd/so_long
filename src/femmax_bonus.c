@@ -115,13 +115,16 @@ int	rndr_femmax(mlx_t *mlx, int x, int y, t_enemy_db *enemies)
 int	load_femmax(mlx_t *mlx, t_enemy_db *enemies)
 {
 	mlx_texture_t	*tex;
+	char			*t_path;
 
-	tex = mlx_load_png("images/femmax.png");
+	t_path = ft_strjoin(TEXTURE_PACK, "femmax.png");
+	tex = mlx_load_png(t_path);
 	if (!tex)
 		return (FALSE);
 	enemies->enemy_tex = mlx_texture_to_image(mlx, tex);
 	if (!enemies->enemy_tex)
 		return (FALSE);
 	mlx_delete_texture(tex);
+	free(t_path);
 	return (1);
 }
