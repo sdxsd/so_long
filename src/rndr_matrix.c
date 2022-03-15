@@ -42,6 +42,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/haring.h"
 #include "../include/movement.h"
 #ifdef BONUS
+# include "../include/death_bonus.h"
 # include "../include/enemy_bonus.h"
 #endif
 /* Takes the width and height of the MLX window and generates a background. */
