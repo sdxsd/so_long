@@ -74,6 +74,16 @@ static int	valline(char *line, int y)
 	return (TRUE);
 }
 
+static int	chborder(t_matrix *matrix)
+{
+	int iterator_y;
+
+	while (iterator < matrix->y)
+	{
+
+	}
+}
+
 /* chline() (check line) takes a line of map data */
 /* represented as a char pointer, a length value */
 /* represented as x, and the current y value pertaining */
