@@ -45,6 +45,7 @@ A program is free software if users have all of these freedoms.
 # include "../include/death_bonus.h"
 # include "../include/enemy_bonus.h"
 #endif
+
 /* Takes the width and height of the MLX window and generates a background. */
 /* Functions by taking the win_y argument and */
 /* defining 3 distinct stages and changing the background colour */

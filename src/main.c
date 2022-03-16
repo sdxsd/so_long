@@ -77,18 +77,18 @@ static void	*init_reality(t_reality *reality)
 }
 
 /* This function initiates the program. */
-// Allocates memory for the reality struct
-// which holds the data of the games state.
-// initiates the matrix struct, which is a substruct
-// of the reality struct. It holds the map data and
-// the player position. matrix_init()
-// also loads, and validates the map.
-// If this function fails, reality is also freed.
-// The haring_db struct is initialised. It holds the data
-// necessary for collectible functionality.
-// Puts some basic output text.
-// Before initialising the reality struct fully.
-// Which also initialises MLX
+/* Allocates memory for the reality struct */
+/* which holds the data of the games state. */
+/* initiates the matrix struct, which is a substruct */
+/* of the reality struct. It holds the map data and */
+/* the player position. matrix_init() */
+/* also loads, and validates the map. */
+/* If this function fails, reality is also freed. */
+/* The haring_db struct is initialised. It holds the data */
+/* necessary for collectible functionality. */
+/* Puts some basic output text. */
+/* Before initialising the reality struct fully. */
+/* Which also initialises MLX */
 /* Upon exit will call a cleanup function to deallocate residual memory. */
 int	main(int argc, char *argv[])
 {
