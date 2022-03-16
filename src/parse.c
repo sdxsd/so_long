@@ -41,47 +41,29 @@ A program is free software if users have all of these freedoms.
 #include "../include/so_long.h"
 #include "../include/dealloc.h"
 
-/* valline() (short for validate line) */
-/* takes the y position of the given line, */
-/* and checks for validity of the line */
-/* based on said position. */
-/* The variable fir_lst (first last) */
-/* defines the acceptable characters that can be present */
-/* in the first and last line of the map. */
-/* If the value of y is -1 */
-/* this indicates the last line of the map data. */
-/* This function simply iterates through a line */
-/* passing each character to a subroutine */
-/* that checks the given character against a dictionary */
-/* of characters in the form of a char pointer. */
-/* Returns false if ft_charchk() fails */
-/* at any time. */
-static int	valline(char *line, int y)
-{
-	const char	*fir_lst = "1\n";
-	int			iterator;
-
-	iterator = 0;
-	if (y == 0 || y == -1)
-	{
-		while (line[iterator] != '\0')
-		{
-			if (!ft_charchk(line[iterator], (char *)fir_lst))
-				return (FALSE);
-			iterator++;
-		}
-	}
-	return (TRUE);
-}
-
 static int	chborder(t_matrix *matrix)
 {
-	int iterator_y;
+	int	iterator_y;
+	int	iterator_x;
 
-	while (iterator < matrix->y)
+	iterator_y = 0;
+	iterator_x = 0;
+	while (iterator_y < matrix->y)
 	{
-
+		while (matrix->simulation_data[matrix->x][iterator_y] == '1' && \
+			   matrix->simulation_data[0][matrix->y] == '1')
+			iterator_y++;
+		if (iterator_y < matrix->y)
+			return (FALSE);
 	}
+	while (matrix->simulation_data[iterator_x][matrix->y] == '1' && \
+		   matrix->simulation_data[iterator_x][0] == '1')
+	{
+		iterator_x++;
+		if (iterator_x < matrix->x)
+			return (FALSE);
+	}
+	return (TRUE);
 }
 
 /* chline() (check line) takes a line of map data */
@@ -120,15 +102,10 @@ static int	chline(char *line, int x, int y, t_matrix *matrix)
 		}
 		if (line[iterator] == 'P')
 		{
-			matrix -> plyr_x = iterator * BLKSIZ;
-			matrix -> plyr_y = y * BLKSIZ;
+			matrix->plyr_x = iterator * BLKSIZ;
+			matrix->plyr_y = y * BLKSIZ;
 		}
 		iterator++;
-	}
-	if (!valline(line, y))
-	{
-		free (line);
-		return (FALSE);
 	}
 	return (TRUE);
 }
@@ -160,12 +137,12 @@ static int	validate_map(t_matrix *matrix)
 	int	iter_y;
 
 	iter_y = 0;
-	matrix -> simulation_data = matrix -> wired_entry;
-	while (iter_y < matrix -> y)
+	matrix->simulation_data = matrix -> wired_entry;
+	while (iter_y < matrix->y)
 	{
-		if (!chline(*matrix -> simulation_data, matrix -> x, iter_y, matrix))
+		if (!chline(*matrix->simulation_data, matrix -> x, iter_y, matrix))
 			return (FALSE);
-		matrix -> simulation_data++;
+		matrix->simulation_data++;
 		iter_y++;
 	}
 	return (TRUE);
@@ -189,23 +166,23 @@ static t_matrix	*load_map(char *path, t_matrix *matrix)
 	char	*line;
 	int		fd;
 
-	matrix -> simulation_data = malloc(sizeof(char *) * 1024);
-	matrix -> wired_entry = matrix -> simulation_data;
-	matrix -> x = -1;
-	matrix -> y = 0;
+	matrix->simulation_data = malloc(sizeof(char *) * 1024);
+	matrix->wired_entry = matrix -> simulation_data;
+	matrix->x = -1;
+	matrix->y = 0;
 	fd = open(path, O_RDONLY);
 	while (TRUE)
 	{
 		line = get_next_line(fd);
 		if (line)
 		{
-			if (matrix -> x == -1)
-				matrix -> x = ft_strlen(line);
-			*matrix -> simulation_data = line;
-			matrix -> simulation_data++;
-			matrix -> y++;
+			if (matrix->x == -1)
+				matrix->x = ft_strlen(line);
+			*matrix->simulation_data = line;
+			matrix->simulation_data++;
+			matrix->y++;
 		}
-		else if (!line && *matrix -> wired_entry != NULL)
+		else if (!line && *matrix->wired_entry != NULL)
 			break ;
 		else
 			return (NULL);
@@ -243,6 +220,6 @@ t_matrix	*matrix_init(int argc, char *argv[])
 		return (free_matrix(matrix));
 	if (!validate_map(matrix))
 		return (free_matrix(matrix));
-	matrix -> x--;
+	matrix->x--;
 	return (matrix);
 }
