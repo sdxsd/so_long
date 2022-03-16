@@ -88,10 +88,7 @@ static int	chline(char *line, int x, int y, t_matrix *matrix)
 
 	iterator = 0;
 	if ((int)ft_strlen(line) != x)
-	{
-		free(line);
 		return (FALSE);
-	}
 	while (iterator < x)
 	{
 		if (!ft_charchk(line[iterator], (char *)dict))

@@ -88,14 +88,14 @@ t_matrix	*free_matrix(t_matrix *matrix)
 	int	iter;
 
 	iter = 0;
-	matrix->simulation_data = matrix -> wired_entry;
-	while (iter < matrix->y)
+	matrix->simulation_data = matrix->wired_entry;
+	while (iter < matrix->y && *matrix->simulation_data)
 	{
 		free(*matrix->simulation_data);
 		matrix->simulation_data++;
 		iter++;
 	}
-	free (matrix->wired_entry);
+	free(matrix->wired_entry);
 	free(matrix);
 	return (NULL);
 }
