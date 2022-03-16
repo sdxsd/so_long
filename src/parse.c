@@ -41,6 +41,14 @@ A program is free software if users have all of these freedoms.
 #include "../include/so_long.h"
 #include "../include/dealloc.h"
 
+// chborder() (Check border)
+// Function checks that the border contains
+// only wall characters, and returns false (0) if the
+// check fails. Functions by iterating
+// first vertically and checking the
+// vertical border. Then iterating horizontally
+// checking the horizontal border at the bottom
+// and top of the map.
 static int	chborder(t_matrix *matrix)
 {
 	int	iterator_y;
