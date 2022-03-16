@@ -41,6 +41,6 @@ A program is free software if users have all of these freedoms.
 # define DEATH_BONUS_H
 # include "so_long.h"
 
-void you_died(t_reality	*reality);
+void	you_died(t_reality	*reality);
 
 #endif // DEATH_BONUS_H

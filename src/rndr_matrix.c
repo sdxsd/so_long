@@ -133,7 +133,8 @@ static int	first_rndr(t_reality *reality)
 		reality->textures = load_textures(reality->mlx);
 	if (!reality->bckgrnd)
 		reality->bckgrnd = \
-			rndr_background(reality->mlx, matrix->x * BLKSIZ, matrix->y * BLKSIZ);
+			rndr_background(reality->mlx, \
+							matrix->x * BLKSIZ, matrix->y * BLKSIZ);
 	mlx_image_to_window(reality->mlx, reality->bckgrnd, 0, 0);
 	matrix->simulation_data = matrix->wired_entry;
 	iter = 0;

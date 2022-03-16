@@ -39,14 +39,14 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/parse.h"
 
-// chborder() (Check border)
-// Function checks that the border contains
-// only wall characters, and returns false (0) if the
-// check fails. Functions by iterating
-// first vertically and checking the
-// vertical border. Then iterating horizontally
-// checking the horizontal border at the bottom
-// and top of the map.
+/* chborder() (Check border) */
+/* Function checks that the border contains */
+/* only wall characters, and returns false (0) if the */
+/* check fails. Functions by iterating */
+/* first vertically and checking the */
+/* vertical border. Then iterating horizontally */
+/* checking the horizontal border at the bottom */
+/* and top of the map. */
 static int	chborder(t_matrix *matrix)
 {
 	int	iterator_y;
@@ -58,13 +58,13 @@ static int	chborder(t_matrix *matrix)
 	while (iterator_y < matrix->y)
 	{
 		if (matrix->simulation_data[iterator_y][matrix->x - 2] == '1' && \
-			   matrix->simulation_data[matrix->y - 1][0] == '1')
+			matrix->simulation_data[matrix->y - 1][0] == '1')
 			iterator_y++;
 		else if (iterator_y < matrix->y)
 			return (FALSE);
 	}
 	while (matrix->simulation_data[matrix->y - 1][iterator_x] == '1' && \
-		   matrix->simulation_data[0][iterator_x] == '1')
+			matrix->simulation_data[0][iterator_x] == '1')
 		iterator_x++;
 	if (iterator_x < matrix->x - 1)
 		return (FALSE);
@@ -89,8 +89,8 @@ static int	chborder(t_matrix *matrix)
 /* Otherwise the function returns true. */
 static int	chline(char *line, int x, int y, t_matrix *matrix)
 {
-	char	*dict = "01CEP\n";
-	int		iterator;
+	const char	*dict = "01CEP\n";
+	int			iterator;
 
 	iterator = 0;
 	if ((int)ft_strlen(line) != x)

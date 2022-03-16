@@ -66,7 +66,8 @@ int	femmax_check(t_reality *reality, t_enemy_db *enemies)
 	{
 		curr_x = enemies->enemy_tex->instances[iter].x;
 		curr_y = enemies->enemy_tex->instances[iter].y;
-		if (curr_x == reality->matrix->plyr_x && curr_y == reality->matrix->plyr_y)
+		if (curr_x == reality->matrix->plyr_x && \
+			curr_y == reality->matrix->plyr_y)
 		{
 			free_and_exit(reality);
 			return (FALSE);

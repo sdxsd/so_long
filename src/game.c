@@ -42,7 +42,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/game.h"
 #include "../include/dealloc.h"
 #ifdef BONUS
-#  include "../include/femmax_bonus.h"
+# include "../include/femmax_bonus.h"
 #endif
 
 /* The val_move() function takes the x, and y coordinates */

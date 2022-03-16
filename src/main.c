@@ -77,27 +77,38 @@ static void	*init_reality(t_reality *reality)
 }
 
 /* This function initiates the program. */
-/* Begins by using the matrix_init() function to interpret */
-/* and load the map. */
-/* Then begins the rendering process with */
-/* rndr_matrix() before entering the game loop. */
+// Allocates memory for the reality struct
+// which holds the data of the games state.
+// initiates the matrix struct, which is a substruct
+// of the reality struct. It holds the map data and
+// the player position. matrix_init()
+// also loads, and validates the map.
+// If this function fails, reality is also freed.
+// The haring_db struct is initialised. It holds the data
+// necessary for collectible functionality.
+// Puts some basic output text.
+// Before initialising the reality struct fully.
+// Which also initialises MLX
 /* Upon exit will call a cleanup function to deallocate residual memory. */
 int	main(int argc, char *argv[])
 {
 	t_reality	*reality;
 
 	reality = malloc(sizeof(t_reality));
+	if (!reality)
+		return (1);
 	reality->matrix = matrix_init(argc, argv);
-	if (!reality -> matrix)
+	if (!reality->matrix)
 	{
 		ft_putstr("ERROR:\nInvalid map...\n");
+		free(reality);
 		return (1);
 	}
 	reality->haring_db = init_haring(reality->matrix->x, reality->matrix->y);
 	if (!reality->haring_db)
-		return (0);
+		return (1);
 	ft_putstr("NederSim Copyright (C) 2022 Will Maguire\n");
-	ft_putstr("\tGreat design shows, never tells.\n");
+	ft_putstr("\t⚒ Great design shows, never tells. ⚒\n");
 	if (!init_reality(reality))
 		return (1);
 	rndr_matrix(reality);

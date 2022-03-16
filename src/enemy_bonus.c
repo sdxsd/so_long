@@ -111,6 +111,7 @@ static int	register_enemy(t_enemy_db *enemies)
 {
 	static int	e_index;
 
+	enemies->enemy_count = e_index + 1;
 	enemies->e_registry[e_index]->x = &enemies->enemy_tex->instances[e_index].x;
 	enemies->e_registry[e_index]->y = &enemies->enemy_tex->instances[e_index].y;
 	enemies->e_registry[e_index]->i_index = e_index;
@@ -135,16 +136,14 @@ static int	register_enemy(t_enemy_db *enemies)
 int	gen_enemies(mlx_t *mlx, t_reality *reality)
 {
 	static int			generated;
-	int					temp_x;
-	int					temp_y;
+	static int			temp_x;
+	static int			temp_y;
 	static t_enemy_db	*enemies;
 	t_matrix			*matrix;
 
 	matrix = reality->matrix;
 	if (!generated)
 		enemies = alloc_enemies(mlx, enemy_limit(matrix->x, matrix->y));
-	temp_x = 0;
-	temp_y = 0;
 	while (generated < enemy_limit(matrix->x, matrix->y))
 	{
 		while (matrix->simulation_data[temp_y][temp_x] == '1')
@@ -158,7 +157,6 @@ int	gen_enemies(mlx_t *mlx, t_reality *reality)
 		temp_x = 0;
 		generated++;
 	}
-	enemies->enemy_count = generated;
 	move_femmaxen(matrix, enemies);
 	femmax_check(reality, enemies);
 	return (0);

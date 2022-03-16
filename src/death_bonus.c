@@ -41,7 +41,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/dealloc.h"
 #include "../include/rndr_matrix.h"
 
-static mlx_image_t *rndr_black(mlx_t *mlx, t_matrix *matrix)
+static mlx_image_t	*rndr_black(mlx_t *mlx, t_matrix *matrix)
 {
 	mlx_image_t	*bckgrnd;
 	int			px;
@@ -65,7 +65,7 @@ static mlx_image_t *rndr_black(mlx_t *mlx, t_matrix *matrix)
 	return (bckgrnd);
 }
 
-void you_died(t_reality	*reality)
+void	you_died(t_reality	*reality)
 {
 	mlx_image_t	*background;
 	int			string_x;
