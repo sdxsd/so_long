@@ -92,10 +92,7 @@ static int	chline(char *line, int x, int y, t_matrix *matrix)
 	while (iterator < x)
 	{
 		if (!ft_charchk(line[iterator], (char *)dict))
-		{
-			free(line);
 			return (FALSE);
-		}
 		if (line[iterator] == 'P')
 		{
 			matrix->plyr_x = iterator * BLKSIZ;
