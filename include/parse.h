@@ -39,10 +39,12 @@ A program is free software if users have all of these freedoms.
 
 #ifndef PARSE_H
 # define PARSE_H
-# include "so_long.h"
-# include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include "so_long.h"
+# include "so_long.h"
+# include "dealloc.h"
 
 t_matrix	*matrix_init(int argc, char *argv[]);
 

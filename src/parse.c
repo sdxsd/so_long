@@ -38,8 +38,6 @@ A program is free software if users have all of these freedoms.
 */
 
 #include "../include/parse.h"
-#include "../include/so_long.h"
-#include "../include/dealloc.h"
 
 // chborder() (Check border)
 // Function checks that the border contains
@@ -87,12 +85,12 @@ static int	chborder(t_matrix *matrix)
 /* characters outside of the provided set. */
 /* Continuing, the function runs the valline() function */
 /* which validates the line based on the given y position. */
-/* If any of the checks fail, the line is freed, and false is returned. */
+/* If any of the checks fail, the function returns false. */
 /* Otherwise the function returns true. */
 static int	chline(char *line, int x, int y, t_matrix *matrix)
 {
-	const char	*dict = "01CEP\n";
-	int			iterator;
+	char	*dict = "01CEP\n";
+	int		iterator;
 
 	iterator = 0;
 	if ((int)ft_strlen(line) != x)
