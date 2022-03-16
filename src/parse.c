@@ -48,21 +48,20 @@ static int	chborder(t_matrix *matrix)
 
 	iterator_y = 0;
 	iterator_x = 0;
+	matrix->simulation_data = matrix->wired_entry;
 	while (iterator_y < matrix->y)
 	{
-		while (matrix->simulation_data[matrix->x][iterator_y] == '1' && \
-			   matrix->simulation_data[0][matrix->y] == '1')
+		if (matrix->simulation_data[iterator_y][matrix->x - 2] == '1' && \
+			   matrix->simulation_data[matrix->y - 1][0] == '1')
 			iterator_y++;
-		if (iterator_y < matrix->y)
+		else if (iterator_y < matrix->y)
 			return (FALSE);
 	}
-	while (matrix->simulation_data[iterator_x][matrix->y] == '1' && \
-		   matrix->simulation_data[iterator_x][0] == '1')
-	{
+	while (matrix->simulation_data[matrix->y - 1][iterator_x] == '1' && \
+		   matrix->simulation_data[0][iterator_x] == '1')
 		iterator_x++;
-		if (iterator_x < matrix->x)
-			return (FALSE);
-	}
+	if (iterator_x < matrix->x - 1)
+		return (FALSE);
 	return (TRUE);
 }
 
@@ -219,6 +218,8 @@ t_matrix	*matrix_init(int argc, char *argv[])
 	if (!load_map(argv[1], matrix))
 		return (free_matrix(matrix));
 	if (!validate_map(matrix))
+		return (free_matrix(matrix));
+	if (!chborder(matrix))
 		return (free_matrix(matrix));
 	matrix->x--;
 	return (matrix);
