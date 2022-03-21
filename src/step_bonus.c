@@ -39,7 +39,7 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/step_bonus.h"
 
-void	display_steps(mlx_t *mlx, int step_c)
+mlx_image_t	*display_steps(mlx_t *mlx, int step_c)
 {
 	static	mlx_image_t	*prev;
 	const char			*str = "Steps: ";
@@ -53,5 +53,5 @@ void	display_steps(mlx_t *mlx, int step_c)
 	prev = mlx_put_string(mlx, steps, BLKSIZ, BLKSIZ);
 	free(nbr);
 	free(steps);
-	return ;
+	return (prev);
 }
