@@ -1,6 +1,6 @@
 # Basic data
 CC = clang
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
 CFILES = \
 			src/main.c \
@@ -59,7 +59,6 @@ clean:
 	rm -f so_long
 
 fclean: clean
-	rm -f *vgcore*
 	rm -rfv so_long.dSYM
 	make -C libft/ clean
 	make -C MLX42/ fclean
