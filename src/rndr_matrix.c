@@ -162,7 +162,7 @@ static int	first_rndr(t_reality *reality)
 						matrix->plyr_x, matrix->plyr_y);
 	matrix->simulation_data = matrix->wired_entry;
 	if (BONUS)
-		gen_enemies(reality->mlx, reality);
+		gen_enemies(reality->mlx, reality, 0);
 	return (TRUE);
 }
 

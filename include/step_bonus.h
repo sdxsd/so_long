@@ -38,8 +38,8 @@ A program is free software if users have all of these freedoms.
 */
 
 #ifndef STEP_BONUS_H
-#define STEP_BONUS_H
-#include "../include/rndr_matrix.h"
+# define STEP_BONUS_H
+# include "../include/rndr_matrix.h"
 
 mlx_image_t	*display_steps(mlx_t *mlx, int step_c);
 

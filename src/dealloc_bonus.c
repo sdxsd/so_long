@@ -37,21 +37,17 @@ The definition of Free Software is as follows:
 A program is free software if users have all of these freedoms.
 */
 
-#include "../include/step_bonus.h"
+#include "../include/dealloc_bonus.h"
 
-mlx_image_t	*display_steps(mlx_t *mlx, int step_c)
+void	dealloc_enemies(mlx_t *mlx, t_enemy_db *enemies)
 {
-	static mlx_image_t	*prev;
-	const char			*str = "Steps: ";
-	char				*nbr;
-	char				*steps;
+	int	iter;
 
-	if (prev)
-		mlx_delete_image(mlx, prev);
-	nbr = ft_itoa(step_c);
-	steps = ft_strjoin(str, nbr);
-	prev = mlx_put_string(mlx, steps, BLKSIZ, BLKSIZ);
-	free(nbr);
-	free(steps);
-	return (prev);
+	iter = 0;
+	while (iter < enemies->enemy_count)
+	{
+		mlx_delete_image(mlx, enemies->enemy_tex);
+		free(enemies->e_registry[iter]);
+		iter++;
+	}
 }

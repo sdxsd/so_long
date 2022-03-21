@@ -13,7 +13,8 @@ CFILES = \
 B_FILES = \
 			src/enemy_bonus.c \
 			src/femmax_bonus.c \
-			src/step_bonus.c
+			src/step_bonus.c \
+			src/dealloc_bonus.c
 BFLAGS = -D BONUS=1
 OFILES = $(CFILES:.c=.o)
 OSFLAG = ""

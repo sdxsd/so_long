@@ -39,6 +39,7 @@ A program is free software if users have all of these freedoms.
 
 #include "../include/enemy_bonus.h"
 #include "../include/femmax_bonus.h"
+#include "../include/dealloc_bonus.h"
 
 /* This function returns a random integer */
 /* between int min and int max. Functions */
@@ -133,23 +134,22 @@ static int	register_enemy(t_enemy_db *enemies)
 /* a suitable coordinate for the new enemy, the */
 /* enemy is registered by the register_enemy() function */
 /* and the process is repeated. */
-int	gen_enemies(mlx_t *mlx, t_reality *reality)
+void	gen_enemies(mlx_t *mlx, t_reality *rlty, int free)
 {
 	static int			generated;
 	static int			temp_x;
 	static int			temp_y;
 	static t_enemy_db	*enemies;
-	t_matrix			*matrix;
 
-	matrix = reality->matrix;
 	if (!generated)
-		enemies = alloc_enemies(mlx, enemy_limit(matrix->x, matrix->y));
-	while (generated < enemy_limit(matrix->x, matrix->y))
+		enemies = alloc_enemies(mlx, \
+								enemy_limit(rlty->matrix->x, rlty->matrix->y));
+	while (generated < enemy_limit(rlty->matrix->x, rlty->matrix->y))
 	{
-		while (matrix->simulation_data[temp_y][temp_x] == '1')
+		while (rlty->matrix->simulation_data[temp_y][temp_x] == '1')
 		{
-			temp_x = get_random(0, matrix->x);
-			temp_y = get_random(0, matrix->y);
+			temp_x = get_random(0, rlty->matrix->x);
+			temp_y = get_random(0, rlty->matrix->y);
 		}
 		if (rndr_femmax(mlx, temp_x, temp_y, enemies))
 			register_enemy(enemies);
@@ -157,7 +157,8 @@ int	gen_enemies(mlx_t *mlx, t_reality *reality)
 		temp_x = 0;
 		generated++;
 	}
-	move_femmaxen(matrix, enemies);
-	femmax_check(reality, enemies);
-	return (0);
+	move_femmaxen(rlty->matrix, enemies);
+	femmax_check(rlty, enemies);
+	if (free)
+		dealloc_enemies(mlx, enemies);
 }

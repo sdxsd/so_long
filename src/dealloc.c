@@ -40,6 +40,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/dealloc.h"
 #ifdef BONUS
 # include "../include/step_bonus.h"
+# include "../include/enemy_bonus.h"
 #endif
 
 /* Deallocates the texture data. */
@@ -112,7 +113,11 @@ t_matrix	*free_matrix(t_matrix *matrix)
 int	free_and_exit(t_reality	*reality)
 {
 	if (BONUS)
-		mlx_delete_image(reality->mlx, display_steps(reality->mlx, reality->matrix->step_c));
+	{
+		gen_enemies(reality->mlx, reality, 1);
+		mlx_delete_image(reality->mlx, \
+						display_steps(reality->mlx, reality->matrix->step_c));
+	}
 	free_textures(reality->mlx, reality->textures);
 	free_haring(reality->haring_db, reality->matrix->y);
 	free_matrix(reality->matrix);

@@ -131,7 +131,10 @@ static void	handle_key(char key, t_reality *reality)
 	else if (key == 'D' && val_move(*plyr_x + BLKSIZ, *plyr_y, mtrx))
 		*plyr_x += BLKSIZ;
 	check_pos(reality, *plyr_x / BLKSIZ, *plyr_y / BLKSIZ);
-	ft_printf("STEPS: %d\n", reality->matrix->step_c++);
+	if (!BONUS)
+		ft_printf("STEPS: %d\n", reality->matrix->step_c++);
+	else
+		reality->matrix->step_c++;
 	return ;
 }
 
@@ -159,7 +162,7 @@ static void	keycodes(mlx_key_data_t keydata, void *param)
 		else if (keydata.key == MLX_KEY_ESCAPE)
 			free_and_exit(reality);
 		if (BONUS)
-			gen_enemies(reality->mlx, reality);
+			gen_enemies(reality->mlx, reality, 0);
 	}
 	rndr_matrix(reality);
 	return ;
