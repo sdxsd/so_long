@@ -38,3 +38,20 @@ A program is free software if users have all of these freedoms.
 */
 
 #include "../include/step_bonus.h"
+
+void	display_steps(mlx_t *mlx, int step_c)
+{
+	static	mlx_image_t	*prev;
+	const char			*str = "Steps: ";
+	char				*nbr;
+	char				*steps;
+
+	if (prev)
+		mlx_delete_image(mlx, prev);
+	nbr = ft_itoa(step_c);
+	steps = ft_strjoin(str, nbr);
+	prev = mlx_put_string(mlx, steps, BLKSIZ, BLKSIZ);
+	free(nbr);
+	free(steps);
+	return ;
+}

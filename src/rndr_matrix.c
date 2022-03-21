@@ -42,6 +42,7 @@ A program is free software if users have all of these freedoms.
 #include "../include/haring.h"
 #ifdef BONUS
 # include "../include/enemy_bonus.h"
+# include "../include/step_bonus.h"
 #endif
 
 /* Takes the width and height of the MLX window and generates a background. */
@@ -173,6 +174,8 @@ int	rndr_matrix(t_reality *reality)
 	mtrx = reality -> matrix;
 	if (!rndrd)
 		rndrd = first_rndr(reality);
+	if (BONUS)
+		display_steps(reality->mlx, mtrx->step_c);
 	if (reality->textures->plyr->instances)
 	{
 		reality->textures->plyr->instances[0].x = mtrx->plyr_x;
