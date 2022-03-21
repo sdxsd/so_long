@@ -49,7 +49,7 @@ lib:
 	@make -C libft/
 
 valtest: re_test libft
-	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./so_long maps/map02.ber
+	valgrind --tool=memcheck --leak-check=full ./so_long maps/map02.ber
 
 re_test: clean bonus
 
