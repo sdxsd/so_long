@@ -1,0 +1,6 @@
+[submodule "MLX42"]
+	path = MLX42
+	url = https://github.com/w2Codam/MLX42
+[submodule "libft"]
+	path = libft
+	url = https://github.com/sdxsd/libft
