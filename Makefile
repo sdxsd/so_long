@@ -12,8 +12,7 @@ CFILES = \
 			src/haring.c
 B_FILES = \
 			src/enemy_bonus.c \
-			src/femmax_bonus.c \
-			src/death_bonus.c
+			src/femmax_bonus.c
 BFLAGS = -D BONUS=1
 OFILES = $(CFILES:.c=.o)
 OSFLAG = ""

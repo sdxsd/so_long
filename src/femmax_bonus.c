@@ -43,7 +43,6 @@ A program is free software if users have all of these freedoms.
 #include "../include/enemy_bonus.h"
 #include "../include/game.h"
 #include "../include/dealloc.h"
-#include "../include/death_bonus.h"
 
 static int	ret_move(void)
 {

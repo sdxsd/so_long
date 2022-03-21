@@ -41,7 +41,6 @@ A program is free software if users have all of these freedoms.
 #include "../include/dealloc.h"
 #include "../include/haring.h"
 #ifdef BONUS
-# include "../include/death_bonus.h"
 # include "../include/enemy_bonus.h"
 #endif
 
