@@ -40,7 +40,6 @@ A program is free software if users have all of these freedoms.
 #include "../include/rndr_matrix.h"
 #include "../include/dealloc.h"
 #include "../include/haring.h"
-#include "../include/movement.h"
 #ifdef BONUS
 # include "../include/death_bonus.h"
 # include "../include/enemy_bonus.h"
@@ -124,18 +123,32 @@ static int	rndr_line(t_reality *reality, char *mline, int lsize, int y)
 }
 
 /* Handles the first render of the game, */
+// In MLX42 rendering images multiple times will eventually
+// cause a stack based buffer overflow, as the amount of memory
+// allocated to images becomes too great. To move each image
+// rather than render it again, you must change the x and y position of the
+// image instance within the struct. This function renders
+// the map for the first time, including the sprites that will
+// eventually be moved in other functions.
+// The textures are also load in this function with load_textures().
+// The function then uses rndr_bckgrnd() to prepare the background
+// image.
+// Continuing, the function iterates through the two dimensional array
+// of map data, rendering each line as it goes with the subroutine
+// rndr_line()
+// It then renders the player, before checking whether the bonus is activated
+// and if it is, then the enemies are generated.
+// The function shall then return.
 static int	first_rndr(t_reality *reality)
 {
 	int					iter;
 	t_matrix			*matrix;
 
 	matrix = reality->matrix;
-	if (!reality->textures)
-		reality->textures = load_textures(reality->mlx);
-	if (!reality->bckgrnd)
-		reality->bckgrnd = \
-			rndr_background(reality->mlx, \
-							matrix->x * BLKSIZ, matrix->y * BLKSIZ);
+	reality->textures = load_textures(reality->mlx);
+	reality->bckgrnd = \
+		rndr_background(reality->mlx, \
+						matrix->x * BLKSIZ, matrix->y * BLKSIZ);
 	mlx_image_to_window(reality->mlx, reality->bckgrnd, 0, 0);
 	matrix->simulation_data = matrix->wired_entry;
 	iter = 0;
@@ -153,25 +166,18 @@ static int	first_rndr(t_reality *reality)
 	return (TRUE);
 }
 
-/* Notes: reimplement movement later with lerp() */
 int	rndr_matrix(t_reality *reality)
 {
 	static int	rndrd;
 	t_matrix	*mtrx;
-	int			*i_plyr_x;
-	int			*i_plyr_y;
 
 	mtrx = reality -> matrix;
 	if (!rndrd)
 		rndrd = first_rndr(reality);
 	if (reality->textures->plyr->instances)
 	{
-		i_plyr_x = &reality->textures->plyr->instances[0].x;
-		i_plyr_y = &reality->textures->plyr->instances[0].y;
-		*i_plyr_x = mtrx->plyr_x;
-		*i_plyr_y = mtrx->plyr_y;
-		/* *i_plyr_x = lerp(*i_plyr_x, mtrx->plyr_x, 0.1); */
-		/* *i_plyr_y = lerp(*i_plyr_y, mtrx->plyr_y, 0.1); */
+		reality->textures->plyr->instances[0].x = mtrx->plyr_x;
+		reality->textures->plyr->instances[0].y = mtrx->plyr_y;
 	}
 	return (TRUE);
 }

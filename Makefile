@@ -9,8 +9,7 @@ CFILES = \
 			src/game.c \
 			src/textures.c \
 			src/dealloc.c \
-			src/haring.c \
-			src/movement.c
+			src/haring.c
 B_FILES = \
 			src/enemy_bonus.c \
 			src/femmax_bonus.c \
