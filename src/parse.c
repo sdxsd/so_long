@@ -186,6 +186,7 @@ static t_matrix	*load_map(char *path, t_matrix *matrix)
 		else
 			return (NULL);
 	}
+	close(fd);
 	return (matrix);
 }
 

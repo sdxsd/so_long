@@ -59,7 +59,7 @@ $(LIB):
 
 re: fclean all
 
-bonus: clean
+bonus:
 	make MAKE_BONUS=1
 
 clean:
