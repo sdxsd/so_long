@@ -34,11 +34,13 @@ B_OFILES = $(B_FILES:.c=.o)
 # Checks for OS and compiles accordingly.
 ifeq ($(shell uname -s),Linux)
 	OSFLAG := linux
-	LINKEN := -D LINUX=1 -I ./MLX42/include/MLX42/ -ldl -lGL -lglfw -lX11 -lpthread -lXrandr -lXi \
+	CFLAGS += -D LINUX=1
+	LINKEN := -I ./MLX42/include/MLX42/ -ldl -lGL -lglfw -lX11 -lpthread -lXrandr -lXi \
 	MLX42/libmlx42.a libft/libft.a
 else
 	OSFLAG := darwin
-	LINKEN := -D DARWIN=1 -lglfw -L /Users/wmaguire/.brew/opt/glfw/lib/ -lmlx42 -L ./MLX42/
+	CFLAGS += -D DARWIN=1
+	LINKEN := -lglfw -L /Users/wmaguire/.brew/opt/glfw/lib/ -lmlx42 -L ./MLX42/
 endif
 
 all: $(NAME)
