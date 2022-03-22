@@ -174,5 +174,6 @@ int	gameloop(t_reality *reality)
 {
 	mlx_key_hook(reality -> mlx, keycodes, reality);
 	mlx_loop(reality->mlx);
+	free_and_exit(reality);
 	return (TRUE);
 }

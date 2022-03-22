@@ -167,8 +167,6 @@ static t_matrix	*load_map(char *path, t_matrix *matrix)
 
 	matrix->simulation_data = malloc(sizeof(char *) * 1024);
 	matrix->wired_entry = matrix -> simulation_data;
-	matrix->x = -1;
-	matrix->y = 0;
 	fd = open(path, O_RDONLY);
 	while (TRUE)
 	{
@@ -216,6 +214,8 @@ t_matrix	*matrix_init(int argc, char *argv[])
 	if (!matrix)
 		return (NULL);
 	matrix->coll_c = 0;
+	matrix->x = -1;
+	matrix->y = 0;
 	if (!load_map(argv[1], matrix))
 		return (free_matrix(matrix));
 	if (!validate_map(matrix))
