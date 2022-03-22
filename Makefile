@@ -1,6 +1,6 @@
 # Basic data
 CC = clang
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
 LIB = libft/libft.a
 MLX = MLX42/libmlx42.a
