@@ -1,6 +1,6 @@
 # Basic data
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 NAME = so_long
 LIB = libft/libft.a
 MLX = MLX42/libmlx42.a
@@ -21,6 +21,15 @@ BFLAGS = -D BONUS=1
 OFILES = $(CFILES:.c=.o)
 OSFLAG = ""
 LINKEN = ""
+CWB = 0
+
+ifdef MAKE_BONUS
+	CFLAGS += $(BFLAGS)
+	CFILES += $(B_FILES)
+	OFILES = $(CFILES:%.c=%.o)
+endif
+
+B_OFILES = $(B_FILES:.c=.o)
 
 # Checks for OS and compiles accordingly.
 ifeq ($(shell uname -s),Linux)
@@ -32,7 +41,6 @@ else
 	LINKEN := -D DARWIN=1 -lglfw -L /Users/wmaguire/.brew/opt/glfw/lib/ -lmlx42 -L ./MLX42/
 endif
 
-.PHONY: all
 all: $(NAME)
 
 $(NAME): $(OFILES) $(LIB) $(MLX)
@@ -40,7 +48,7 @@ $(NAME): $(OFILES) $(LIB) $(MLX)
 	$(CC) $(CFLAGS) $(OFILES) $(LINKEN) -o $(NAME)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) -g $(CFLAGS) -c $< -o $@
 	@echo "COMPILED:" $<
 
 $(MLX):
@@ -51,12 +59,17 @@ $(LIB):
 
 re: fclean all
 
+bonus: clean
+	make MAKE_BONUS=1
+
 clean:
 	rm -f so_long
 
 fclean: clean
 	@rm -rfv so_long.dSYM
 	@rm -rfv $(OFILES)
+	@rm -rfv $(B_OFILES)
 	@make -C libft/ fclean
 	@make -C MLX42/ fclean
 
+.PHONY: all clean fclean re bonus
