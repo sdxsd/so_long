@@ -40,7 +40,8 @@ ifeq ($(shell uname -s),Linux)
 else
 	OSFLAG := darwin
 	CFLAGS += -D DARWIN=1
-	LINKEN := -lglfw -L /Users/wmaguire/.brew/opt/glfw/lib/ -lmlx42 -L ./MLX42/
+	LINKEN := -lglfw -L /Users/wmaguire/.brew/opt/glfw/lib/ -lmlx42 -L ./MLX42/ \
+	MLX42/libmlx42.a libft/libft.a
 endif
 
 all: $(NAME)
