@@ -54,26 +54,31 @@ A program is free software if users have all of these freedoms.
 /* This function initializes the reality struct */
 /* which holds most if not all of the game state data. */
 /* Calls mlx_init() to begin window rendering. */
-/* Sets reality -> textures to null, this is important because */
+/* Sets reality->textures to null, this is important because */
 /* otherwise it will be set to a random address in memory */
 /* and the check in rndr_matrix() of if the textures have loaded */
 /* will be invalid and segfault the program. */
 /* Finally checks if mlx has loaded, returning null if not. */
-/* Otherwise returns */
+/* Otherwise returns NULL */
+/* Initialises the x and y of the plyr to 0, if */
+/* after the map is parsed player still equals 0, then */
+/* the map is invalid. */
 static void	*init_reality(t_reality *reality)
 {
 	mlx_t		*mlx;
 	t_matrix	*matr;
 
-	matr = reality -> matrix;
-	matr -> step_c = 1;
-	mlx = mlx_init(matr -> x * BLKSIZ, matr -> y * BLKSIZ, "NederSim", TRUE);
-	reality -> textures = NULL;
-	reality -> bckgrnd = NULL;
-	reality -> mlx = mlx;
-	if (!reality -> mlx)
+	matr = reality->matrix;
+	matr->step_c = 0;
+	matr->plyr_x = 0;
+	matr->plyr_y = 0;
+	mlx = mlx_init(matr->x * BLKSIZ, matr -> y * BLKSIZ, "NederSim", TRUE);
+	reality->textures = NULL;
+	reality->bckgrnd = NULL;
+	reality->mlx = mlx;
+	if (!reality->mlx)
 		return (NULL);
-	return (reality -> mlx);
+	return (reality->mlx);
 }
 
 /* This function initiates the program. */

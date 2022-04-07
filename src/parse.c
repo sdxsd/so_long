@@ -101,6 +101,8 @@ static int	chline(char *line, int x, int y, t_matrix *matrix)
 			return (FALSE);
 		if (line[iterator] == 'P')
 		{
+			if (matrix->plyr_x != 0 && matrix->plyr_y != 0)
+				return (FALSE);
 			matrix->plyr_x = iterator * BLKSIZ;
 			matrix->plyr_y = y * BLKSIZ;
 		}
@@ -219,6 +221,8 @@ t_matrix	*matrix_init(int argc, char *argv[])
 	if (!load_map(argv[1], matrix))
 		return (free_matrix(matrix));
 	if (!validate_map(matrix))
+		return (free_matrix(matrix));
+	if (!matrix->plyr_x || !matrix->plyr_y)
 		return (free_matrix(matrix));
 	if (!chborder(matrix))
 		return (free_matrix(matrix));
