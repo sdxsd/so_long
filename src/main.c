@@ -70,8 +70,6 @@ static void	*init_reality(t_reality *reality)
 
 	matr = reality->matrix;
 	matr->step_c = 0;
-	matr->plyr_x = 0;
-	matr->plyr_y = 0;
 	mlx = mlx_init(matr->x * BLKSIZ, matr -> y * BLKSIZ, "NederSim", TRUE);
 	reality->textures = NULL;
 	reality->bckgrnd = NULL;

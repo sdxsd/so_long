@@ -206,6 +206,8 @@ static t_matrix	*load_map(char *path, t_matrix *matrix)
 /* map_data constitutes a valid map */
 /* according to the project definitions. */
 /* Finally returns the populated Matrix struct. */
+/* Now also checks if their are multiple player chars */
+/* and if the player is actually found. */
 t_matrix	*matrix_init(int argc, char *argv[])
 {
 	t_matrix	*matrix;
@@ -218,6 +220,8 @@ t_matrix	*matrix_init(int argc, char *argv[])
 	matrix->coll_c = 0;
 	matrix->x = -1;
 	matrix->y = 0;
+	matrix->plyr_x = 0;
+	matrix->plyr_y = 0;
 	if (!load_map(argv[1], matrix))
 		return (free_matrix(matrix));
 	if (!validate_map(matrix))
