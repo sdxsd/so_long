@@ -94,8 +94,9 @@ static int	chline(char *line, int x, int y, t_matrix *matrix)
 
 	iterator = 0;
 	if ((int)ft_strlen(line) != x)
-		return (FALSE);
-	while (iterator < x)
+		if ((int)ft_strlen(line) != x - 1)
+			return (FALSE);
+	while (iterator < x - 1)
 	{
 		if (!ft_charchk(line[iterator], (char *)dict))
 			return (FALSE);
@@ -213,6 +214,8 @@ t_matrix	*matrix_init(int argc, char *argv[])
 	t_matrix	*matrix;
 
 	if (argc < 2 || argv[1] == NULL)
+		return (NULL);
+	if (!ft_strnstr(argv[1], ".ber", ft_strlen(argv[1])))
 		return (NULL);
 	matrix = malloc(sizeof(t_matrix));
 	if (!matrix)
